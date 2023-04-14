@@ -1,35 +1,151 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./../src/styles/App.css";
+import {
+  SwapOutlined,
+  LineChartOutlined,
+  SettingOutlined,
+  LogoutOutlined,
+  AppstoreOutlined,
+  CarOutlined,
+} from "@ant-design/icons";
+import { ConfigProvider, Layout, Menu, theme } from "antd";
+import React, { useEffect, useState } from "react";
+import classes from "./styles/App.module.css";
 
-function App() {
-  const [count, setCount] = useState(0);
+const { Content, Footer, Sider } = Layout;
+
+const getItem = (label, key, icon, children, type) => {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
+};
+
+const useWindowSize = () => {
+  const [size, setSize] = useState([window.innerHeight, window.innerWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSize([window.innerHeight, window.innerWidth]);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return size;
+};
+
+const App = () => {
+  const [_, windowWidth] = useWindowSize();
+  const isMobile = windowWidth <= 768;
+  const isTablet = windowWidth >= 768 && windowWidth <= 992;
+
+  const items = [
+    getItem(
+      isMobile ? null : "Bảng điều khiển",
+      "dashboard",
+      <AppstoreOutlined className={classes.icon} />
+    ),
+    getItem(
+      isMobile ? null : "Yêu cầu",
+      "request",
+      <SwapOutlined className={classes.icon} />
+    ),
+    getItem(
+      isMobile ? null : "Thống kê",
+      "statistics",
+      <LineChartOutlined className={classes.icon} />
+    ),
+    getItem(
+      isMobile ? null : "Cài đặt",
+      "settings",
+      <SettingOutlined className={classes.icon} />
+    ),
+    getItem(
+      isMobile ? null : "Đăng xuất",
+      "logout",
+      <LogoutOutlined className={classes.icon} />
+    ),
+  ];
+
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
+  const [controlHeightLG, setControlHeightLG] = useState(55);
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorText: "#737373",
+          fontFamily: "Inter",
+          colorBgTextHover: "#ddd",
+          controlItemBgActive: "#ddd",
+          borderRadius: 12,
+          fontSize: 16,
+          controlHeightLG: controlHeightLG,
+          colorPrimary: "#3C4048",
+          colorFillQuaternary: "transparent",
+        },
+      }}
+    >
+      <Layout>
+        {!isMobile && (
+          <Sider
+            breakpoint="lg"
+            onCollapse={(collapsed) => {
+              if (collapsed) setControlHeightLG(50);
+              else setControlHeightLG(60);
+            }}
+            className={classes.sider}
+            width={280}
+          >
+            <div className={classes.logo}>
+              {isTablet ? (
+                <CarOutlined className={classes.icon} />
+              ) : (
+                <h1>Logo</h1>
+              )}
+            </div>
+            <Menu
+              defaultSelectedKeys={"dashboard"}
+              items={items}
+              className={classes.menu}
+            />
+          </Sider>
+        )}
+        <Content>
+          <div
+            className={classes.content}
+            style={{
+              background: colorBgContainer,
+            }}
+          >
+            Content
+          </div>
+        </Content>
+        {isMobile && (
+          <Footer
+            className={classes.footer}
+            style={{
+              position: "sticky",
+              bottom: 0,
+            }}
+          >
+            <Menu
+              mode="horizontal"
+              defaultSelectedKeys={["dashboard"]}
+              items={items}
+              className={classes.menu}
+            />
+          </Footer>
+        )}
+      </Layout>
+    </ConfigProvider>
   );
-}
-
+};
 export default App;
