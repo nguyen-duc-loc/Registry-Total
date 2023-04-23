@@ -1,26 +1,9 @@
-import {
-  SwapOutlined,
-  LineChartOutlined,
-  SettingOutlined,
-  LogoutOutlined,
-  AppstoreOutlined,
-  CarOutlined,
-} from "@ant-design/icons";
-import { ConfigProvider, Layout, Menu, theme } from "antd";
+import { ConfigProvider, Layout } from "antd";
 import React, { useEffect, useState } from "react";
-import classes from "./styles/App.module.css";
-
-const { Content, Footer, Sider } = Layout;
-
-const getItem = (label, key, icon, children, type) => {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
-};
+import PageSider from "./components/Layout/PageSider";
+import PageContent from "./components/Layout/PageContent";
+import PageFooter from "./components/Layout/PageFooter";
+import "./styles/App.css";
 
 const useWindowSize = () => {
   const [size, setSize] = useState([window.innerHeight, window.innerWidth]);
@@ -43,107 +26,20 @@ const App = () => {
   const isMobile = windowWidth <= 768;
   const isTablet = windowWidth >= 768 && windowWidth <= 992;
 
-  const items = [
-    getItem(
-      isMobile ? null : "Bảng điều khiển",
-      "dashboard",
-      <AppstoreOutlined className={classes.icon} />
-    ),
-    getItem(
-      isMobile ? null : "Yêu cầu",
-      "request",
-      <SwapOutlined className={classes.icon} />
-    ),
-    getItem(
-      isMobile ? null : "Thống kê",
-      "statistics",
-      <LineChartOutlined className={classes.icon} />
-    ),
-    getItem(
-      isMobile ? null : "Cài đặt",
-      "settings",
-      <SettingOutlined className={classes.icon} />
-    ),
-    getItem(
-      isMobile ? null : "Đăng xuất",
-      "logout",
-      <LogoutOutlined className={classes.icon} />
-    ),
-  ];
-
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-
-  const [controlHeightLG, setControlHeightLG] = useState(55);
-
   return (
     <ConfigProvider
       theme={{
         token: {
-          colorText: "#737373",
           fontFamily: "Inter",
-          colorBgTextHover: "#ddd",
-          controlItemBgActive: "#ddd",
-          borderRadius: 12,
-          fontSize: 16,
-          controlHeightLG: controlHeightLG,
-          colorPrimary: "#3C4048",
-          colorFillQuaternary: "transparent",
+          fontSize: "1.6rem",
+          colorPrimary: "#27272a",
         },
       }}
     >
       <Layout>
-        {!isMobile && (
-          <Sider
-            breakpoint="lg"
-            onCollapse={(collapsed) => {
-              if (collapsed) setControlHeightLG(50);
-              else setControlHeightLG(60);
-            }}
-            className={classes.sider}
-            width={280}
-          >
-            <div className={classes.logo}>
-              {isTablet ? (
-                <CarOutlined className={classes.icon} />
-              ) : (
-                <h1>Logo</h1>
-              )}
-            </div>
-            <Menu
-              defaultSelectedKeys={"dashboard"}
-              items={items}
-              className={classes.menu}
-            />
-          </Sider>
-        )}
-        <Content>
-          <div
-            className={classes.content}
-            style={{
-              background: colorBgContainer,
-            }}
-          >
-            Content
-          </div>
-        </Content>
-        {isMobile && (
-          <Footer
-            className={classes.footer}
-            style={{
-              position: "sticky",
-              bottom: 0,
-            }}
-          >
-            <Menu
-              mode="horizontal"
-              defaultSelectedKeys={["dashboard"]}
-              items={items}
-              className={classes.menu}
-            />
-          </Footer>
-        )}
+        {!isMobile && <PageSider isTablet={isTablet} />}
+        <PageContent />
+        {isMobile && <PageFooter />}
       </Layout>
     </ConfigProvider>
   );

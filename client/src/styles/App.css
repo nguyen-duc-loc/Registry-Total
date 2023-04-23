@@ -1,0 +1,13 @@
+.ant-menu-title-content {
+  margin-inline-start: 1.4rem !important;
+}
+
+.ant-menu-inline-collapsed-tooltip {
+  display: none;
+}
+
+@media (max-width: 62em) {
+  .ant-menu-title-content {
+    margin-inline-start: 0 !important;
+  }
+}
