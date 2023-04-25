@@ -66,6 +66,7 @@ const MenuItem = (props) => {
     <ConfigProvider
       theme={{
         token: {
+          colorPrimary: "#27272a",
           colorText: "var(--color-grey-dark-2)",
           colorBgTextHover: "var(--color-grey-dark-1)",
           controlItemBgActive: "var(--color-grey-dark-1)",

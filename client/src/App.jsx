@@ -15,7 +15,7 @@ const App = () => {
       theme={{
         token: {
           fontFamily: "Inter",
-          colorPrimary: "#27272a",
+          colorText: "#27272a",
         },
       }}
     >
