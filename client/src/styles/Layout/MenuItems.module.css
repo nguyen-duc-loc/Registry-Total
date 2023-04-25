@@ -1,0 +1,27 @@
+.menu {
+  background-color: transparent;
+  font-weight: 500;
+}
+
+.menu li {
+  background-color: transparent;
+}
+
+.menu li > * {
+  vertical-align: middle;
+}
+
+@media (max-width: 48em) {
+  .menu {
+    justify-content: space-around;
+  }
+
+  .menu li > span:first-child {
+    margin-left: 0 !important;
+  }
+
+  .menu::before,
+  .menu::after {
+    display: none;
+  }
+}

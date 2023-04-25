@@ -1,0 +1,18 @@
+.sider {
+  height: 100vh;
+  background-color: var(--color-grey-light-1) !important;
+  padding: 1.6rem 1rem;
+}
+
+.logo {
+  font-size: 2rem;
+  margin-bottom: 3.6rem;
+  padding: 1.2rem 2rem;
+}
+
+@media (max-width: 62em) {
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+}
