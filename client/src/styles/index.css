@@ -1,3 +1,12 @@
+:root {
+  --color-grey-ligh-1: #fafafa;
+  --color-grey-dark-1: #e4e4e7;
+  --color-grey-dark-2: #737373;
+  --color-grey-dark-3: #71717a;
+  --color-black: #27272a;
+  --color-white: #fff;
+}
+
 * {
   margin: 0;
   padding: 0;

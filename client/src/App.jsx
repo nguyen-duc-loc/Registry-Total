@@ -1,9 +1,10 @@
 import { ConfigProvider, Layout } from "antd";
 import React, { useEffect, useState } from "react";
-import PageSider from "./components/Layout/PageSider";
-import PageContent from "./components/Layout/PageContent";
-import PageFooter from "./components/Layout/PageFooter";
+import Sider from "./components/Layout/Sider";
+import Content from "./components/Layout/Content";
+import Footer from "./components/Layout/Footer";
 import "./styles/App.css";
+import Header from "./components/Layout/Header";
 
 const useWindowSize = () => {
   const [size, setSize] = useState([window.innerHeight, window.innerWidth]);
@@ -31,15 +32,17 @@ const App = () => {
       theme={{
         token: {
           fontFamily: "Inter",
-          fontSize: "1.6rem",
           colorPrimary: "#27272a",
         },
       }}
     >
       <Layout>
-        {!isMobile && <PageSider isTablet={isTablet} />}
-        <PageContent />
-        {isMobile && <PageFooter />}
+        {!isMobile && <Sider isTablet={isTablet} />}
+        <Layout>
+          <Header />
+          <Content />
+          {isMobile && <Footer />}
+        </Layout>
       </Layout>
     </ConfigProvider>
   );
