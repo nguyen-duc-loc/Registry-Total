@@ -8,6 +8,7 @@ const PageHeader = () => {
   return (
     <Header className={classes.header}>
       <Search
+        size="large"
         placeholder="input search text"
         allowClear
         style={{

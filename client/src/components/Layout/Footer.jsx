@@ -7,7 +7,7 @@ const { Footer } = Layout;
 const PageFooter = () => {
   return (
     <Footer className={classes.footer}>
-      <Menu mode="horizontal" isMobile={true} controlHeightLG={40} />
+      <Menu />
     </Footer>
   );
 };

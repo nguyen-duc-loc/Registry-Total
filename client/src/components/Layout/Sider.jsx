@@ -1,12 +1,14 @@
 import { CarOutlined } from "@ant-design/icons";
 import { Layout } from "antd";
-import classes from "./../../styles/Layout/Sider.module.css";
+import { useMediaQuery } from "react-responsive";
 import Menu from "./MenuItems";
 import { useState } from "react";
+import classes from "./../../styles/Layout/Sider.module.css";
 
 const { Sider } = Layout;
 
-const PageSider = (props) => {
+const PageSider = () => {
+  const isTablet = useMediaQuery({ query: "(max-width: 992px)" });
   const [controlHeightLG, setControlHeightLG] = useState(55);
 
   return (
@@ -20,17 +22,13 @@ const PageSider = (props) => {
       width={270}
     >
       <div className={classes.logo}>
-        {props.isTablet ? (
+        {isTablet ? (
           <CarOutlined style={{ fontSize: "2rem" }} className={classes.icon} />
         ) : (
           <h1>Logo</h1>
         )}
       </div>
-      <Menu
-        isMobile={false}
-        isTablet={props.isTablet}
-        controlHeightLG={controlHeightLG}
-      />
+      <Menu controlHeightLG={controlHeightLG} />
     </Sider>
   );
 };

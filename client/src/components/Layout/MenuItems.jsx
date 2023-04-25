@@ -6,8 +6,9 @@ import {
   AppstoreOutlined,
   DatabaseOutlined,
 } from "@ant-design/icons";
-import classes from "./../../styles/Layout/MenuItems.module.css";
 import { ConfigProvider, Menu } from "antd";
+import { useMediaQuery } from "react-responsive";
+import classes from "./../../styles/Layout/MenuItems.module.css";
 
 const styleIcon = {
   verticalAlign: "middle",
@@ -26,34 +27,36 @@ const getItem = (label, key, icon, children, type) => {
 };
 
 const MenuItem = (props) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
   const items = [
     getItem(
-      props.isMobile ? null : "Bảng điều khiển",
+      isMobile ? null : "Bảng điều khiển",
       "dashboard",
       <AppstoreOutlined className={classes.icon} style={styleIcon} />
     ),
     getItem(
-      props.isMobile ? null : "Yêu cầu",
+      isMobile ? null : "Yêu cầu",
       "request",
       <SwapOutlined className={classes.icon} style={styleIcon} />
     ),
     getItem(
-      props.isMobile ? null : "Quản lý",
+      isMobile ? null : "Quản lý",
       "manage",
       <DatabaseOutlined className={classes.icon} style={styleIcon} />
     ),
     getItem(
-      props.isMobile ? null : "Thống kê",
+      isMobile ? null : "Thống kê",
       "statistics",
       <LineChartOutlined className={classes.icon} style={styleIcon} />
     ),
     getItem(
-      props.isMobile ? null : "Cài đặt",
+      isMobile ? null : "Cài đặt",
       "settings",
       <SettingOutlined className={classes.icon} style={styleIcon} />
     ),
     getItem(
-      props.isMobile ? null : "Đăng xuất",
+      isMobile ? null : "Đăng xuất",
       "logout",
       <LogoutOutlined className={classes.icon} style={styleIcon} />
     ),
@@ -67,14 +70,14 @@ const MenuItem = (props) => {
           colorBgTextHover: "var(--color-grey-dark-1)",
           controlItemBgActive: "var(--color-grey-dark-1)",
           borderRadius: "1.2rem",
-          controlHeightLG: props.controlHeightLG,
+          controlHeightLG: isMobile ? 40 : props.controlHeightLG,
           colorFillQuaternary: "transparent",
           padding: 22,
         },
       }}
     >
       <Menu
-        mode={props.mode}
+        mode={isMobile ? "horizontal" : undefined}
         defaultSelectedKeys={"dashboard"}
         items={items}
         className={classes.menu}
