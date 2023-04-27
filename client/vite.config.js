@@ -8,7 +8,6 @@ export default defineConfig({
     modules: true,
   },
   server: {
-    port: 3000,
     open: true,
   },
 });
