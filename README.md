@@ -19,4 +19,5 @@ On server side:
 
 ```bash
 $ npm install
+$ npm run start:dev
 ```
