@@ -14,3 +14,9 @@ On client side:
 $ npm install
 $ npm run dev
 ```
+
+On server side:
+
+```bash
+$ npm install
+```
