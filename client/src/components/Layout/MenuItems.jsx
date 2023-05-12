@@ -1,13 +1,12 @@
 import {
   SwapOutlined,
   LineChartOutlined,
-  SettingOutlined,
-  LogoutOutlined,
   AppstoreOutlined,
   DatabaseOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { ConfigProvider, Menu } from "antd";
-import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 import classes from "./../../styles/Layout/MenuItems.module.css";
 
 const styleIcon = {
@@ -26,41 +25,37 @@ const getItem = (label, key, icon, children, type) => {
   };
 };
 
-const MenuItem = (props) => {
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+const items = [
+  getItem(
+    "Bảng điều khiển",
+    "dashboard",
+    <AppstoreOutlined className={classes.icon} style={styleIcon} />
+  ),
+  getItem(
+    "Yêu cầu",
+    "request",
+    <SwapOutlined className={classes.icon} style={styleIcon} />
+  ),
+  getItem(
+    "Quản lý",
+    "manage",
+    <DatabaseOutlined className={classes.icon} style={styleIcon} />
+  ),
+  getItem(
+    "Thống kê",
+    "statistics",
+    <LineChartOutlined className={classes.icon} style={styleIcon} />
+  ),
+  getItem(
+    "Tài khoản",
+    "account",
+    <UserOutlined className={classes.icon} style={styleIcon} />,
+    [getItem("Cài đặt", "settings"), getItem("Đăng xuất", "logout")]
+  ),
+];
 
-  const items = [
-    getItem(
-      isMobile ? null : "Bảng điều khiển",
-      "dashboard",
-      <AppstoreOutlined className={classes.icon} style={styleIcon} />
-    ),
-    getItem(
-      isMobile ? null : "Yêu cầu",
-      "request",
-      <SwapOutlined className={classes.icon} style={styleIcon} />
-    ),
-    getItem(
-      isMobile ? null : "Quản lý",
-      "manage",
-      <DatabaseOutlined className={classes.icon} style={styleIcon} />
-    ),
-    getItem(
-      isMobile ? null : "Thống kê",
-      "statistics",
-      <LineChartOutlined className={classes.icon} style={styleIcon} />
-    ),
-    getItem(
-      isMobile ? null : "Cài đặt",
-      "settings",
-      <SettingOutlined className={classes.icon} style={styleIcon} />
-    ),
-    getItem(
-      isMobile ? null : "Đăng xuất",
-      "logout",
-      <LogoutOutlined className={classes.icon} style={styleIcon} />
-    ),
-  ];
+const MenuItem = () => {
+  const navigate = useNavigate();
 
   return (
     <ConfigProvider
@@ -71,18 +66,21 @@ const MenuItem = (props) => {
           colorBgTextHover: "var(--color-grey-dark-1)",
           controlItemBgActive: "var(--color-grey-dark-1)",
           borderRadius: "1.2rem",
-          controlHeightLG: isMobile ? 40 : props.controlHeightLG,
+          controlHeightLG: 50,
           colorFillQuaternary: "transparent",
           padding: 22,
         },
       }}
     >
       <Menu
-        mode={isMobile ? "horizontal" : undefined}
+        mode="inline"
         defaultSelectedKeys={"dashboard"}
         items={items}
         className={classes.menu}
         style={{ border: "none" }}
+        onClick={({ key }) => {
+          navigate(`${key}`);
+        }}
       />
     </ConfigProvider>
   );

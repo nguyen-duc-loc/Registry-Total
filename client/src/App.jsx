@@ -1,33 +1,23 @@
-import { ConfigProvider, Layout } from "antd";
-import React, { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
-import Sider from "./components/Layout/Sider";
-import Content from "./components/Layout/Content";
-import Footer from "./components/Layout/Footer";
+import { Route, Routes } from "react-router-dom";
 import "./styles/App.css";
-import Header from "./components/Layout/Header";
+import Root from "./pages/Root";
+import Home from "./pages/Home";
+import { Navigate } from "react-router-dom";
 
 const App = () => {
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          fontFamily: "Inter",
-          colorText: "#27272a",
-        },
-      }}
-    >
-      <Layout>
-        {!isMobile && <Sider />}
-        <Layout>
-          <Header />
-          <Content />
-          {isMobile && <Footer />}
-        </Layout>
-      </Layout>
-    </ConfigProvider>
+    <Routes>
+      <Route path="/" element={<Root />}>
+        <Route index element={<Navigate to="/dashboard" />}></Route>
+        <Route path="dashboard" element={<Home />}></Route>
+        <Route path="request" element={<Home />}></Route>
+        <Route path="manage" element={<Home />}></Route>
+        <Route path="statistics" element={<Home />}></Route>
+        <Route path="settings" element={<Home />}></Route>
+        <Route path="logout" element={<Home />}></Route>
+      </Route>
+    </Routes>
   );
 };
+
 export default App;

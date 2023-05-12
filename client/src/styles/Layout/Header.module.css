@@ -2,16 +2,7 @@
   background-color: var(--color-white);
   display: flex;
   align-items: center;
+  padding-left: 4rem;
   gap: 2.4rem;
   height: 7rem;
-}
-
-.searchbox {
-  width: 50%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.searchbox input {
-  margin-left: 1.2rem;
 }

@@ -1,5 +1,10 @@
+.ant-menu-item,
+.ant-menu-submenu-title {
+  gap: 1.2rem;
+}
+
 .ant-menu-title-content {
-  margin-inline-start: 1.4rem !important;
+  margin-inline-start: 0 !important;
 }
 
 .ant-menu-inline-collapsed-tooltip {
