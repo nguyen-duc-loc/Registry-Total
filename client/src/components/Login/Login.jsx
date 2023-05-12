@@ -1,40 +1,57 @@
-import { Button, Form, Input } from "antd";
-import { useSignIn } from "react-auth-kit";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import {
+  Button,
+  ConfigProvider,
+  Form,
+  Input,
+  Typography,
+  notification,
+} from "antd";
 import { useNavigate } from "react-router-dom";
-
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+import classes from "./../../styles/Login/Login.module.css";
+import { useState } from "react";
+import { useSignIn } from "react-auth-kit";
 
 const Login = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [buttonText, setButtonText] = useState("Đăng nhập");
+  const [api, contextHolder] = notification.useNotification();
   const signIn = useSignIn();
   const navigate = useNavigate();
 
-  const onFinish = async (values) => {
-    console.log("Success:", values);
+  const openNotification = () => {
+    api["error"]({
+      message: "Lỗi",
+      description: "Thông tin đăng nhập không chính xác.",
+    });
+  };
 
-    const authData = {
-      email: values.username,
-      password: values.password,
-    };
+  const onFinish = async (values) => {
+    console.log("Received values of form: ", values);
+
+    setIsSubmitting(true);
+    setButtonText("Đang đăng nhập...");
 
     try {
       const response = await fetch(
-        "https://sleepy-coast-93816.herokuapp.com/api/v1/users/login",
+        `https://sleepy-coast-93816.herokuapp.com/api/v1/users/login`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(authData),
+          body: JSON.stringify(values),
         }
       );
 
       if (!response.ok) {
-        throw new Error("Cannot fetch");
+        openNotification();
+        setIsSubmitting(false);
+        setButtonText("Đăng nhập");
+        throw new Error("Can not authenticate.");
       }
 
-      const res = await response.json();
+      const res = response.json();
 
       if (
         signIn({
@@ -42,75 +59,85 @@ const Login = () => {
           expiresIn: 480,
           tokenType: "Bearer",
           authState: {
-            data: res.data.user,
+            data: res.data,
           },
         })
       ) {
-        console.log("login");
         navigate("/");
       }
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
     }
   };
 
   return (
-    <Form
-      name="basic"
-      labelCol={{
-        span: 8,
+    <ConfigProvider
+      theme={{
+        token: {
+          colorBgContainer: "#F1F6F5",
+          borderRadius: "10px",
+          controlHeight: "36",
+          colorBgContainerDisabled: "#4096ff",
+          colorTextDisabled: "#fff",
+        },
       }}
-      wrapperCol={{
-        span: 16,
-      }}
-      style={{
-        maxWidth: 600,
-      }}
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
     >
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: "Please input your username!",
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+      {contextHolder}
+      <Form name="normal_login" className={classes.form} onFinish={onFinish}>
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "⛔ Hãy điền email",
+            },
+          ]}
+        >
+          <Input
+            prefix={<MailOutlined className={classes.icon} />}
+            placeholder="Email"
+            type="email"
+            size="large"
+            className={classes.input}
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "⛔ Hãy nhập mật khẩu",
+            },
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className={classes.icon} />}
+            type="password"
+            size="large"
+            placeholder="Mật khẩu"
+            className={classes.input}
+          />
+        </Form.Item>
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+        <Form.Item style={{ justifyContent: "end" }}>
+          <Typography.Text strong className={classes.forgot}>
+            Quên mật khẩu?
+          </Typography.Text>
+        </Form.Item>
 
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className={classes.button}
+            size="large"
+            disabled={isSubmitting}
+          >
+            {buttonText}
+          </Button>
+        </Form.Item>
+      </Form>
+    </ConfigProvider>
   );
 };
-
 export default Login;
