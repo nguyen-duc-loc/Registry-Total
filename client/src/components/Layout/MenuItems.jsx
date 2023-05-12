@@ -8,6 +8,7 @@ import {
 import { ConfigProvider, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import classes from "./../../styles/Layout/MenuItems.module.css";
+import { useSignOut } from "react-auth-kit";
 
 const styleIcon = {
   verticalAlign: "middle",
@@ -56,6 +57,7 @@ const items = [
 
 const MenuItem = () => {
   const navigate = useNavigate();
+  const signOut = useSignOut();
 
   return (
     <ConfigProvider
@@ -79,7 +81,11 @@ const MenuItem = () => {
         className={classes.menu}
         style={{ border: "none" }}
         onClick={({ key }) => {
-          navigate(`${key}`);
+          if (key === "logout") {
+            signOut();
+          } else {
+            navigate(`${key}`);
+          }
         }}
       />
     </ConfigProvider>
