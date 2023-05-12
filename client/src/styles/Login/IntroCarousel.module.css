@@ -1,0 +1,27 @@
+.intro {
+  height: 100%;
+  background-color: #f1f6f5;
+  padding: 7.2rem 9.6rem;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--color-black);
+  text-transform: uppercase;
+  margin-bottom: 7.2rem;
+}
+
+.img {
+  margin-bottom: 1.6rem;
+  text-align: center;
+  height: 100;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-grey-dark-2);
+  text-align: center;
+  margin-bottom: 4.8rem;
+}
