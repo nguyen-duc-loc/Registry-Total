@@ -5,7 +5,7 @@ import IntroCarousel from "../components/Login/IntroCarousel";
 const LoginPage = () => {
   return (
     <Row>
-      <Col lg={10}>
+      <Col lg={10} xs={0}>
         <IntroCarousel />
       </Col>
       <Col lg={14} xs={24}>
