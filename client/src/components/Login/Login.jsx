@@ -111,6 +111,7 @@ const Login = () => {
                 prefix={<MailOutlined className={classes.icon} />}
                 placeholder="Email"
                 type="email"
+                autoComplete="off"
                 size="large"
                 className={classes.input}
               />
@@ -129,6 +130,7 @@ const Login = () => {
                 type="password"
                 size="large"
                 placeholder="Mật khẩu"
+                autoComplete="off"
                 className={classes.input}
               />
             </Form.Item>
