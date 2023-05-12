@@ -11,6 +11,17 @@
   display: none;
 }
 
+.ant-form-item-explain-error {
+  margin-left: 3.2rem;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.ant-input::placeholder {
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
 @media (max-width: 62em) {
   .ant-menu-title-content {
     margin-inline-start: 0 !important;
