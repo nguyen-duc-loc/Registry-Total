@@ -1,6 +1,22 @@
 .form {
-  width: 50vw;
-  margin: auto;
+  width: 45%;
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  align-items: start;
+  margin-top: auto;
+}
+
+.login {
+  width: 100%;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 2.8rem;
+  color: var(--color-black);
 }
 
 .icon {
@@ -21,4 +37,11 @@
 
 .button {
   width: 100%;
+}
+
+.copy {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  padding: 2.4rem;
 }

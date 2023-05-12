@@ -17,6 +17,11 @@
   margin-top: 2px;
 }
 
+.ant-input::placeholder {
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
 @media (max-width: 62em) {
   .ant-menu-title-content {
     margin-inline-start: 0 !important;

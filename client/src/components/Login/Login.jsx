@@ -12,6 +12,8 @@ import classes from "./../../styles/Login/Login.module.css";
 import { useState } from "react";
 import { useSignIn } from "react-auth-kit";
 
+const currentYear = new Date().getFullYear();
+
 const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [buttonText, setButtonText] = useState("Đăng nhập");
@@ -27,8 +29,6 @@ const Login = () => {
   };
 
   const onFinish = async (values) => {
-    console.log("Received values of form: ", values);
-
     setIsSubmitting(true);
     setButtonText("Đang đăng nhập...");
 
@@ -76,67 +76,86 @@ const Login = () => {
         token: {
           colorBgContainer: "#F1F6F5",
           borderRadius: "10px",
-          controlHeight: "36",
+          controlHeight: "34",
           colorBgContainerDisabled: "#4096ff",
           colorTextDisabled: "#fff",
         },
       }}
     >
-      {contextHolder}
-      <Form name="normal_login" className={classes.form} onFinish={onFinish}>
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "⛔ Hãy điền email",
-            },
-          ]}
-        >
-          <Input
-            prefix={<MailOutlined className={classes.icon} />}
-            placeholder="Email"
-            type="email"
-            size="large"
-            className={classes.input}
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "⛔ Hãy nhập mật khẩu",
-            },
-          ]}
-        >
-          <Input
-            prefix={<LockOutlined className={classes.icon} />}
-            type="password"
-            size="large"
-            placeholder="Mật khẩu"
-            className={classes.input}
-          />
-        </Form.Item>
-
-        <Form.Item style={{ justifyContent: "end" }}>
-          <Typography.Text strong className={classes.forgot}>
-            Quên mật khẩu?
-          </Typography.Text>
-        </Form.Item>
-
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className={classes.button}
-            size="large"
-            disabled={isSubmitting}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <div className={classes.form}>
+          {contextHolder}
+          <h1 className={classes.title}>Welcome back!</h1>
+          <Form
+            name="normal_login"
+            className={classes.login}
+            onFinish={onFinish}
           >
-            {buttonText}
-          </Button>
-        </Form.Item>
-      </Form>
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "⛔ Hãy điền email",
+                },
+              ]}
+            >
+              <Input
+                prefix={<MailOutlined className={classes.icon} />}
+                placeholder="Email"
+                type="email"
+                size="large"
+                className={classes.input}
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "⛔ Hãy nhập mật khẩu",
+                },
+              ]}
+            >
+              <Input
+                prefix={<LockOutlined className={classes.icon} />}
+                type="password"
+                size="large"
+                placeholder="Mật khẩu"
+                className={classes.input}
+              />
+            </Form.Item>
+
+            <Form.Item style={{ justifyContent: "end" }}>
+              <Typography.Text strong className={classes.forgot}>
+                Quên mật khẩu?
+              </Typography.Text>
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className={classes.button}
+                size="large"
+                disabled={isSubmitting}
+              >
+                {buttonText}
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+        <div className={classes.copy}>
+          &copy; {currentYear} allright reserved
+        </div>
+      </div>
     </ConfigProvider>
   );
 };
