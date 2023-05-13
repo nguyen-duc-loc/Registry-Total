@@ -1,5 +1,5 @@
 import { Carousel, ConfigProvider, Image } from "antd";
-import classes from "./../../styles/Login/IntroCarousel.module.css";
+import classes from "./../../styles/Authentication/IntroCarousel.module.css";
 
 import carouselImg1 from "./../../assets/images/carousel-1.svg";
 import carouselImg2 from "./../../assets/images/carousel-2.svg";

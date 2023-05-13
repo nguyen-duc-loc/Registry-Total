@@ -1,12 +1,12 @@
 .form {
   width: 45%;
-  flex: 1;
   justify-content: center;
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
   align-items: start;
-  margin-top: auto;
+  margin: auto;
+  height: 90vh;
 }
 
 .login {
@@ -33,15 +33,9 @@
 .forgot {
   color: #1677ff;
   float: right;
+  font-size: 1.4rem;
 }
 
 .button {
   width: 100%;
-}
-
-.copy {
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.25);
-  text-transform: uppercase;
-  padding: 2.4rem;
 }
