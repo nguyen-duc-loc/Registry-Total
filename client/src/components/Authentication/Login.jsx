@@ -112,7 +112,7 @@ const LoginForm = (props) => {
               },
             ]}
           >
-            <Input
+            <Input.Password
               prefix={<LockOutlined className={classes.icon} />}
               type="password"
               size="large"

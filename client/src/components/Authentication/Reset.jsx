@@ -24,9 +24,12 @@ const ResetForm = (props) => {
   const [findingEmail, setFindingEmail] = useState(true);
   const [verifying, setVerifying] = useState(false);
   const [resetting, setResetting] = useState(false);
-  const [current, setCurrent] = useState(0);
-  const [api, contextHolder] = notification.useNotification();
   const [tokenReset, setTokenReset] = useState("");
+
+  const [current, setCurrent] = useState(0);
+  const [status, setStatus] = useState("process");
+
+  const [api, contextHolder] = notification.useNotification();
 
   const openNotification = (message, description) => {
     api["error"]({
@@ -51,7 +54,13 @@ const ResetForm = (props) => {
   return (
     <div className={classes.reset}>
       {contextHolder}
-      <Steps progressDot size="small" current={current} items={items} />
+      <Steps
+        status={status}
+        progressDot
+        size="small"
+        current={current}
+        items={items}
+      />
       <h1 className={classes.title}>
         {findingEmail && "Hãy bắt đầu bằng cách tìm kiếm email của bạn"}
         {verifying && "Hãy kiểm tra hòm thư của bạn nhé"}
@@ -78,6 +87,7 @@ const ResetForm = (props) => {
               setVerifying={setVerifying}
               next={next}
               openNotification={openNotification}
+              setStatus={setStatus}
             />
           )}
 
@@ -89,6 +99,7 @@ const ResetForm = (props) => {
               next={next}
               openNotification={openNotification}
               setTokenReset={setTokenReset}
+              setStatus={setStatus}
             />
           )}
 

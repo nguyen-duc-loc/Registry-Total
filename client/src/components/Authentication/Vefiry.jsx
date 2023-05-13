@@ -22,10 +22,12 @@ const Verify = (props) => {
 
       if (!response.ok) {
         props.openNotification("Lỗi", "Mã xác thực không chính xác.");
+        props.setStatus("error");
         setIsSubmitting(false);
         throw new Error("Could not authenticate.");
       }
 
+      props.setStatus("finish");
       props.setTokenReset(values.token);
       props.setVerifying(false);
       props.setResetting(true);
@@ -46,7 +48,7 @@ const Verify = (props) => {
           },
         ]}
       >
-        <Input
+        <Input.Password
           placeholder="Mã xác thực"
           type="password"
           autoComplete="off"

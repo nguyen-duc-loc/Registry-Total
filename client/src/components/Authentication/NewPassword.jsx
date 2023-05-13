@@ -61,7 +61,7 @@ const NewPassword = (props) => {
           },
         ]}
       >
-        <Input
+        <Input.Password
           prefix={<LockOutlined className={classes.icon} />}
           placeholder="Mật khẩu mới"
           type="password"
@@ -90,7 +90,7 @@ const NewPassword = (props) => {
           }),
         ]}
       >
-        <Input
+        <Input.Password
           prefix={<LockOutlined className={classes.icon} />}
           placeholder="Nhập lại mật khẩu mới"
           type="password"

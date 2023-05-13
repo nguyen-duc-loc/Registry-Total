@@ -23,10 +23,12 @@ const FindEmail = (props) => {
 
       if (!response.ok) {
         props.openNotification("Lỗi", "Không tìm thấy email này.");
+        props.setStatus("error");
         setIsSubmitting(false);
         throw new Error("Could not find email.");
       }
 
+      props.setStatus("finish");
       props.setFindingEmail(false);
       props.setVerifying(true);
       props.next();
