@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 uploads
-config.env
+server/config.env
 *.local
 
 # Editor directories and files
