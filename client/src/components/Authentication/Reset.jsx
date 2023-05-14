@@ -2,7 +2,7 @@ import { Steps, ConfigProvider, notification } from "antd";
 import { useState } from "react";
 import FindEmail from "./FindEmail";
 import classes from "./../../styles/Authentication/Reset.module.css";
-import Verify from "./Vefiry";
+import Verify from "./Verify";
 import NewPassword from "./NewPassword";
 
 const steps = [
