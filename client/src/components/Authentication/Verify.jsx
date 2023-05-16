@@ -63,6 +63,7 @@ const Verify = (props) => {
           htmlType="submit"
           className={classes.button}
           size="large"
+          loading={isSubmitting}
           disabled={isSubmitting}
           style={{ fontSize: "1.6rem" }}
         >

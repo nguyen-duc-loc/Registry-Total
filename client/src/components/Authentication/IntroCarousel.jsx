@@ -1,4 +1,5 @@
 import { Carousel, ConfigProvider, Image } from "antd";
+import logo from "./../../assets/images/logo.png";
 import classes from "./../../styles/Authentication/IntroCarousel.module.css";
 
 import carouselImg1 from "./../../assets/images/carousel-1.svg";
@@ -9,7 +10,10 @@ import carouselImg4 from "./../../assets/images/carousel-4.svg";
 const IntroCarousel = () => {
   return (
     <div className={classes.intro}>
-      <h1 className={classes.title}>Registry</h1>
+      <div className={classes.logo}>
+        <Image src={logo} height={32} preview={false} />
+        <h1 className={classes.title}>Registry</h1>
+      </div>
       <ConfigProvider
         theme={{ token: { colorBgContainer: "var(--color-black)" } }}
       >

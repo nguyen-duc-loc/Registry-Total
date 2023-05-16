@@ -65,6 +65,7 @@ const FindEmail = (props) => {
           htmlType="submit"
           className={classes.button}
           size="large"
+          loading={isSubmitting}
           style={{ fontSize: "1.6rem" }}
           disabled={isSubmitting}
         >

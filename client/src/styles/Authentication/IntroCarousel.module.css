@@ -6,10 +6,10 @@
 
 .title {
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--color-black);
   text-transform: uppercase;
-  margin-bottom: 7.2rem;
+  align-self: end;
 }
 
 .img {
@@ -17,6 +17,13 @@
   text-align: center;
   height: 100;
   padding: 0 0.4rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 9.6rem;
 }
 
 .subtitle {

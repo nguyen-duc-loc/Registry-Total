@@ -3,6 +3,7 @@ import { Layout, Button, Drawer, ConfigProvider } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import Menu from "./MenuItems";
 import classes from "./../../styles/Layout/Header.module.css";
+import Logo from "./Logo";
 
 const { Header } = Layout;
 
@@ -23,7 +24,13 @@ const PageHeader = () => {
         onClick={showDrawer}
       />
       <ConfigProvider theme={{ token: { paddingLG: 16 } }}>
-        <Drawer placement="left" width={300} onClose={onClose} open={open}>
+        <Drawer
+          placement="left"
+          width={300}
+          onClose={onClose}
+          open={open}
+          title={<Logo />}
+        >
           <Menu />
         </Drawer>
       </ConfigProvider>

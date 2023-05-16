@@ -1,0 +1,25 @@
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  align-self: end;
+  color: var(--color-black);
+}
+
+.logo {
+  font-size: 2rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+@media (min-width: 48em) {
+  .logo {
+    margin-bottom: 3.6rem;
+    padding: 1.2rem 2rem;
+  }
+}
+
+@media (max-width: 48em) {
+  .logo {
+    margin-left: 1.2rem;
+  }
+}
