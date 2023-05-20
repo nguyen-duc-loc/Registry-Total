@@ -1,5 +1,5 @@
 :root {
-  --color-grey-ligh-1: #fafafa;
+  --color-grey-light-1: #fafafa;
   --color-grey-dark-1: #e4e4e7;
   --color-grey-dark-2: #737373;
   --color-grey-dark-3: #71717a;
@@ -10,7 +10,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 html {

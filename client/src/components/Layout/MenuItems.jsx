@@ -6,7 +6,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { ConfigProvider, Menu } from "antd";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import classes from "./../../styles/Layout/MenuItems.module.css";
 import { useSignOut } from "react-auth-kit";
 
@@ -14,6 +14,19 @@ const styleIcon = {
   verticalAlign: "middle",
   marginLeft: "-2px",
   fontSize: "2rem",
+};
+
+const defaultStyleLink = {
+  fontSize: "14px",
+  fontWeight: "400",
+  marginLeft: "0",
+};
+
+const styleLink = (isActive) => {
+  return {
+    ...defaultStyleLink,
+    fontWeight: isActive ? "600" : "400",
+  };
 };
 
 const getItem = (label, key, icon, children, type) => {
@@ -28,35 +41,50 @@ const getItem = (label, key, icon, children, type) => {
 
 const items = [
   getItem(
-    "Bảng điều khiển",
+    <NavLink to="/" style={({ isActive }) => styleLink(isActive)}>
+      Bảng điều khiển
+    </NavLink>,
     "dashboard",
-    <AppstoreOutlined className={classes.icon} style={styleIcon} />
+    <AppstoreOutlined style={styleIcon} />
   ),
   getItem(
-    "Yêu cầu",
+    <NavLink to="/request" style={({ isActive }) => styleLink(isActive)}>
+      Yêu cầu
+    </NavLink>,
     "request",
-    <SwapOutlined className={classes.icon} style={styleIcon} />
+    <SwapOutlined style={styleIcon} />
   ),
   getItem(
-    "Quản lý",
+    <NavLink to="/manage" style={({ isActive }) => styleLink(isActive)}>
+      Quản lý
+    </NavLink>,
     "manage",
-    <DatabaseOutlined className={classes.icon} style={styleIcon} />
+    <DatabaseOutlined style={styleIcon} />
   ),
   getItem(
-    "Thống kê",
+    <NavLink to="/statistics" style={({ isActive }) => styleLink(isActive)}>
+      Thống kê
+    </NavLink>,
     "statistics",
-    <LineChartOutlined className={classes.icon} style={styleIcon} />
+    <LineChartOutlined style={styleIcon} />
   ),
   getItem(
-    "Tài khoản",
+    <span style={defaultStyleLink}>Tài khoản</span>,
     "account",
-    <UserOutlined className={classes.icon} style={styleIcon} />,
-    [getItem("Cài đặt", "settings"), getItem("Đăng xuất", "logout")]
+    <UserOutlined style={styleIcon} />,
+    [
+      getItem(
+        <NavLink to="/settings" style={({ isActive }) => styleLink(isActive)}>
+          Cài đặt
+        </NavLink>,
+        "settings"
+      ),
+      getItem(<span style={defaultStyleLink}>Đăng xuất</span>, "logout"),
+    ]
   ),
 ];
 
 const MenuItem = () => {
-  const navigate = useNavigate();
   const signOut = useSignOut();
 
   return (
@@ -64,9 +92,8 @@ const MenuItem = () => {
       theme={{
         token: {
           colorPrimary: "#27272a",
-          colorText: "var(--color-grey-dark-2)",
           colorBgTextHover: "var(--color-grey-dark-1)",
-          controlItemBgActive: "var(--color-grey-dark-1)",
+          controlItemBgActive: "none",
           borderRadius: "1.2rem",
           controlHeightLG: 50,
           colorFillQuaternary: "transparent",
@@ -76,15 +103,12 @@ const MenuItem = () => {
     >
       <Menu
         mode="inline"
-        defaultSelectedKeys={"dashboard"}
         items={items}
         className={classes.menu}
         style={{ border: "none" }}
-        onClick={({ key }) => {
-          if (key === "logout") {
+        onClick={(e) => {
+          if (e.key === "logout") {
             signOut();
-          } else {
-            navigate(`${key}`);
           }
         }}
       />

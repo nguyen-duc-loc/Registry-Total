@@ -7,7 +7,14 @@ const { Sider } = Layout;
 
 const PageSider = () => {
   return (
-    <Sider breakpoint="lg" className={classes.sider} width={270}>
+    <Sider
+      breakpoint="lg"
+      className={classes.sider}
+      width={270}
+      style={{
+        backgroundColor: "var(--color-white)",
+      }}
+    >
       <Logo />
       <Menu />
     </Sider>

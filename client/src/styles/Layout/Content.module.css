@@ -1,5 +1,5 @@
 .content {
-  min-height: 100vh;
-  /* padding: 2.4rem; */
-  /* background-color: var(--color-white); */
+  max-height: 100vh;
+  overflow-y: scroll;
+  background-color: var(--color-white);
 }
