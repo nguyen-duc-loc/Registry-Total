@@ -13,7 +13,6 @@ const processBirthDate = (birthDate) => {
 const Profile = () => {
   const auth = useAuthUser();
   const user = auth().data;
-  console.log(user);
 
   return (
     <ConfigProvider
@@ -24,11 +23,13 @@ const Profile = () => {
         },
       }}
     >
+      <h1 className={classes.title}>Hồ sơ của tôi</h1>
       <Space
         direction="vertical"
         size="large"
         style={{
           display: "flex",
+          padding: "3rem",
         }}
       >
         <Card>
