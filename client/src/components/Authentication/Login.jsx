@@ -48,7 +48,9 @@ const LoginForm = (props) => {
         throw new Error("Can not authenticate.");
       }
 
-      const res = response.json();
+      const res = await response.json();
+
+      console.log(res);
 
       if (
         signIn({
