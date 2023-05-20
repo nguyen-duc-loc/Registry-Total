@@ -33,10 +33,10 @@ const App = () => {
           <Route path="request" element={<Home />} />
           <Route path="manage" element={<Home />} />
           <Route path="statistics" element={<Home />} />
-          <Route path="settings" element={<Settings />}>
-            {/* <Route index element={<Navigate to="profile" />} /> */}
-            <Route path="profile" element={<Profile />} />
-            <Route path="password" element={<ChangePassword />} />
+          <Route path="settings">
+            <Route index element={<Navigate to="profile" />} />
+            <Route path="profile" element={<Settings mode="profile" />} />
+            <Route path="password" element={<Settings mode="password" />} />
           </Route>
         </Route>
       </Routes>

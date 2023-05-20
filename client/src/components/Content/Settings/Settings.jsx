@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useMediaQuery } from "react-responsive";
 
-const Settings = () => {
+const Settings = (props) => {
   const breakPoint = useMediaQuery({ query: "(max-width: 1200px)" });
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,7 +48,7 @@ const Settings = () => {
         onChange={(key) => {
           navigate(`/settings/${key}`);
         }}
-        defaultActiveKey={defaultKey}
+        defaultActiveKey={props.mode}
       />
     </ConfigProvider>
   );

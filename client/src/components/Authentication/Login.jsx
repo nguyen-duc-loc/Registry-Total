@@ -50,15 +50,13 @@ const LoginForm = (props) => {
 
       const res = await response.json();
 
-      console.log(res);
-
       if (
         signIn({
           token: res.token,
           expiresIn: 480,
           tokenType: "Bearer",
           authState: {
-            data: res.data,
+            data: res.data.user,
           },
         })
       ) {
