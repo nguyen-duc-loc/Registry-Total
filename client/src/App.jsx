@@ -32,7 +32,6 @@ const App = () => {
           <Route path="manage" element={<Home />} />
           <Route path="statistics" element={<Home />} />
           <Route path="settings" element={<Home />} />
-          <Route path="logout" element={<Home />} />
         </Route>
       </Routes>
     </ConfigProvider>
