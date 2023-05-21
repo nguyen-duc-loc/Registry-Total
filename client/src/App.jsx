@@ -28,8 +28,11 @@ const App = () => {
         <Route path="/auth" element={<Authentication />} />
         <Route path="/" element={<PrivateRoute Component={Root} />}>
           <Route index element={<Home />} />
-          <Route path="request" element={<Home />} />
-          <Route path="manage" element={<Home />} />
+          <Route path="registration" element={<Home />}>
+            <Route path="all" element={<Home />} />
+            <Route path="me" element={<Home />} />
+          </Route>
+          <Route path="create" element={<Home />} />
           <Route path="statistics" element={<Home />} />
           <Route path="settings">
             <Route index element={<Navigate to="profile" />} />
