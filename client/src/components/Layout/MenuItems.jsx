@@ -54,21 +54,21 @@ const items = [
     [
       getItem(
         <NavLink
-          to="/registration/all"
+          to="/inspections/all"
           style={({ isActive }) => styleLink(isActive)}
         >
           Tất cả đăng kiểm
         </NavLink>,
-        "all-registration"
+        "all-inspections"
       ),
       getItem(
         <NavLink
-          to="/registration/me"
+          to="/inspections/me"
           style={({ isActive }) => styleLink(isActive)}
         >
           Đăng kiểm của tôi
         </NavLink>,
-        "my-registration"
+        "my-inspections"
       ),
     ]
   ),

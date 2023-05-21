@@ -3,6 +3,7 @@ import "./styles/App.css";
 import { ConfigProvider } from "antd";
 import Root from "./pages/RootPage";
 import Home from "./pages/HomePage";
+import AllInspections from "./pages/AllInspectionsPage";
 import { useIsAuthenticated } from "react-auth-kit";
 import { Navigate } from "react-router-dom";
 import Authentication from "./pages/AuthenticationPage";
@@ -28,8 +29,8 @@ const App = () => {
         <Route path="/auth" element={<Authentication />} />
         <Route path="/" element={<PrivateRoute Component={Root} />}>
           <Route index element={<Home />} />
-          <Route path="registration" element={<Home />}>
-            <Route path="all" element={<Home />} />
+          <Route path="inspections">
+            <Route path="all" element={<AllInspections />} />
             <Route path="me" element={<Home />} />
           </Route>
           <Route path="create" element={<Home />} />

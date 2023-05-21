@@ -15,7 +15,7 @@ const ContentBreadcumb = () => {
       items = [defaultItem, { title: "Bảng điều khiển" }];
       break;
 
-    case "/registration/all":
+    case "/inspections/all":
       items = [
         defaultItem,
         { title: "Quản lí đăng kiểm" },
@@ -23,7 +23,7 @@ const ContentBreadcumb = () => {
       ];
       break;
 
-    case "/registration/me":
+    case "/inspections/me":
       items = [
         defaultItem,
         { title: "Quản lí đăng kiểm" },
