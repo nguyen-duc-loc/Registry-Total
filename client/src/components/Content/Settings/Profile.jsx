@@ -249,7 +249,7 @@ const Profile = () => {
           setOpen(false);
         }}
         okButtonProps={{ loading: submitting, disabled: submitting }}
-        okText={submitting ? "Đang chỉnh sửa..." : "Chỉnh sửa"}
+        okText={submitting ? "Đang cập nhật..." : "Chỉnh sửa"}
         onOk={async () => {
           try {
             setSubmitting(true);

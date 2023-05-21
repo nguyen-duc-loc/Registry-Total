@@ -9,8 +9,6 @@ const Settings = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const defaultKey = location.pathname.split("/").slice(-1).pop();
-
   return (
     <ConfigProvider
       theme={{
