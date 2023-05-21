@@ -10,7 +10,4 @@ export default defineConfig({
   server: {
     open: true,
   },
-  optimizeDeps: {
-    include: ["esm-dep > cjs-dep"],
-  },
 });
