@@ -10,6 +10,7 @@ import {
   Input,
   notification,
   message,
+  Skeleton,
 } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useAuthHeader } from "react-auth-kit";
@@ -80,6 +81,7 @@ const Profile = () => {
     notification.useNotification();
   const [messageApi, messageContextHolder] = message.useMessage();
   const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({
     ssn: "",
     dateOfBirth: "",
@@ -114,6 +116,7 @@ const Profile = () => {
 
         const res = await response.json();
         setUser(res.data.user);
+        setLoading(false);
       } catch (err) {
         console.error(err.message);
       }
@@ -152,95 +155,106 @@ const Profile = () => {
       {notificationContextHolder}
       {messageContextHolder}
       <h1 className={classes.title}>Hồ sơ của tôi</h1>
-      <Space
-        direction="vertical"
-        size="large"
-        style={{
-          display: "flex",
-          padding: "3rem",
-        }}
-      >
-        <Card>
-          <Space size="large">
-            <Avatar src={avatar} size={100} />
-            <Space direction="vertical" size="small">
-              <span className={classes.name}>{user.name}</span>
-              <span className={classes.role}>
-                {user.role === "staff" ? "Nhân viên" : "Quản trị viên"}
-              </span>
-              <span className={classes.address}>
-                {user.workFor.address}, Việt Nam
-              </span>
-            </Space>
-          </Space>
-        </Card>
-        <Card
-          title="Thông tin cá nhân"
-          extra={
-            <Button
-              size="middle"
-              shape="round"
-              icon={<EditOutlined />}
-              onClick={() => {
-                setOpen(true);
-              }}
-            />
-          }
+      <Skeleton
+        loading={loading}
+        style={{ padding: "3rem" }}
+        avatar
+        active
+        round
+      />
+      {!loading && (
+        <Space
+          direction="vertical"
+          size="large"
+          style={{
+            display: "flex",
+            padding: "3rem",
+          }}
         >
-          <Descriptions
-            layout="vertical"
-            labelStyle={{
-              color: "var(--color-grey-dark-3)",
-            }}
-            contentStyle={{ paddingBottom: "16px", fontWeight: "500" }}
-            colon={false}
-            column={{
-              sm: 2,
-              xs: 1,
-            }}
+          <Card>
+            <Space size="large">
+              <Avatar src={avatar} size={100} />
+              <Space direction="vertical" size="small">
+                <span className={classes.name}>{user.name}</span>
+                <span className={classes.role}>
+                  {user.role === "staff" ? "Nhân viên" : "Quản trị viên"}
+                </span>
+                <span className={classes.address}>
+                  {user.workFor.address}, Việt Nam
+                </span>
+              </Space>
+            </Space>
+          </Card>
+          <Card
+            title="Thông tin cá nhân"
+            extra={
+              <Button
+                size="middle"
+                shape="round"
+                icon={<EditOutlined />}
+                onClick={() => {
+                  setOpen(true);
+                }}
+              />
+            }
           >
-            <Descriptions.Item label="Họ và tên">{user.name}</Descriptions.Item>
-            <Descriptions.Item label="Ngày sinh">
-              {processBirthDate(user.dateOfBirth)}
-            </Descriptions.Item>
-            <Descriptions.Item label="Số điện thoại">
-              +84 {user.phone}
-            </Descriptions.Item>
-            <Descriptions.Item label="Số căn cước công dân">
-              {user.ssn}
-            </Descriptions.Item>
-            <Descriptions.Item label="Email">{user.email}</Descriptions.Item>
-          </Descriptions>
-        </Card>
-        <Card title="Địa chỉ làm việc">
-          <Descriptions
-            layout="vertical"
-            labelStyle={{
-              color: "var(--color-grey-dark-3)",
-            }}
-            contentStyle={{ paddingBottom: "16px", fontWeight: "500" }}
-            colon={false}
-            column={{
-              sm: 2,
-              xs: 1,
-            }}
-          >
-            <Descriptions.Item label="Quốc gia">Việt Nam</Descriptions.Item>
-            <Descriptions.Item label="Tỉnh / Thành phố">
-              {user.workFor.address}
-            </Descriptions.Item>
-            <Descriptions.Item label="Số điện thoại">
-              +84 {user.workFor.phone}
-            </Descriptions.Item>
-            <Descriptions.Item label="Email">
-              {user.workFor.email}
-            </Descriptions.Item>
-            <Descriptions.Item label="Tên trung tâm">
-              {user.workFor.name}
-            </Descriptions.Item>
-          </Descriptions>
-        </Card>
-      </Space>
+            <Descriptions
+              layout="vertical"
+              labelStyle={{
+                color: "var(--color-grey-dark-3)",
+              }}
+              contentStyle={{ paddingBottom: "16px", fontWeight: "500" }}
+              colon={false}
+              column={{
+                sm: 2,
+                xs: 1,
+              }}
+            >
+              <Descriptions.Item label="Họ và tên">
+                {user.name}
+              </Descriptions.Item>
+              <Descriptions.Item label="Ngày sinh">
+                {processBirthDate(user.dateOfBirth)}
+              </Descriptions.Item>
+              <Descriptions.Item label="Số điện thoại">
+                +84 {user.phone}
+              </Descriptions.Item>
+              <Descriptions.Item label="Số căn cước công dân">
+                {user.ssn}
+              </Descriptions.Item>
+              <Descriptions.Item label="Email">{user.email}</Descriptions.Item>
+            </Descriptions>
+          </Card>
+          <Card title="Địa chỉ làm việc">
+            <Descriptions
+              layout="vertical"
+              labelStyle={{
+                color: "var(--color-grey-dark-3)",
+              }}
+              contentStyle={{ paddingBottom: "16px", fontWeight: "500" }}
+              colon={false}
+              column={{
+                sm: 2,
+                xs: 1,
+              }}
+            >
+              <Descriptions.Item label="Quốc gia">Việt Nam</Descriptions.Item>
+              <Descriptions.Item label="Tỉnh / Thành phố">
+                {user.workFor.address}
+              </Descriptions.Item>
+              <Descriptions.Item label="Số điện thoại">
+                +84 {user.workFor.phone}
+              </Descriptions.Item>
+              <Descriptions.Item label="Email">
+                {user.workFor.email}
+              </Descriptions.Item>
+              <Descriptions.Item label="Tên trung tâm">
+                {user.workFor.name}
+              </Descriptions.Item>
+            </Descriptions>
+          </Card>
+        </Space>
+      )}
       <Modal
         open={open}
         title="Chỉnh sửa thông tin cá nhân"
