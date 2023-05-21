@@ -7,8 +7,6 @@ import { useIsAuthenticated } from "react-auth-kit";
 import { Navigate } from "react-router-dom";
 import Authentication from "./pages/AuthenticationPage";
 import Settings from "./pages/SettingsPage";
-import Profile from "./pages/ProfilePage";
-import ChangePassword from "./pages/ChangePasswordPage";
 
 const App = () => {
   const PrivateRoute = ({ Component }) => {
