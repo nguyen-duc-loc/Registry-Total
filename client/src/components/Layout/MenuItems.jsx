@@ -1,5 +1,5 @@
 import {
-  SwapOutlined,
+  FileAddOutlined,
   LineChartOutlined,
   AppstoreOutlined,
   DatabaseOutlined,
@@ -48,18 +48,36 @@ const items = [
     <AppstoreOutlined style={styleIcon} />
   ),
   getItem(
-    <NavLink to="/request" style={({ isActive }) => styleLink(isActive)}>
-      Yêu cầu
-    </NavLink>,
-    "request",
-    <SwapOutlined style={styleIcon} />
+    <span style={defaultStyleLink}>Quản lí đăng kiểm</span>,
+    "registration",
+    <DatabaseOutlined style={styleIcon} />,
+    [
+      getItem(
+        <NavLink
+          to="/inspections/all"
+          style={({ isActive }) => styleLink(isActive)}
+        >
+          Tất cả đăng kiểm
+        </NavLink>,
+        "all-inspections"
+      ),
+      getItem(
+        <NavLink
+          to="/inspections/me"
+          style={({ isActive }) => styleLink(isActive)}
+        >
+          Đăng kiểm của tôi
+        </NavLink>,
+        "my-inspections"
+      ),
+    ]
   ),
   getItem(
-    <NavLink to="/manage" style={({ isActive }) => styleLink(isActive)}>
-      Quản lý
+    <NavLink to="/create" style={({ isActive }) => styleLink(isActive)}>
+      Tạo đăng kiểm
     </NavLink>,
-    "manage",
-    <DatabaseOutlined style={styleIcon} />
+    "create-registration",
+    <FileAddOutlined style={styleIcon} />
   ),
   getItem(
     <NavLink to="/statistics" style={({ isActive }) => styleLink(isActive)}>
@@ -95,7 +113,7 @@ const MenuItem = () => {
           colorBgTextHover: "var(--color-grey-dark-1)",
           controlItemBgActive: "none",
           borderRadius: "1.2rem",
-          controlHeightLG: 50,
+          controlHeightLG: 48,
           colorFillQuaternary: "transparent",
           padding: 22,
         },
