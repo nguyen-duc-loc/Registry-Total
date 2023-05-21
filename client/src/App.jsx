@@ -3,7 +3,7 @@ import "./styles/App.css";
 import { ConfigProvider } from "antd";
 import Root from "./pages/RootPage";
 import Home from "./pages/HomePage";
-import AllInspections from "./pages/AllInspectionsPage";
+import Inspections from "./pages/InspectionsPage";
 import { useIsAuthenticated } from "react-auth-kit";
 import { Navigate } from "react-router-dom";
 import Authentication from "./pages/AuthenticationPage";
@@ -30,8 +30,9 @@ const App = () => {
         <Route path="/" element={<PrivateRoute Component={Root} />}>
           <Route index element={<Home />} />
           <Route path="inspections">
-            <Route path="all" element={<AllInspections />} />
-            <Route path="me" element={<Home />} />
+            <Route path="all" element={<Inspections mode="all" />} />
+            <Route path="me" element={<Inspections mode="me" />} />
+            <Route path=":carId" element={<Home />} />
           </Route>
           <Route path="create" element={<Home />} />
           <Route path="statistics" element={<Home />} />
