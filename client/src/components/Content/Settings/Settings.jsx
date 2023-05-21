@@ -2,6 +2,7 @@ import { ConfigProvider, Tabs } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useMediaQuery } from "react-responsive";
+import ChangePassword from "./ChangePassword";
 
 const Settings = (props) => {
   const breakPoint = useMediaQuery({ query: "(max-width: 1200px)" });
@@ -20,7 +21,7 @@ const Settings = (props) => {
     >
       <Tabs
         tabPosition={breakPoint ? "top" : "left"}
-        tabBarGutter={breakPoint ? 30 : 20}
+        tabBarGutter={breakPoint ? 30 : 16}
         tabBarStyle={{
           margin: breakPoint ? "0 2rem" : undefined,
           marginTop: breakPoint ? undefined : "2rem",
@@ -36,7 +37,7 @@ const Settings = (props) => {
           {
             label: "Thay đổi mật khẩu",
             key: "password",
-            children: <Profile />,
+            children: <ChangePassword />,
           },
         ]}
         style={{
