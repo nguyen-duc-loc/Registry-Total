@@ -161,6 +161,29 @@ const Profile = () => {
         avatar
         active
         round
+        title={false}
+        paragraph={{
+          rows: 3,
+        }}
+      />
+      <Skeleton
+        loading={loading}
+        style={{ padding: "3rem" }}
+        active
+        round
+        paragraph={{
+          rows: 3,
+        }}
+      />
+      <Skeleton
+        loading={loading}
+        style={{ padding: "3rem" }}
+        active
+        round
+        title
+        paragraph={{
+          rows: 3,
+        }}
       />
       {!loading && (
         <Space
