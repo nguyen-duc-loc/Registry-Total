@@ -27,7 +27,11 @@ const InspectionCollapse = (props) => {
         alignItems: "center",
       }}
     >
-      <Collapse defaultActiveKey="inspection" accordion>
+      <Collapse
+        defaultActiveKey="inspection"
+        accordion
+        style={{ width: "100%" }}
+      >
         <Panel header="Thông tin chủ sở hữu" key="owner">
           <Descriptions
             column={1}
