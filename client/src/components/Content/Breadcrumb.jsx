@@ -10,50 +10,48 @@ const ContentBreadcumb = () => {
 
   let items = [];
 
-  switch (location.pathname) {
-    case "/":
-      items = [defaultItem, { title: "Bảng điều khiển" }];
-      break;
+  const path = location.pathname;
 
-    case "/inspections/all":
+  if (path === "/") {
+    items = [defaultItem, { title: "Bảng điều khiển" }];
+  } else if (path.includes("/inspections")) {
+    if (path.includes("/all")) {
       items = [
         defaultItem,
         { title: "Quản lí đăng kiểm" },
         { title: "Tất cả đăng kiểm" },
       ];
-      break;
-
-    case "/inspections/me":
+    } else if (path.includes("/me")) {
       items = [
         defaultItem,
         { title: "Quản lí đăng kiểm" },
         { title: "Đăng kiểm của tôi" },
       ];
-      break;
-
-    case "/create":
-      items = [defaultItem, { title: "Tạo đăng kiểm" }];
-      break;
-
-    case "/statistics":
-      items = [defaultItem, { title: "Thống kê" }];
-      break;
-
-    case "/settings/profile":
+    } else {
+      items = [
+        defaultItem,
+        { title: "Quản lí đăng kiểm" },
+        { title: "Xem đăng kiểm" },
+      ];
+    }
+  } else if (path === "/create") {
+    items = [defaultItem, { title: "Tạo đăng kiểm" }];
+  } else if (path === "statistics") {
+    items = [defaultItem, { title: "Thống kê" }];
+  } else if (path.includes("/settings")) {
+    if (path.includes("/profile")) {
       items = [
         defaultItem,
         { title: "Cài đặt" },
         { title: "Thông tin cá nhân" },
       ];
-      break;
-
-    case "/settings/password":
+    } else if (path.includes("/password")) {
       items = [
         defaultItem,
         { title: "Cài đặt" },
         { title: "Thay đổi mật khẩu" },
       ];
-      break;
+    }
   }
 
   return (

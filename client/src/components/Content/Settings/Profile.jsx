@@ -20,10 +20,11 @@ import { useEffect, useState } from "react";
 import validateDate from "validate-date";
 
 const processBirthDate = (birthDate) => {
+  if (!birthDate) return;
   const [month, day, year] = new Date(birthDate)
     .toLocaleDateString()
     .split("/");
-  return [day, month, year].join("/");
+  return [day.padStart(2, "0"), month.padStart(2, "0"), year].join("/");
 };
 
 const setRule = (name) => {
@@ -94,7 +95,7 @@ const Profile = () => {
       phone: "",
       email: "",
     },
-    role: "staff",
+    role: "",
   });
 
   useEffect(() => {
@@ -245,7 +246,9 @@ const Profile = () => {
               <Descriptions.Item label="Số căn cước công dân">
                 {user.ssn}
               </Descriptions.Item>
-              <Descriptions.Item label="Email">{user.email}</Descriptions.Item>
+              <Descriptions.Item label="Email" style={{ padding: 0 }}>
+                {user.email}
+              </Descriptions.Item>
             </Descriptions>
           </Card>
           <Card title="Địa chỉ làm việc">

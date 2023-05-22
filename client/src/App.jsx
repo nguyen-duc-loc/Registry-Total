@@ -8,6 +8,7 @@ import { useIsAuthenticated } from "react-auth-kit";
 import { Navigate } from "react-router-dom";
 import Authentication from "./pages/AuthenticationPage";
 import Settings from "./pages/SettingsPage";
+import ViewInspection from "./pages/ViewInspectionPage";
 
 const App = () => {
   const PrivateRoute = ({ Component }) => {
@@ -32,7 +33,7 @@ const App = () => {
           <Route path="inspections">
             <Route path="all" element={<Inspections mode="all" />} />
             <Route path="me" element={<Inspections mode="me" />} />
-            <Route path=":carId" element={<Home />} />
+            <Route path=":carId" element={<ViewInspection />} />
           </Route>
           <Route path="create" element={<Home />} />
           <Route path="statistics" element={<Home />} />

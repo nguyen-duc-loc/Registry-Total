@@ -7,8 +7,9 @@ import { DoubleRightOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 
 const processDate = (date) => {
+  if (!date) return;
   const [month, day, year] = new Date(date).toLocaleDateString().split("/");
-  return [day.padStart(2, "0"), month.padStart(2, 0), year].join("/");
+  return [day.padStart(2, "0"), month.padStart(2, "0"), year].join("/");
 };
 
 const InspectionsTable = (props) => {
