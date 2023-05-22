@@ -46,7 +46,9 @@ const InspectionsTable = (props) => {
       >
         <Input
           ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`Tìm kiếm ${
+            dataIndex === "inspectionNumber" ? "số đăng kiểm" : "biển số xe "
+          }`}
           value={selectedKeys[0]}
           onChange={(e) =>
             setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -163,7 +165,7 @@ const InspectionsTable = (props) => {
       key: "inspectionDate",
       align: "center",
       render: (text) => processDate(text),
-      sorter: (a, b) => new Date(a.expiredDate) - new Date(b.expiredDate),
+      sorter: (a, b) => new Date(a.inspectionDate) - new Date(b.inspectionDate),
       sortDirections: ["descend", "ascend"],
       showSorterTooltip: false,
     },
