@@ -8,7 +8,7 @@ import Highlighter from "react-highlight-words";
 
 const processDate = (date) => {
   const [month, day, year] = new Date(date).toLocaleDateString().split("/");
-  return [day, month, year].join("/");
+  return [day.padStart(2, "0"), month.padStart(2, 0), year].join("/");
 };
 
 const InspectionsTable = (props) => {
