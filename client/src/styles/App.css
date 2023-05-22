@@ -21,6 +21,12 @@
   font-size: 1.4rem;
 }
 
+.ant-table-title {
+  font-weight: 600;
+  margin-left: 2rem;
+  font-size: 1.6rem;
+}
+
 @media (max-width: 62em) {
   .ant-menu-title-content {
     margin-inline-start: 0 !important;
