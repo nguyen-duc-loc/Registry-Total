@@ -1,17 +1,17 @@
-import { UserOutlined } from "@ant-design/icons";
-import { ConfigProvider, Menu } from "antd";
+import { Avatar, ConfigProvider, Menu } from "antd";
 import { NavLink } from "react-router-dom";
 import classes from "./../../styles/Layout/MenuItems.module.css";
 import { useSignOut } from "react-auth-kit";
 import {
-  IoAdd,
-  IoAddOutline,
+  IoAddCircle,
+  IoAddCircleOutline,
   IoBarChart,
   IoBarChartOutline,
   IoFileTrayFullOutline,
   IoGrid,
   IoGridOutline,
 } from "react-icons/io5";
+import avatar from "./../../assets/images/avatar.png";
 
 const styleIcon = {
   verticalAlign: "middle",
@@ -88,12 +88,12 @@ const items = [
       Tạo đăng kiểm
     </NavLink>,
     "create-registration",
-    <NavLink to="/statistics" style={({ isActive }) => styleLink(isActive)}>
+    <NavLink to="/create" style={({ isActive }) => styleLink(isActive)}>
       {({ isActive }) =>
         isActive ? (
-          <IoAdd style={styleIcon} />
+          <IoAddCircle style={styleIcon} />
         ) : (
-          <IoAddOutline style={styleIcon} />
+          <IoAddCircleOutline style={styleIcon} />
         )
       }
     </NavLink>
@@ -114,10 +114,16 @@ const items = [
     </NavLink>
   ),
   getItem(
-    <span style={defaultStyleLink}>Tài khoản</span>,
+    <span style={{ ...defaultStyleLink, transform: "translateX(-8px)" }}>
+      Tài khoản
+    </span>,
     "account",
     <NavLink to="/settings">
-      <UserOutlined style={styleIcon} />
+      <Avatar
+        src={avatar}
+        size="small"
+        style={{ transform: "translateX(-6px)" }}
+      />
     </NavLink>,
     [
       getItem(
