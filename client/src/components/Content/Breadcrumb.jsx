@@ -36,7 +36,7 @@ const ContentBreadcumb = () => {
     }
   } else if (path === "/create") {
     items = [defaultItem, { title: "Tạo đăng kiểm" }];
-  } else if (path === "statistics") {
+  } else if (path === "/statistics") {
     items = [defaultItem, { title: "Thống kê" }];
   } else if (path.includes("/settings")) {
     if (path.includes("/profile")) {

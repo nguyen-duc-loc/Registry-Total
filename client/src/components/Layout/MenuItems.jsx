@@ -1,10 +1,4 @@
-import {
-  FileAddOutlined,
-  LineChartOutlined,
-  AppstoreOutlined,
-  DatabaseOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import { ConfigProvider, Menu } from "antd";
 import { NavLink } from "react-router-dom";
 import classes from "./../../styles/Layout/MenuItems.module.css";
