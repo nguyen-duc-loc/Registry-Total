@@ -9,6 +9,15 @@ import { ConfigProvider, Menu } from "antd";
 import { NavLink } from "react-router-dom";
 import classes from "./../../styles/Layout/MenuItems.module.css";
 import { useSignOut } from "react-auth-kit";
+import {
+  IoAdd,
+  IoAddOutline,
+  IoBarChart,
+  IoBarChartOutline,
+  IoFileTrayFullOutline,
+  IoGrid,
+  IoGridOutline,
+} from "react-icons/io5";
 
 const styleIcon = {
   verticalAlign: "middle",
@@ -45,12 +54,20 @@ const items = [
       Bảng điều khiển
     </NavLink>,
     "dashboard",
-    <AppstoreOutlined style={styleIcon} />
+    <NavLink to="/" style={({ isActive }) => styleLink(isActive)}>
+      {({ isActive }) =>
+        isActive ? (
+          <IoGrid style={styleIcon} />
+        ) : (
+          <IoGridOutline style={styleIcon} />
+        )
+      }
+    </NavLink>
   ),
   getItem(
     <span style={defaultStyleLink}>Quản lí đăng kiểm</span>,
     "registration",
-    <DatabaseOutlined style={styleIcon} />,
+    <IoFileTrayFullOutline style={styleIcon} />,
     [
       getItem(
         <NavLink
@@ -77,19 +94,37 @@ const items = [
       Tạo đăng kiểm
     </NavLink>,
     "create-registration",
-    <FileAddOutlined style={styleIcon} />
+    <NavLink to="/statistics" style={({ isActive }) => styleLink(isActive)}>
+      {({ isActive }) =>
+        isActive ? (
+          <IoAdd style={styleIcon} />
+        ) : (
+          <IoAddOutline style={styleIcon} />
+        )
+      }
+    </NavLink>
   ),
   getItem(
     <NavLink to="/statistics" style={({ isActive }) => styleLink(isActive)}>
       Thống kê
     </NavLink>,
     "statistics",
-    <LineChartOutlined style={styleIcon} />
+    <NavLink to="/statistics" style={({ isActive }) => styleLink(isActive)}>
+      {({ isActive }) =>
+        isActive ? (
+          <IoBarChart style={styleIcon} />
+        ) : (
+          <IoBarChartOutline style={styleIcon} />
+        )
+      }
+    </NavLink>
   ),
   getItem(
     <span style={defaultStyleLink}>Tài khoản</span>,
     "account",
-    <UserOutlined style={styleIcon} />,
+    <NavLink to="/settings">
+      <UserOutlined style={styleIcon} />
+    </NavLink>,
     [
       getItem(
         <NavLink to="/settings" style={({ isActive }) => styleLink(isActive)}>

@@ -27,6 +27,11 @@
   font-size: 1.6rem;
 }
 
+.ant-descriptions-item-container,
+.ant-descriptions-item-label {
+  align-items: center !important;
+}
+
 @media (max-width: 62em) {
   .ant-menu-title-content {
     margin-inline-start: 0 !important;

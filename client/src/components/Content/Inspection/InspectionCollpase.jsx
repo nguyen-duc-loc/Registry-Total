@@ -1,5 +1,19 @@
 import { Button, Collapse, Descriptions } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
+import {
+  IoCallOutline,
+  IoCalendarOutline,
+  IoPersonOutline,
+  IoMailOutline,
+  IoConstructOutline,
+  IoLocationOutline,
+  IoIdCardOutline,
+  IoShieldCheckmarkOutline,
+  IoSyncOutline,
+  IoCheckmark,
+  IoClose,
+} from "react-icons/io5";
+import TextWithIcon from "../../UI/TextWithIcon";
 
 const { Panel } = Collapse;
 
@@ -38,11 +52,27 @@ const InspectionCollapse = (props) => {
             style={{ padding: "1.2rem" }}
             layout="vertical"
           >
-            <Item label="Tên chủ sở hữu">{owner.name}</Item>
-            <Item label="Địa chỉ">{owner.address}</Item>
-            <Item label="Số điện thoại">{owner.phone}</Item>
-            <Item label="Email">{owner.email}</Item>
-            <Item label="Chủ sở hữu">
+            <Item
+              label={<TextWithIcon Icon={IoPersonOutline} text="Họ và tên" />}
+            >
+              {owner.name}
+            </Item>
+            <Item
+              label={<TextWithIcon Icon={IoLocationOutline} text="Địa chỉ" />}
+            >
+              {owner.address}
+            </Item>
+            <Item
+              label={<TextWithIcon Icon={IoCallOutline} text="Số điện thoại" />}
+            >
+              {owner.phone}
+            </Item>
+            <Item label={<TextWithIcon Icon={IoMailOutline} text="Email" />}>
+              {owner.email}
+            </Item>
+            <Item
+              label={<TextWithIcon Icon={IoIdCardOutline} text="Chủ sở hữu" />}
+            >
               Chủ sở hữu{" "}
               {owner.role === "organization" ? "doanh nghiệp" : "cá nhân"}
             </Item>
@@ -63,10 +93,18 @@ const InspectionCollapse = (props) => {
             <Item label="Năm sản xuất">{car.manufacturedYear}</Item>
             <Item label="Nước sản xuất">{car.manufacturedCountry}</Item>
             <Item label="Kinh doanh vận tải">
-              {car.purpose === "business" ? "✔️" : "❌"}
+              {car.purpose === "business" ? (
+                <IoCheckmark style={{ color: "#379237" }} />
+              ) : (
+                <IoClose />
+              )}
             </Item>
             <Item label="Cải tạo" style={{ padding: 0 }}>
-              {car.recovered ? "✔️" : "❌"}
+              {car.recovered ? (
+                <IoCheckmark style={{ color: "#379237" }} />
+              ) : (
+                <IoClose style={{ color: "#ED2B2A" }} />
+              )}
             </Item>
           </Descriptions>
         </Panel>
@@ -110,18 +148,72 @@ const InspectionCollapse = (props) => {
         </Panel>
         <Panel header="Thông tin đăng kiểm" key="inspection">
           <Descriptions column={1} style={{ padding: "1.2rem" }}>
-            <Item label="Số đăng kiểm">{data.inspectionNumber}</Item>
-            <Item label="Ngày đăng kiểm">
+            <Item
+              label={
+                <TextWithIcon
+                  Icon={IoShieldCheckmarkOutline}
+                  text="Số đăng kiểm"
+                />
+              }
+            >
+              {data.inspectionNumber}
+            </Item>
+            <Item
+              label={
+                <TextWithIcon Icon={IoCalendarOutline} text="Ngày đăng kiểm" />
+              }
+            >
               {processDate(data.inspectionDate)}
             </Item>
-            <Item label="Có hiệu lực đến ngày">
+            <Item
+              label={
+                <TextWithIcon
+                  Icon={IoCalendarOutline}
+                  text="Có hiệu lực đến ngày"
+                />
+              }
+            >
               {processDate(data.expiredDate)}
             </Item>
-            <Item label="Đơn vị kiểm định">{data.madeBy.workFor.name}</Item>
-            <Item label="Số điện thoại">{data.madeBy.workFor.phone}</Item>
-            <Item label="Email">{data.madeBy.workFor.email}</Item>
-            <Item label="Nhân viên đăng kiểm">{data.madeBy.name}</Item>
-            {data.firstTime && <Item label="Đăng kiểm lần đầu">✔️</Item>}
+            <Item
+              label={
+                <TextWithIcon
+                  Icon={IoConstructOutline}
+                  text="Đơn vị kiểm định"
+                />
+              }
+            >
+              {data.madeBy.workFor.name}
+            </Item>
+            <Item
+              label={<TextWithIcon Icon={IoCallOutline} text="Số điện thoại" />}
+            >
+              {data.madeBy.workFor.phone}
+            </Item>
+            <Item label={<TextWithIcon Icon={IoMailOutline} text="Email" />}>
+              {data.madeBy.workFor.email}
+            </Item>
+            <Item
+              label={
+                <TextWithIcon
+                  Icon={IoPersonOutline}
+                  text="Nhân viên đăng kiểm"
+                />
+              }
+            >
+              {data.madeBy.name}
+            </Item>
+            {data.firstTime && (
+              <Item
+                label={
+                  <TextWithIcon Icon={IoSyncOutline} text="Đăng kiểm lần đầu" />
+                }
+              >
+                <div>
+                  <IoCheckmark style={{ color: "#379237" }} />
+                </div>
+              </Item>
+            )}
           </Descriptions>
         </Panel>
       </Collapse>

@@ -12,12 +12,23 @@ import {
   message,
   Skeleton,
 } from "antd";
+import {
+  IoCallOutline,
+  IoCalendarOutline,
+  IoPersonOutline,
+  IoCardOutline,
+  IoMailOutline,
+  IoMapOutline,
+  IoLocationOutline,
+  IoConstructOutline,
+} from "react-icons/io5";
 import { EditOutlined } from "@ant-design/icons";
 import { useAuthHeader } from "react-auth-kit";
 import avatar from "./../../../assets/images/avatar.png";
 import classes from "./../../../styles/Content/Settings/Profile.module.css";
 import { useEffect, useState } from "react";
 import validateDate from "validate-date";
+import TextWithIcon from "../../UI/TextWithIcon";
 
 const processBirthDate = (birthDate) => {
   if (!birthDate) return;
@@ -25,6 +36,10 @@ const processBirthDate = (birthDate) => {
     .toLocaleDateString()
     .split("/");
   return [day.padStart(2, "0"), month.padStart(2, "0"), year].join("/");
+};
+
+const marginSmall = {
+  padding: "2px",
 };
 
 const setRule = (name) => {
@@ -234,19 +249,43 @@ const Profile = () => {
                 xs: 1,
               }}
             >
-              <Descriptions.Item label="Họ và tên">
+              <Descriptions.Item
+                label={<TextWithIcon Icon={IoPersonOutline} text="Họ và tên" />}
+                style={marginSmall}
+              >
                 {user.name}
               </Descriptions.Item>
-              <Descriptions.Item label="Ngày sinh">
+              <Descriptions.Item
+                label={
+                  <TextWithIcon Icon={IoCalendarOutline} text="Ngày sinh" />
+                }
+                style={marginSmall}
+              >
                 {processBirthDate(user.dateOfBirth)}
               </Descriptions.Item>
-              <Descriptions.Item label="Số điện thoại">
+              <Descriptions.Item
+                label={
+                  <TextWithIcon Icon={IoCallOutline} text="Số điện thoại" />
+                }
+                style={marginSmall}
+              >
                 +84 {user.phone}
               </Descriptions.Item>
-              <Descriptions.Item label="Số căn cước công dân">
+              <Descriptions.Item
+                label={
+                  <TextWithIcon
+                    Icon={IoCardOutline}
+                    text="Số căn cước công dân"
+                  />
+                }
+                style={marginSmall}
+              >
                 {user.ssn}
               </Descriptions.Item>
-              <Descriptions.Item label="Email" style={{ padding: 0 }}>
+              <Descriptions.Item
+                label={<TextWithIcon Icon={IoMailOutline} text="Email" />}
+                style={marginSmall}
+              >
                 {user.email}
               </Descriptions.Item>
             </Descriptions>
@@ -264,17 +303,46 @@ const Profile = () => {
                 xs: 1,
               }}
             >
-              <Descriptions.Item label="Quốc gia">Việt Nam</Descriptions.Item>
-              <Descriptions.Item label="Tỉnh / Thành phố">
+              <Descriptions.Item
+                label={<TextWithIcon Icon={IoMapOutline} text="Quốc gia" />}
+                style={marginSmall}
+              >
+                Việt Nam
+              </Descriptions.Item>
+              <Descriptions.Item
+                label={
+                  <TextWithIcon
+                    Icon={IoLocationOutline}
+                    text="Tỉnh / Thành phố"
+                  />
+                }
+                style={marginSmall}
+              >
                 {user.workFor.address}
               </Descriptions.Item>
-              <Descriptions.Item label="Số điện thoại">
+              <Descriptions.Item
+                label={
+                  <TextWithIcon Icon={IoCallOutline} text="Số điện thoại" />
+                }
+                style={marginSmall}
+              >
                 +84 {user.workFor.phone}
               </Descriptions.Item>
-              <Descriptions.Item label="Email">
+              <Descriptions.Item
+                label={<TextWithIcon Icon={IoMailOutline} text="Email" />}
+                style={marginSmall}
+              >
                 {user.workFor.email}
               </Descriptions.Item>
-              <Descriptions.Item label="Tên trung tâm">
+              <Descriptions.Item
+                label={
+                  <TextWithIcon
+                    Icon={IoConstructOutline}
+                    text="Tên đơn vị đăng kiểm"
+                  />
+                }
+                style={marginSmall}
+              >
                 {user.workFor.name}
               </Descriptions.Item>
             </Descriptions>
