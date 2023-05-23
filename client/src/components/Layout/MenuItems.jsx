@@ -10,6 +10,8 @@ import {
   IoFileTrayFullOutline,
   IoGrid,
   IoGridOutline,
+  IoSearch,
+  IoSearchOutline,
 } from "react-icons/io5";
 import avatar from "./../../assets/images/avatar.png";
 
@@ -94,6 +96,21 @@ const items = [
           <IoAddCircle style={styleIcon} />
         ) : (
           <IoAddCircleOutline style={styleIcon} />
+        )
+      }
+    </NavLink>
+  ),
+  getItem(
+    <NavLink to="/search" style={({ isActive }) => styleLink(isActive)}>
+      Tra cứu phương tiện
+    </NavLink>,
+    "search",
+    <NavLink to="/search" style={({ isActive }) => styleLink(isActive)}>
+      {({ isActive }) =>
+        isActive ? (
+          <IoSearch style={styleIcon} />
+        ) : (
+          <IoSearchOutline style={styleIcon} />
         )
       }
     </NavLink>

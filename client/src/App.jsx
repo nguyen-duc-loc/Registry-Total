@@ -9,6 +9,7 @@ import { Navigate } from "react-router-dom";
 import Authentication from "./pages/AuthenticationPage";
 import Settings from "./pages/SettingsPage";
 import ViewInspection from "./pages/ViewInspectionPage";
+import Search from "./pages/SearchPage";
 
 const App = () => {
   const PrivateRoute = ({ Component }) => {
@@ -36,6 +37,10 @@ const App = () => {
             <Route path=":carId" element={<ViewInspection />} />
           </Route>
           <Route path="create" element={<Home />} />
+          <Route path="search">
+            <Route index element={<Search />} />
+            <Route path=":plate" element={<Home />} />
+          </Route>
           <Route path="statistics" element={<Home />} />
           <Route path="settings">
             <Route index element={<Navigate to="profile" />} />
