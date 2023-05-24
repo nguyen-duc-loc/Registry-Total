@@ -1,10 +1,12 @@
-import { ConfigProvider, Table, Input, Space, Button } from "antd";
+import { ConfigProvider, Table, Input, Space, Button, DatePicker } from "antd";
 import classes from "./../../../styles/Content/Inspection/InspectionsTable.module.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { useAuthHeader } from "react-auth-kit";
 import { DoubleRightOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
+
+const { RangePicker } = DatePicker;
 
 const processDate = (date) => {
   if (!date) return;
@@ -30,6 +32,69 @@ const InspectionsTable = (props) => {
     clearFilters();
     setSearchText("");
   };
+
+  const handleTimeRangeSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const handleTimeRangeReset = (clearFilters) => {
+    clearFilters();
+    setSearchText("");
+  };
+
+  const getColumnDateFilterProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => {
+      return (
+        <div
+          style={{
+            padding: 8,
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            width: "30rem",
+          }}
+        >
+          <RangePicker
+            allowClear={false}
+            placeholder={["Từ ngày", "Đến ngày"]}
+            format="DD-MM-YYYY"
+            value={selectedKeys[0]}
+            onChange={(e) => {
+              setSelectedKeys(e.length ? [e] : []);
+            }}
+          />
+          <Space size="middle" style={{ margin: "auto" }}>
+            <Button
+              role="reset"
+              onClick={() => handleTimeRangeReset(clearFilters)}
+            >
+              Đặt lại
+            </Button>
+            <Button
+              type="primary"
+              role="search"
+              onClick={() =>
+                handleTimeRangeSearch(selectedKeys, confirm, dataIndex)
+              }
+              icon={<SearchOutlined />}
+            >
+              Tìm kiếm
+            </Button>
+          </Space>
+        </div>
+      );
+    },
+    onFilter: (value, record) =>
+      new Date(record[dataIndex]) >= new Date(value[0]) &&
+      new Date(record[dataIndex]) <= new Date(value[1]),
+  });
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -61,6 +126,7 @@ const InspectionsTable = (props) => {
         />
         <Space size="middle">
           <Button
+            role="reset"
             onClick={() => clearFilters && handleReset(clearFilters)}
             size="middle"
             style={{
@@ -168,6 +234,7 @@ const InspectionsTable = (props) => {
       sorter: (a, b) => new Date(a.inspectionDate) - new Date(b.inspectionDate),
       sortDirections: ["descend", "ascend"],
       showSorterTooltip: false,
+      ...getColumnDateFilterProps("inspectionDate"),
     },
     {
       title: "Ngày hết hạn",
@@ -178,6 +245,7 @@ const InspectionsTable = (props) => {
       sorter: (a, b) => new Date(a.expiredDate) - new Date(b.expiredDate),
       sortDirections: ["descend", "ascend"],
       showSorterTooltip: false,
+      ...getColumnDateFilterProps("expiredDate"),
     },
     {
       title: "",

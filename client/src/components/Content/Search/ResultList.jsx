@@ -10,7 +10,7 @@ const ResultList = (props) => {
       dataSource={props.listData}
       pagination={{ align: "center", showSizeChanger: false }}
       style={{
-        width: "45rem",
+        width: "50rem",
         margin: "3rem auto",
         backgroundColor: "var(--color-white)",
       }}

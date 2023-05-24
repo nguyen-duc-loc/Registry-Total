@@ -1,6 +1,7 @@
 import { AutoComplete, Input } from "antd";
 import { useEffect, useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
+import { useNavigate } from "react-router-dom";
 
 const SearchInput = (props) => {
   const [options, setOptions] = useState([]);
@@ -8,6 +9,7 @@ const SearchInput = (props) => {
     { id: "", numberPlate: "", modelCode: "" },
   ]);
   const authHeader = useAuthHeader();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,14 +40,14 @@ const SearchInput = (props) => {
   }, []);
 
   const onSelect = (_, options) => {
-    console.log(options.id);
+    navigate(options.id);
   };
 
   const getPanelValue = (searchText) => {
     if (!searchText) return [];
 
     return data
-      .filter((d) => d.numberPlate.includes(searchText))
+      .filter((d) => d.numberPlate.startsWith(searchText))
       .map((d) => {
         return { label: d.numberPlate, value: d.numberPlate, id: d.id };
       })
@@ -54,7 +56,7 @@ const SearchInput = (props) => {
 
   return (
     <AutoComplete
-      style={{ width: "45rem", marginTop: "3rem" }}
+      style={{ width: "50rem", marginTop: "3rem" }}
       options={options}
       onSelect={onSelect}
       onChange={(text) => setOptions(getPanelValue(text))}
@@ -66,7 +68,7 @@ const SearchInput = (props) => {
           if (!value) props.setListData([]);
           else
             props.setListData(
-              data.filter((d) => d.numberPlate.includes(value)).splice(0, 100)
+              data.filter((d) => d.numberPlate.startsWith(value)).splice(0, 100)
             );
         }}
         enterButton
