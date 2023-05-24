@@ -122,16 +122,16 @@ const InspectionCollapse = (props) => {
             </Item>
             <Item label="Chiều dài cơ sở">{specification.lengthBase}</Item>
             <Item label="Khối lượng bản thân">{specification.kerbMass}</Item>
-            <Item label="Khối lượng hàng chuyên chở CP tham gia GT">
+            <Item label="Khối lượng hàng CC theo TK/CP TGGT">
               {specification.designedAndAuthorizedPayload}
             </Item>
-            <Item label="Số người cho phép chở">
+            <Item label="Khối lượng toàn bộ theo TK/CP TGGT">
               {specification.designedAndAuthorizedTotalMass}
             </Item>
-            <Item label="Khối lượng cho phép kéo theo">
+            <Item label="Khối lượng kéo theo TK/CP TGGT">
               {specification.designedAndAuthorizedTowedMass}
             </Item>
-            <Item label="Khối lượng toàn bộ cho phép tham gia giao thông">
+            <Item label="Số người cho phép chở">
               {specification.permissibleCarry}
             </Item>
             <Item label="Loại nhiên liệu">{specification.fuel}</Item>

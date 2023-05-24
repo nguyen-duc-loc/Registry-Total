@@ -1,8 +1,7 @@
-import { Card, Avatar, Button } from "antd";
+import { Card, Button } from "antd";
 import InspectionCollapse from "./InspectionCollpase";
 import classes from "./../../../styles/Content/Inspection/ViewInspection.module.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import avatar from "./../../../assets/images/owner.png";
 import { useNavigate } from "react-router-dom";
 
 const ViewInspection = (props) => {
@@ -23,17 +22,7 @@ const ViewInspection = (props) => {
       }
     >
       <Card.Meta
-        avatar={
-          <Avatar
-            src={avatar}
-            size={72}
-            style={{
-              margin: "2rem",
-              outline: "3px solid var(--color-grey-dark-1)",
-              outlineOffset: "6px",
-            }}
-          />
-        }
+        style={{ padding: "0 3rem " }}
         title={<div style={{ maringBottom: "3rem" }}>Thông tin đăng kiểm</div>}
         description={<InspectionCollapse data={props.data} />}
       />
