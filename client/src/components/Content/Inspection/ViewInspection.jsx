@@ -3,6 +3,7 @@ import InspectionCollapse from "./InspectionCollpase";
 import classes from "./../../../styles/Content/Inspection/ViewInspection.module.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 const ViewInspection = (props) => {
   const navigate = useNavigate();
@@ -13,7 +14,11 @@ const ViewInspection = (props) => {
       loading={props.loading}
       title={
         <Button
-          icon={<ArrowLeftOutlined />}
+          icon={
+            <IoArrowBackOutline
+              style={{ fontSize: "2rem", verticalAlign: "middle" }}
+            />
+          }
           className={classes.btn}
           onClick={() => {
             navigate(-1);
