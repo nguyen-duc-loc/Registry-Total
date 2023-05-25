@@ -1,5 +1,5 @@
-import { ConfigProvider, Tabs } from "antd";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Tabs } from "antd";
+import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useMediaQuery } from "react-responsive";
 import ChangePassword from "./ChangePassword";
@@ -7,7 +7,6 @@ import ChangePassword from "./ChangePassword";
 const Settings = (props) => {
   const breakPoint = useMediaQuery({ query: "(max-width: 1200px)" });
   const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <Tabs
