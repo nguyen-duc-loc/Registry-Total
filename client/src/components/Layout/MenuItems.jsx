@@ -13,7 +13,7 @@ import {
   IoSearch,
   IoSearchOutline,
 } from "react-icons/io5";
-import avatar from "./../../assets/images/avatar.png";
+import avatar from "./../../assets/images/avatar.svg";
 
 const styleIcon = {
   verticalAlign: "middle",

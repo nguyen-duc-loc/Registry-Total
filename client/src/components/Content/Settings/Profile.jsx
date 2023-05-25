@@ -24,7 +24,7 @@ import {
 } from "react-icons/io5";
 import { EditOutlined } from "@ant-design/icons";
 import { useAuthHeader } from "react-auth-kit";
-import avatar from "./../../../assets/images/avatar.png";
+import avatar from "./../../../assets/images/avatar.svg";
 import classes from "./../../../styles/Content/Settings/Profile.module.css";
 import { useEffect, useState } from "react";
 import validateDate from "validate-date";
