@@ -10,46 +10,38 @@ const Settings = (props) => {
   const location = useLocation();
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#27272a",
-        },
+    <Tabs
+      tabPosition={breakPoint ? "top" : "left"}
+      tabBarGutter={breakPoint ? 30 : 16}
+      tabBarStyle={{
+        margin: breakPoint ? "0 2rem" : undefined,
+        marginTop: breakPoint ? undefined : "2rem",
+        width: breakPoint ? undefined : "25rem",
       }}
-    >
-      <Tabs
-        tabPosition={breakPoint ? "top" : "left"}
-        tabBarGutter={breakPoint ? 30 : 16}
-        tabBarStyle={{
-          margin: breakPoint ? "0 2rem" : undefined,
-          marginTop: breakPoint ? undefined : "2rem",
-          width: breakPoint ? undefined : "25rem",
-        }}
-        centered={true}
-        items={[
-          {
-            label: "Thông tin cá nhân",
-            key: "profile",
-            children: <Profile />,
-          },
-          {
-            label: "Thay đổi mật khẩu",
-            key: "password",
-            children: <ChangePassword />,
-          },
-        ]}
-        style={{
-          width: "80%",
-          backgroundColor: "#fff",
-          margin: "3rem auto",
-          border: "1px solid var(--color-grey-dark-1)",
-        }}
-        onChange={(key) => {
-          navigate(`/settings/${key}`);
-        }}
-        defaultActiveKey={props.mode}
-      />
-    </ConfigProvider>
+      centered={true}
+      items={[
+        {
+          label: "Thông tin cá nhân",
+          key: "profile",
+          children: <Profile />,
+        },
+        {
+          label: "Thay đổi mật khẩu",
+          key: "password",
+          children: <ChangePassword />,
+        },
+      ]}
+      style={{
+        width: "80%",
+        backgroundColor: "#fff",
+        margin: "3rem auto",
+        border: "1px solid var(--color-grey-dark-1)",
+      }}
+      onChange={(key) => {
+        navigate(`/settings/${key}`);
+      }}
+      defaultActiveKey={props.mode}
+    />
   );
 };
 
