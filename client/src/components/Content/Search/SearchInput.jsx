@@ -65,6 +65,7 @@ const SearchInput = (props) => {
         size="large"
         placeholder="Nhập biển số xe"
         onSearch={(value) => {
+          props.setSearchText(value);
           if (!value) props.setListData([]);
           else
             props.setListData(

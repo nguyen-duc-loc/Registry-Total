@@ -4,10 +4,12 @@ import SearchInput from "../components/Content/Search/SearchInput";
 
 const SearchPage = () => {
   const [listData, setListData] = useState([]);
+  const [searchText, setSearchText] = useState("");
+
   return (
     <div style={{ textAlign: "center" }}>
-      <SearchInput setListData={setListData} />
-      <ResultList listData={listData} />
+      <SearchInput setListData={setListData} setSearchText={setSearchText} />
+      <ResultList listData={listData} searchText={searchText} />
     </div>
   );
 };
