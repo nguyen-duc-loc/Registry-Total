@@ -10,6 +10,7 @@ import Authentication from "./pages/AuthenticationPage";
 import Settings from "./pages/SettingsPage";
 import ViewInspection from "./pages/ViewInspectionPage";
 import Search from "./pages/SearchPage";
+import ViewCar from "./pages/ViewCarPage";
 
 const App = () => {
   const PrivateRoute = ({ Component }) => {
@@ -39,7 +40,7 @@ const App = () => {
           <Route path="create" element={<Home />} />
           <Route path="search">
             <Route index element={<Search />} />
-            <Route path=":plate" element={<Home />} />
+            <Route path=":plate" element={<ViewCar />} />
           </Route>
           <Route path="statistics" element={<Home />} />
           <Route path="settings">
