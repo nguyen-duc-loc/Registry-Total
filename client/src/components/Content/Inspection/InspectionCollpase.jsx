@@ -79,7 +79,13 @@ const InspectionCollapse = (props) => {
           </Descriptions>
         </Panel>
         <Panel header="Phương tiện" key="car">
-          <Descriptions column={1} style={{ padding: "1.2rem" }}>
+          <Descriptions
+            column={{
+              sm: 2,
+              xs: 1,
+            }}
+            style={{ padding: "1.2rem" }}
+          >
             <Item label="Biển đăng kí">{car.numberPlate}</Item>
             <Item label="Số đăng kí">{car.registrationNumber}</Item>
             <Item label="Ngày đăng kí">
