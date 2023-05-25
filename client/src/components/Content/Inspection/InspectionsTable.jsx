@@ -288,7 +288,7 @@ const InspectionsTable = (props) => {
         pagination={{
           position: ["bottomCenter"],
         }}
-        scroll={{ x: 720 }}
+        scroll={{ x: 640 }}
       />
     </ConfigProvider>
   );

@@ -1,7 +1,6 @@
 import { Card, Button } from "antd";
 import InspectionCollapse from "./InspectionCollpase";
 import classes from "./../../../styles/Content/Inspection/ViewInspection.module.css";
-import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
 

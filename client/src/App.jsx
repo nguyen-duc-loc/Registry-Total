@@ -35,12 +35,12 @@ const App = () => {
           <Route path="inspections">
             <Route path="all" element={<Inspections mode="all" />} />
             <Route path="me" element={<Inspections mode="me" />} />
-            <Route path=":carId" element={<ViewInspection />} />
+            <Route path=":inspectionId" element={<ViewInspection />} />
           </Route>
           <Route path="create" element={<Home />} />
           <Route path="search">
             <Route index element={<Search />} />
-            <Route path=":plate" element={<ViewCar />} />
+            <Route path=":carId" element={<ViewCar />} />
           </Route>
           <Route path="statistics" element={<Home />} />
           <Route path="settings">

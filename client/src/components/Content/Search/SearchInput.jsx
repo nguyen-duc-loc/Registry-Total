@@ -1,43 +1,12 @@
 import { AutoComplete, Input } from "antd";
-import { useEffect, useState } from "react";
-import { useAuthHeader } from "react-auth-kit";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchInput = (props) => {
   const [options, setOptions] = useState([]);
-  const [data, setData] = useState([
-    { id: "", numberPlate: "", modelCode: "" },
-  ]);
-  const authHeader = useAuthHeader();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/?limit=10000&fields=numberPlate, modelCode`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: authHeader(),
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Can not get.");
-        }
-
-        const res = await response.json();
-
-        setData(res.data.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const data = props.data;
 
   const onSelect = (_, options) => {
     navigate(options.id);
@@ -47,7 +16,7 @@ const SearchInput = (props) => {
     if (!searchText) return [];
 
     return data
-      .filter((d) => d.numberPlate.startsWith(searchText))
+      .filter((d) => d.numberPlate.startsWith(searchText.trim()))
       .map((d) => {
         return { label: d.numberPlate, value: d.numberPlate, id: d.id };
       })
@@ -69,7 +38,9 @@ const SearchInput = (props) => {
           if (!value) props.setListData([]);
           else
             props.setListData(
-              data.filter((d) => d.numberPlate.startsWith(value)).splice(0, 100)
+              data
+                .filter((d) => d.numberPlate.startsWith(value.trim()))
+                .splice(0, 100)
             );
         }}
         enterButton

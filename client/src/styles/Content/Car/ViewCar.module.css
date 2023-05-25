@@ -1,0 +1,23 @@
+.container {
+  background-color: var(--color-white);
+  max-width: 70rem;
+  margin: 3rem auto;
+  border-radius: 6px;
+  padding: 2.4rem 3rem;
+}
+
+.spin {
+  animation-name: spinAnimation;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spinAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

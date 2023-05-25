@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import ViewInspection from "../components/Content/Inspection/ViewInspection";
 
 const ViewInspectionPage = () => {
-  const { carId } = useParams();
+  const { inspectionId } = useParams();
   const authHeader = useAuthHeader();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
@@ -56,6 +56,7 @@ const ViewInspectionPage = () => {
       manufacturedCountry: "",
       recovered: "",
       purpose: "",
+      id: "",
     },
   });
 
@@ -65,7 +66,7 @@ const ViewInspectionPage = () => {
         setLoading(true);
 
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/${carId}`,
+          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/${inspectionId}`,
           {
             headers: {
               "Content-Type": "application/json",
