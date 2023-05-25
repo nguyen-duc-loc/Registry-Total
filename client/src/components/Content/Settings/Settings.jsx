@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useMediaQuery } from "react-responsive";
 import ChangePassword from "./ChangePassword";
+import TextWithIcon from "../../UI/TextWithIcon";
+import { IoLockClosedOutline, IoRocketOutline } from "react-icons/io5";
 
 const Settings = (props) => {
   const breakPoint = useMediaQuery({ query: "(max-width: 1200px)" });
@@ -20,12 +22,16 @@ const Settings = (props) => {
       centered={true}
       items={[
         {
-          label: "Thông tin cá nhân",
+          label: (
+            <TextWithIcon Icon={IoRocketOutline} text="Thông tin cá nhân" />
+          ),
           key: "profile",
           children: <Profile />,
         },
         {
-          label: "Thay đổi mật khẩu",
+          label: (
+            <TextWithIcon Icon={IoLockClosedOutline} text="Thay đổi mật khẩu" />
+          ),
           key: "password",
           children: <ChangePassword />,
         },
