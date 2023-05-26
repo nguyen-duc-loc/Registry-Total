@@ -1,5 +1,4 @@
-import { Button, Collapse, Descriptions } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+import { Collapse, Descriptions } from "antd";
 import {
   IoCallOutline,
   IoCalendarOutline,
@@ -14,6 +13,7 @@ import TextWithIcon from "../../UI/TextWithIcon";
 import Car from "../Car/Car";
 import Owner from "../Car/Owner";
 import Specification from "../Car/Specification";
+import InspectionPDF from "./InspectionPDF";
 
 const { Panel } = Collapse;
 
@@ -125,14 +125,7 @@ const InspectionCollapse = (props) => {
           </Descriptions>
         </Panel>
       </Collapse>
-      <Button
-        type="primary"
-        size="large"
-        style={{ marginTop: "2rem" }}
-        icon={<DownloadOutlined />}
-      >
-        Tải xuống đăng kiểm
-      </Button>
+      <InspectionPDF car={car} specification={specification} data={data} />
     </div>
   );
 };
