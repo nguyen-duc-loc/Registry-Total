@@ -13,6 +13,7 @@ const ViewInspection = (props) => {
       loading={props.loading}
       title={
         <Button
+          type="text"
           icon={
             <IoArrowBackOutline
               style={{ fontSize: "2rem", verticalAlign: "middle" }}

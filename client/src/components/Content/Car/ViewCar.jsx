@@ -1,4 +1,4 @@
-import { Skeleton, Tabs, Timeline } from "antd";
+import { Card, Tabs, Timeline, Button } from "antd";
 import classes from "./../../../styles/Content/Car/ViewCar.module.css";
 import Icon from "@ant-design/icons";
 import TextWithIcon from "../../UI/TextWithIcon";
@@ -9,11 +9,13 @@ import {
   IoShieldCheckmarkOutline,
   IoSyncOutline,
   IoTimerOutline,
+  IoArrowBackOutline,
 } from "react-icons/io5";
 import Owner from "./Owner";
 import Car from "./Car";
 import Specification from "./Specification";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const processDate = (date) => {
   if (!date) return;
@@ -25,6 +27,7 @@ const processDate = (date) => {
 const ViewCar = (props) => {
   const inspections = props.anotherData.inspections;
   const timelineItems = [];
+  const navigate = useNavigate();
 
   inspections.forEach((ins, index) => {
     const inspectionDate = ins.inspectionDate;
@@ -114,11 +117,26 @@ const ViewCar = (props) => {
   ];
 
   return (
-    <Skeleton loading={props.isLoading} active className={classes.container}>
-      <div className={classes.container}>
-        <Tabs className={classes.tabs} defaultActiveKey="car" items={items} />
-      </div>
-    </Skeleton>
+    <Card
+      className={classes.container}
+      loading={props.isLoading}
+      title={
+        <Button
+          type="text"
+          icon={
+            <IoArrowBackOutline
+              style={{ fontSize: "2rem", verticalAlign: "middle" }}
+            />
+          }
+          className={classes.btn}
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+      }
+    >
+      <Tabs className={classes.tabs} defaultActiveKey="car" items={items} />
+    </Card>
   );
 };
 
