@@ -92,7 +92,7 @@ const Title = (props) => {
 
 const Item = (props) => {
   return (
-    <View style={flex}>
+    <View style={flex} break={props.break}>
       <Text>{props.title}: </Text>
       {props.english && <Text style={italic}>{props.english} </Text>}
       <Text
@@ -308,12 +308,13 @@ const InspectionPDF = ({ data, car, specification }) => {
         <Item
           title="Số lượng lốp, cỡ lốp/trục"
           value={specification.numberOfTiresAndTireSize.replace("tires", "lốp")}
+          break={true}
         />
         <Text style={italic}>(Number of tires; Tires size/axle)</Text>
         <View
           style={{
             ...flex,
-            marginTop: 20,
+            marginTop: 30,
             justifyContent: "center",
             alignItems: "start",
           }}
