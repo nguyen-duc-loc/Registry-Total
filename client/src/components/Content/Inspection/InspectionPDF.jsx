@@ -416,7 +416,10 @@ const InspectionPDF = ({ data, car, specification }) => {
   );
 
   return (
-    <PDFDownloadLink document={<Inspecion />} fileName="inpection.pdf">
+    <PDFDownloadLink
+      document={<Inspecion />}
+      fileName={`${data.inspectionNumber}.pdf`}
+    >
       {({ blob, url, loading, error }) => (
         <Button
           type="primary"
