@@ -14,6 +14,7 @@ import Car from "../Car/Car";
 import Owner from "../Car/Owner";
 import Specification from "../Car/Specification";
 import InspectionPDF from "./InspectionPDF";
+import { useMediaQuery } from "react-responsive";
 
 const { Panel } = Collapse;
 
@@ -31,6 +32,8 @@ const InspectionCollapse = (props) => {
   const owner = data.car.owner;
   const specification = data.car.specification;
   const car = data.car;
+
+  const breakPoint = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
     <div
@@ -55,7 +58,11 @@ const InspectionCollapse = (props) => {
           <Specification specification={specification} />
         </Panel>
         <Panel header="Thông tin đăng kiểm" key="inspection">
-          <Descriptions column={1} style={{ padding: "1.2rem" }}>
+          <Descriptions
+            column={1}
+            style={{ padding: "1.2rem" }}
+            layout={breakPoint ? "vertical" : "horizontal"}
+          >
             <Item
               label={
                 <TextWithIcon
