@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Layout, Button, Drawer, ConfigProvider } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
 import Menu from "./MenuItems";
 import classes from "./../../styles/Layout/Header.module.css";
 import Logo from "./Logo";
+import { IoCloseOutline, IoMenuOutline } from "react-icons/io5";
 
 const { Header } = Layout;
 
@@ -20,7 +20,15 @@ const PageHeader = () => {
   return (
     <Header className={classes.header}>
       <Button
-        icon={<MenuOutlined style={{ verticalAlign: "middle" }} />}
+        type="text"
+        icon={
+          <IoMenuOutline
+            style={{
+              verticalAlign: "middle",
+              fontSize: "24px",
+            }}
+          />
+        }
         onClick={showDrawer}
       />
       <ConfigProvider theme={{ token: { paddingLG: 16 } }}>
@@ -30,6 +38,11 @@ const PageHeader = () => {
           onClose={onClose}
           open={open}
           title={<Logo />}
+          closeIcon={
+            <IoCloseOutline
+              style={{ fontSize: "20px", verticalAlign: "middle" }}
+            />
+          }
         >
           <Menu />
         </Drawer>
