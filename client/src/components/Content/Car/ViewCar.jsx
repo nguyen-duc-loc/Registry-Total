@@ -24,10 +24,16 @@ const processDate = (date) => {
   return [day.padStart(2, "0"), month.padStart(2, "0"), year].join("-");
 };
 
+const compare = (ins1, ins2) => {
+  return new Date(ins1.inspectionDate) - new Date(ins2.inspectionDate);
+};
+
 const ViewCar = (props) => {
   const inspections = props.anotherData.inspections;
   const timelineItems = [];
   const navigate = useNavigate();
+
+  inspections.sort(compare);
 
   inspections.forEach((ins, index) => {
     const inspectionDate = ins.inspectionDate;
