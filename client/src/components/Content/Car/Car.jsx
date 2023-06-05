@@ -44,7 +44,7 @@ const Car = (props) => {
         {car.purpose === "business" ? (
           <IoCheckmark style={{ color: "#379237" }} />
         ) : (
-          <IoClose />
+          <IoClose style={{ color: "#ED2B2A" }} />
         )}
       </Item>
       <Item label="Cải tạo" style={{ padding: 0 }}>

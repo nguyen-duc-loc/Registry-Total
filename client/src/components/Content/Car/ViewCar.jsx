@@ -16,6 +16,7 @@ import Car from "./Car";
 import Specification from "./Specification";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import NoData from "../../UI/NoData";
 
 const processDate = (date) => {
   if (!date) return;
@@ -32,6 +33,7 @@ const ViewCar = (props) => {
   const inspections = props.anotherData.inspections;
   const timelineItems = [];
   const navigate = useNavigate();
+  const inspected = props.carData.inspected;
 
   inspections.sort(compare);
 
@@ -93,7 +95,7 @@ const ViewCar = (props) => {
     {
       key: "specification",
       label: <TextWithIcon Icon={IoBuildOutline} text="Thông số kĩ thuật" />,
-      children: (
+      children: inspected ? (
         <Specification
           specification={props.anotherData.specification}
           columnProps={{
@@ -102,6 +104,8 @@ const ViewCar = (props) => {
             xs: 1,
           }}
         />
+      ) : (
+        <NoData text="Phương tiện chưa được đăng kiểm :(" />
       ),
     },
     {
@@ -112,12 +116,14 @@ const ViewCar = (props) => {
           text="Lịch sử đăng kiểm"
         />
       ),
-      children: (
+      children: inspected ? (
         <Timeline
           style={{ marginTop: "2rem", marginLeft: "-4rem" }}
           mode="left"
           items={timelineItems}
         />
+      ) : (
+        <NoData text="Phương tiện chưa được đăng kiểm :(" />
       ),
     },
   ];
@@ -141,7 +147,12 @@ const ViewCar = (props) => {
         />
       }
     >
-      <Tabs className={classes.tabs} defaultActiveKey="car" items={items} />
+      <Tabs
+        className={classes.tabs}
+        defaultActiveKey="car"
+        items={items}
+        centered={true}
+      />
     </Card>
   );
 };
