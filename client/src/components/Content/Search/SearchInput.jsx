@@ -16,7 +16,7 @@ const SearchInput = (props) => {
     if (!searchText) return [];
 
     return data
-      .filter((d) => d.numberPlate.startsWith(searchText.trim()))
+      .filter((d) => d.numberPlate.startsWith(searchText.trim().toUpperCase()))
       .map((d) => {
         return { label: d.numberPlate, value: d.numberPlate, id: d.id };
       })
@@ -39,7 +39,9 @@ const SearchInput = (props) => {
           else
             props.setListData(
               data
-                .filter((d) => d.numberPlate.startsWith(value.trim()))
+                .filter((d) =>
+                  d.numberPlate.startsWith(value.trim().toUpperCase())
+                )
                 .splice(0, 100)
             );
         }}
