@@ -14,7 +14,6 @@ import Owner from "./Owner";
 import Car from "./Car";
 import Specification from "./Specification";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import NoData from "../../UI/NoData";
 
 const processDate = (date) => {
@@ -31,7 +30,6 @@ const compare = (ins1, ins2) => {
 const ViewCar = (props) => {
   const inspections = props.anotherData.inspections;
   const timelineItems = [];
-  const navigate = useNavigate();
   const inspected = props.carData.inspected;
 
   if (inspections) {

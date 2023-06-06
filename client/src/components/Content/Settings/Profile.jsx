@@ -98,20 +98,7 @@ const Profile = () => {
   const [messageApi, messageContextHolder] = message.useMessage();
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({
-    ssn: "",
-    dateOfBirth: "",
-    name: "",
-    phone: "",
-    email: "",
-    workFor: {
-      name: "",
-      address: "",
-      phone: "",
-      email: "",
-    },
-    role: "",
-  });
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {

@@ -181,7 +181,7 @@ const InspectionsTable = (props) => {
 
     if (props.mode === "all") url += "registrationCentres/";
 
-    url += "inspections?limit=5000&sort=inspectionNumber";
+    url += "inspections?limit=5000&sort=-inspectionNumber";
 
     const fetchData = async () => {
       try {
