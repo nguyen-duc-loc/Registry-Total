@@ -11,6 +11,7 @@ import Settings from "./pages/SettingsPage";
 import ViewInspection from "./pages/ViewInspectionPage";
 import Search from "./pages/SearchPage";
 import ViewCar from "./pages/ViewCarPage";
+import CreateInspection from "./pages/CreateInspectionPage";
 
 const App = () => {
   const PrivateRoute = ({ Component }) => {
@@ -36,8 +37,8 @@ const App = () => {
             <Route path="all" element={<Inspections mode="all" />} />
             <Route path="me" element={<Inspections mode="me" />} />
             <Route path=":inspectionId" element={<ViewInspection />} />
+            <Route path="create" element={<CreateInspection />} />
           </Route>
-          <Route path="create" element={<Home />} />
           <Route path="search">
             <Route index element={<Search />} />
             <Route path=":carId" element={<ViewCar />} />

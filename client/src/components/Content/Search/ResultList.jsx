@@ -1,6 +1,6 @@
 import { Avatar, Image, List } from "antd";
 import { Link } from "react-router-dom";
-import searchImage from "./../../../assets/images/search.svg";
+import searchImage from "./../../../assets/images/search-1.svg";
 import notFoundImage from "./../../../assets/images/void.svg";
 
 const ResultList = (props) => {

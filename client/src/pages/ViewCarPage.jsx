@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import ViewCar from "../components/Content/Car/ViewCar";
 import { useEffect, useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
+import { Button } from "antd";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 const ViewCarPage = () => {
   const { carId } = useParams();
@@ -117,6 +119,19 @@ const ViewCarPage = () => {
       isLoading={isLoading}
       carData={carData}
       anotherData={anotherData}
+      title={
+        <Button
+          type="text"
+          icon={
+            <IoArrowBackOutline
+              style={{ fontSize: "2rem", verticalAlign: "middle" }}
+            />
+          }
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+      }
     />
   );
 };

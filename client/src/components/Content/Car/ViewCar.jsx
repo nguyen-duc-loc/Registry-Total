@@ -1,4 +1,4 @@
-import { Card, Tabs, Timeline, Button } from "antd";
+import { Card, Tabs, Timeline } from "antd";
 import classes from "./../../../styles/Content/Car/ViewCar.module.css";
 import Icon from "@ant-design/icons";
 import TextWithIcon from "../../UI/TextWithIcon";
@@ -9,7 +9,6 @@ import {
   IoShieldCheckmarkOutline,
   IoSyncOutline,
   IoTimerOutline,
-  IoArrowBackOutline,
 } from "react-icons/io5";
 import Owner from "./Owner";
 import Car from "./Car";
@@ -35,43 +34,45 @@ const ViewCar = (props) => {
   const navigate = useNavigate();
   const inspected = props.carData.inspected;
 
-  inspections.sort(compare);
+  if (inspections) {
+    inspections.sort(compare);
 
-  inspections.forEach((ins, index) => {
-    const inspectionDate = ins.inspectionDate;
-    const expiredDate = ins.expiredDate;
-    const id = ins.id;
+    inspections.forEach((ins, index) => {
+      const inspectionDate = ins.inspectionDate;
+      const expiredDate = ins.expiredDate;
+      const id = ins.id;
 
-    const now = new Date();
-    const isExpired = new Date(expiredDate) < now;
+      const now = new Date();
+      const isExpired = new Date(expiredDate) < now;
 
-    timelineItems.push({
-      dot: <IoShieldCheckmarkOutline style={{ fontSize: "16px" }} />,
-      color: "green",
-      label: processDate(inspectionDate),
-      children: (
-        <Link to={`/inspections/${id}`} style={{ color: "currentcolor" }}>
-          Đăng kiểm lần thứ {index + 1}
-        </Link>
-      ),
+      timelineItems.push({
+        dot: <IoShieldCheckmarkOutline style={{ fontSize: "16px" }} />,
+        color: "green",
+        label: processDate(inspectionDate),
+        children: (
+          <Link to={`/inspections/${id}`} style={{ color: "currentcolor" }}>
+            Đăng kiểm lần thứ {index + 1}
+          </Link>
+        ),
+      });
+      timelineItems.push({
+        dot: isExpired ? (
+          <IoTimerOutline style={{ fontSize: "16px" }} />
+        ) : (
+          <Icon
+            component={IoSyncOutline}
+            style={{ fontSize: "16px" }}
+            className={classes.spin}
+          />
+        ),
+        color: isExpired ? "red" : "blue",
+        label: processDate(expiredDate),
+        children: isExpired
+          ? `Hết hạn đăng kiểm thứ ${index + 1}`
+          : `Sẽ hết hạn đăng kiểm lần thứ ${index + 1}`,
+      });
     });
-    timelineItems.push({
-      dot: isExpired ? (
-        <IoTimerOutline style={{ fontSize: "16px" }} />
-      ) : (
-        <Icon
-          component={IoSyncOutline}
-          style={{ fontSize: "16px" }}
-          className={classes.spin}
-        />
-      ),
-      color: isExpired ? "red" : "blue",
-      label: processDate(expiredDate),
-      children: isExpired
-        ? `Hết hạn đăng kiểm thứ ${index + 1}`
-        : `Sẽ hết hạn đăng kiểm lần thứ ${index + 1}`,
-    });
-  });
+  }
 
   const items = [
     {
@@ -108,7 +109,7 @@ const ViewCar = (props) => {
         <NoData text="Phương tiện chưa được đăng kiểm :(" />
       ),
     },
-    {
+    inspections && {
       key: "inspections",
       label: (
         <TextWithIcon
@@ -132,20 +133,7 @@ const ViewCar = (props) => {
     <Card
       className={classes.container}
       loading={props.isLoading}
-      title={
-        <Button
-          type="text"
-          icon={
-            <IoArrowBackOutline
-              style={{ fontSize: "2rem", verticalAlign: "middle" }}
-            />
-          }
-          className={classes.btn}
-          onClick={() => {
-            navigate(-1);
-          }}
-        />
-      }
+      title={props.title}
     >
       <Tabs
         className={classes.tabs}

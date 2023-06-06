@@ -86,7 +86,10 @@ const items = [
     ]
   ),
   getItem(
-    <NavLink to="/create" style={({ isActive }) => styleLink(isActive)}>
+    <NavLink
+      to="/inspections/create"
+      style={({ isActive }) => styleLink(isActive)}
+    >
       Tạo đăng kiểm
     </NavLink>,
     "create-registration",

@@ -27,6 +27,12 @@ const ContentBreadcumb = () => {
         { title: "Quản lí đăng kiểm" },
         { title: "Đăng kiểm của tôi" },
       ];
+    } else if (path.includes("/create")) {
+      items = [
+        defaultItem,
+        { title: "Quản lí đăng kiểm" },
+        { title: "Tạo đăng kiểm" },
+      ];
     } else {
       items = [
         defaultItem,
