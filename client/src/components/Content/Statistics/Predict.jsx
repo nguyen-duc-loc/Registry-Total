@@ -2,6 +2,7 @@ import { Pie } from "@ant-design/plots";
 import { Card } from "antd";
 import { useEffect, useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
+import { useMediaQuery } from "react-responsive";
 
 const Predict = (props) => {
   const authHeader = useAuthHeader();
@@ -9,6 +10,7 @@ const Predict = (props) => {
   const [expired, setExpired] = useState(0);
   const [aboutToExpire, setAboutToExpire] = useState(0);
   const [newIns, setNewIns] = useState(0);
+  const breakPoint = useMediaQuery({ query: "(min-width: 576px)" });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,7 +82,7 @@ const Predict = (props) => {
         colorField="type"
         radius={0.75}
         legend={{
-          position: "right",
+          position: breakPoint ? "right" : "bottom",
         }}
         label={{
           type: "inner",
