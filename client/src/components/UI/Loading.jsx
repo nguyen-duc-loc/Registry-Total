@@ -10,7 +10,7 @@ const Loading = () => {
         alignItems: "center",
       }}
     >
-      <Spin tip="Đang tải" size="large" />
+      <Spin size="large" />
     </div>
   );
 };
