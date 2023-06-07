@@ -46,7 +46,7 @@ const CountThisMonth = () => {
 
   return (
     <CardStatistics
-      title="Số lượng đăng kiểm tháng này"
+      title="Đăng kiểm trong tháng này"
       loading={loading}
       value={count}
       src={image}

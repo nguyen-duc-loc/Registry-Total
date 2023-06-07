@@ -14,10 +14,10 @@ const StatisticsPage = () => {
         <Col xl={17} sm={24} xs={24}>
           <ColumnChart />
         </Col>
-        <Col xl={17} sm={24} xs={24}>
+        <Col xl={15} sm={24} xs={24}>
           <LineChart />
         </Col>
-        <Col xl={7} sm={24} xs={24}>
+        <Col xl={9} sm={24} xs={24}>
           <Predict height={300} />
         </Col>
       </Row>

@@ -232,7 +232,7 @@ const InspectionsTable = (props) => {
       align: "center",
       render: (text) => processDate(text),
       sorter: (a, b) => new Date(a.inspectionDate) - new Date(b.inspectionDate),
-      sortDirections: ["descend", "ascend"],
+      sortDirections: "ascend",
       showSorterTooltip: false,
       ...getColumnDateFilterProps("inspectionDate"),
     },

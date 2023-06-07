@@ -6,7 +6,8 @@ import { useAuthHeader } from "react-auth-kit";
 const Predict = (props) => {
   const authHeader = useAuthHeader();
   const [loading, setLoading] = useState(false);
-  const [expire, setExpire] = useState(0);
+  const [expired, setExpired] = useState(0);
+  const [aboutToExpire, setAboutToExpire] = useState(0);
   const [newIns, setNewIns] = useState(0);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ const Predict = (props) => {
       try {
         setLoading(true);
 
-        const getNumberOfExpire = await fetch(
+        const getExpireData = await fetch(
           `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/centreStatistics/expirationPredictions`,
           {
             headers: {
@@ -34,14 +35,15 @@ const Predict = (props) => {
           }
         );
 
-        if (!getNumberOfExpire.ok || !getNumberOfNew.ok) {
+        if (!getExpireData.ok || !getNumberOfNew.ok) {
           throw new Error("Can not get.");
         }
 
-        const numberOfExpire = await getNumberOfExpire.json();
+        const expireData = await getExpireData.json();
         const numberOfNew = await getNumberOfNew.json();
 
-        setExpire(numberOfExpire.reInspections[1].count);
+        setExpired(expireData.reInspections[0].count);
+        setAboutToExpire(expireData.reInspections[1].count);
         setNewIns(Math.ceil(numberOfNew.data.data));
 
         setLoading(false);
@@ -56,17 +58,21 @@ const Predict = (props) => {
 
   const data = [
     {
-      type: "Sắp hết hạn",
-      value: expire,
+      type: "Đã hết hạn",
+      value: expired,
     },
     {
-      type: "Đăng kiểm mới",
+      type: "Sắp hết hạn",
+      value: aboutToExpire,
+    },
+    {
+      type: "Mới (dự đoán)",
       value: newIns,
     },
   ];
 
   return (
-    <Card title="Dự báo đăng kiểm" loading={loading}>
+    <Card title="Trong tháng này" loading={loading}>
       <Pie
         appendPadding={10}
         data={data}
@@ -74,7 +80,7 @@ const Predict = (props) => {
         colorField="type"
         radius={0.75}
         legend={{
-          position: "bottom",
+          position: "right",
         }}
         label={{
           type: "inner",

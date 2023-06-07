@@ -45,7 +45,7 @@ const CountThisYear = () => {
 
   return (
     <CardStatistics
-      title="Số lượng đăng kiểm năm nay"
+      title="Đăng kiểm trong năm nay"
       loading={loading}
       value={count}
       src={image}
