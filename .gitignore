@@ -27,3 +27,6 @@ server/config.env
 
 
 
+
+# Local Netlify folder
+.netlify
