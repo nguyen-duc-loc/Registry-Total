@@ -44,7 +44,6 @@ const LoginForm = (props) => {
       if (!response.ok) {
         openNotification();
         setIsSubmitting(false);
-
         throw new Error("Can not authenticate.");
       }
 
@@ -63,6 +62,7 @@ const LoginForm = (props) => {
         navigate("/");
       }
     } catch (err) {
+      setIsSubmitting(false);
       console.error(err.message);
     }
   };

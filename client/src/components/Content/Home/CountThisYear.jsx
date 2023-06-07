@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuthHeader } from "react-auth-kit";
-import image from "./../../../assets/images/check-2.svg";
+import image from "./../../../assets/images/grow-2.svg";
 import CardStatistics from "../../UI/CardStatistics";
 
 const now = new Date();

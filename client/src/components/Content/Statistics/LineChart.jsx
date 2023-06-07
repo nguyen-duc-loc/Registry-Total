@@ -13,11 +13,8 @@ const LineChart = () => {
       try {
         setLoading(true);
 
-        let dataItems = [];
-        const allYears = [];
-
-        const getAllYearsData = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/year/?sort=year&fields=year`,
+        const response = await fetch(
+          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/monthYear?sort=year,month`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -26,51 +23,17 @@ const LineChart = () => {
           }
         );
 
-        if (!getAllYearsData.ok) {
+        if (!response.ok) {
           throw new Error("Can not get.");
         }
 
-        const allYearsData = await getAllYearsData.json();
+        const res = await response.json();
 
-        allYearsData.data.data.forEach((d) => {
-          allYears.push(d.year);
-        });
-
-        // Promise.all(
-        //   allYears.map((year) => {
-        //     fetch(
-        //       `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/month/${year}?sort=month`,
-        //       {
-        //         headers: {
-        //           "Content-Type": "application/json",
-        //           Authorization: authHeader(),
-        //         },
-        //       }
-        //     )
-        //       .then((response) => response.json())
-        //       .then((res) => {
-        //         const data = res.data.data;
-        //         dataItems = dataItems.concat(
-        //           data.map((d) => {
-        //             return {
-        //               month: d.month,
-        //               count: d.count,
-        //               year: `${year}`,
-        //               monthYear: `${d.month}/${year}`,
-        //             };
-        //           })
-        //         );
-        //         // console.log(dataItems);
-        //       })
-        //       .catch((err) => console.error(err));
-        //   })
-        // );
-
-        // console.log(dataItems);
-
-        dataItems.sort((a, b) => {
-          if (a.year === b.year) return a.month - b.month;
-          return a.year - b.year;
+        const dataItems = res.data.data.map((d) => {
+          return {
+            count: d.count,
+            monthYear: `${d.month}/${d.year}`,
+          };
         });
 
         setData(dataItems);
@@ -89,16 +52,22 @@ const LineChart = () => {
     <Card title="Biểu đồ đăng kiểm" loading={loading}>
       <Line
         data={data}
-        xField="yearMonth"
+        xField="monthYear"
         yField="count"
-        height={250}
+        height={300}
         xAxis={{
           tickCount: 5,
         }}
         slider={{
-          start: 0,
+          start: 0.5,
           end: 1,
         }}
+        meta={{
+          count: {
+            alias: "Số lượng",
+          },
+        }}
+        smooth={true}
       />
     </Card>
   );

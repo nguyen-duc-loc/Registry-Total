@@ -19,7 +19,7 @@ const Chart = () => {
         const items = [];
 
         const getDataThisYear = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/month/${year}`,
+          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/monthYear?sort=year,month`,
           {
             headers: {
               "Content-Type": "application/json",

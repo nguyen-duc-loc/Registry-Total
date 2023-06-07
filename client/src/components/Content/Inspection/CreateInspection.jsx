@@ -49,7 +49,7 @@ const stepItems = steps.map((item, index) => ({
   ...item,
 }));
 
-const InputBox = ({ type, label, name, addonAfter }) => {
+const InputBox = ({ type, label, name, addonAfter, placeholder }) => {
   return (
     <Col xl={8} md={12} xs={24}>
       <Form.Item
@@ -65,7 +65,7 @@ const InputBox = ({ type, label, name, addonAfter }) => {
         {type === "number" ? (
           <InputNumber addonAfter={addonAfter} style={{ width: "100%" }} />
         ) : (
-          <Input addonAfter={addonAfter} />
+          <Input addonAfter={addonAfter} placeholder={placeholder} />
         )}
       </Form.Item>
     </Col>
@@ -73,30 +73,58 @@ const InputBox = ({ type, label, name, addonAfter }) => {
 };
 
 const inputItems = [
-  { label: "Công thức bánh xe", name: "wheelFormula" },
-  { label: "Vết bánh xe", name: "wheelTread", addonAfter: "mm" },
-  { label: "Kích thước bao", name: "overallDimension", addonAfter: "mm" },
+  {
+    label: "Công thức bánh xe",
+    name: "wheelFormula",
+    placeholder: "VD: 6x6",
+  },
+  {
+    type: "number",
+    label: "Vết bánh xe",
+    name: "wheelTread",
+    addonAfter: "mm",
+  },
+  {
+    label: "Kích thước bao",
+    name: "overallDimension",
+    addonAfter: "mm",
+    placeholder: "VD: 4288 x 1535 x 1485",
+  },
   {
     label: "Kích thước lòng thùng xe",
     name: "containerDimension",
     addonAfter: "mm",
+    placeholder: "VD: 2495 x 1423 x 1110",
   },
-  { label: "Chiều dài cơ sở", name: "lengthBase", addonAfter: "mm" },
-  { label: "Khối lượng bản thân", name: "kerbMass", addonAfter: "kg" },
+  {
+    type: "number",
+    label: "Chiều dài cơ sở",
+    name: "lengthBase",
+    addonAfter: "mm",
+  },
+  {
+    type: "number",
+    label: "Khối lượng bản thân",
+    name: "kerbMass",
+    addonAfter: "kg",
+  },
   {
     label: "Khối lượng hàng CC theo TK/CP TGGT",
     name: "designedAndAuthorizedPayload",
     addonAfter: "kg",
+    placeholder: "VD: 531/700",
   },
   {
     label: "Khối lượng toàn bộ theo TK/CP TGGT",
     name: "designedAndAuthorizedTotalMass",
     addonAfter: "kg",
+    placeholder: "VD: 2964/2914",
   },
   {
     label: "Khối lượng kéo theo TK/CP TGGT",
     name: "designedAndAuthorizedTowedMass",
     addonAfter: "kg",
+    placeholder: "VD: 1899/1679",
   },
   {
     type: "number",
@@ -112,7 +140,11 @@ const inputItems = [
       </span>
     ),
   },
-  { label: "Công suất lớn nhất/tốc độ quay", name: "maximumOutputToRpmRatio" },
+  {
+    label: "Công suất lớn nhất/tốc độ quay",
+    name: "maximumOutputToRpmRatio",
+    placeholder: "VD: 130kW/6333vph",
+  },
   { label: "Loại nhiên liệu", name: "fuel" },
   {
     type: "number",
@@ -120,7 +152,7 @@ const inputItems = [
     name: "numberOfTires",
     addonAfter: "lốp",
   },
-  { label: "Cỡ lốp/trục", name: "tireSize" },
+  { label: "Cỡ lốp/trục", name: "tireSize", placeholder: "VD: 225/65 R17" },
 ];
 
 const CreateInspection = () => {
@@ -403,6 +435,7 @@ const CreateInspection = () => {
                     label={item.label}
                     name={item.name}
                     addonAfter={item.addonAfter}
+                    placeholder={item.placeholder}
                   />
                 );
               })}

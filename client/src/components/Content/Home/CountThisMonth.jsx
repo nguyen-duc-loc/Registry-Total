@@ -33,7 +33,7 @@ const CountThisMonth = () => {
 
         const res = await response.json();
 
-        setCount(res.data.data.filter((d) => d.month === month)[0].count);
+        setCount(res.data.data.filter((d) => d.month === month)[0]?.count);
         setLoading(false);
       } catch (err) {
         setLoading(false);
