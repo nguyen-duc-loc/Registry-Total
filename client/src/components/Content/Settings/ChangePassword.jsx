@@ -95,6 +95,7 @@ const ChangePassword = () => {
       {messageContextHolder}
       <h1 className={classes.title}>Thay đổi mật khẩu</h1>
       <Form
+        name="change-password-form"
         form={form}
         className={classes.form}
         labelCol={{

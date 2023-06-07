@@ -421,7 +421,7 @@ const CreateInspection = () => {
           }
         >
           <Form
-            name="basic"
+            name="create-form"
             layout="vertical"
             onFinish={onFinish}
             autoComplete="off"

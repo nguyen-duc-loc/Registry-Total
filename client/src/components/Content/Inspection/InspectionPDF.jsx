@@ -424,14 +424,16 @@ const InspectionPDF = ({ data, car, specification }) => {
         <Button
           type="primary"
           size="large"
-          style={{ marginTop: "2rem" }}
+          style={{
+            marginTop: "2rem",
+          }}
           disabled={loading}
           icon={
             <IoDownloadOutline
               style={{
-                fontSize: "20px",
-                verticalAlign: "top",
-                marginRight: "8px",
+                fontSize: "18px",
+                verticalAlign: "middle",
+                marginBottom: "6px",
               }}
             />
           }
