@@ -15,7 +15,7 @@ const Settings = (props) => {
       tabPosition={breakPoint ? "top" : "left"}
       tabBarGutter={breakPoint ? 30 : 16}
       tabBarStyle={{
-        margin: breakPoint ? "0 2rem" : undefined,
+        margin: breakPoint ? "1.2rem 2rem" : undefined,
         marginTop: breakPoint ? undefined : "2rem",
         width: breakPoint ? undefined : "25rem",
       }}
@@ -41,6 +41,7 @@ const Settings = (props) => {
         backgroundColor: "#fff",
         margin: "3rem auto",
         border: "1px solid var(--color-grey-dark-1)",
+        borderRadius: "8px",
       }}
       onChange={(key) => {
         navigate(`/settings/${key}`);
