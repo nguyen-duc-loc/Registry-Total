@@ -46,7 +46,7 @@ const ChangePassword = () => {
       setIsChanging(true);
 
       const response = await fetch(
-        `https://sleepy-coast-93816.herokuapp.com/api/v1/users/updatePassword`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/updatePassword`,
         {
           method: "PATCH",
           headers: {

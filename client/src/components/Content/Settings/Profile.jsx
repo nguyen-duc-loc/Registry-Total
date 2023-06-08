@@ -104,7 +104,7 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/users/getMe`,
+          `${import.meta.env.VITE_BASE_URL}/api/v1/users/getMe`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -359,7 +359,7 @@ const Profile = () => {
             };
 
             const response = await fetch(
-              `https://sleepy-coast-93816.herokuapp.com/api/v1/users/updateMe`,
+              `${import.meta.env.VITE_BASE_URL}/api/v1/users/updateMe`,
               {
                 method: "PATCH",
                 headers: {

@@ -66,7 +66,7 @@ const ViewCarPage = () => {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/${carId}`,
+          `${import.meta.env.VITE_BASE_URL}/api/v1/cars/${carId}`,
           {
             headers: {
               "Content-Type": "application/json",

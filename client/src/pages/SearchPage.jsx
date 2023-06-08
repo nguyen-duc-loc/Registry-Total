@@ -18,7 +18,9 @@ const SearchPage = () => {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/?limit=10000&fields=numberPlate, modelCode`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/cars/?limit=10000&fields=numberPlate, modelCode`,
           {
             headers: {
               "Content-Type": "application/json",

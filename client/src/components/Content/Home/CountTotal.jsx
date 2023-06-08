@@ -14,7 +14,9 @@ const CountTotal = () => {
         setLoading(true);
 
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/users/registrationCentres/inspections?limit=45000`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/users/registrationCentres/inspections?limit=45000`,
           {
             headers: {
               "Content-Type": "application/json",
