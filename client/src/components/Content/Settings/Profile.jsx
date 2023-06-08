@@ -101,6 +101,8 @@ const Profile = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
+    document.title = "Hồ sơ cá nhân";
+
     const fetchData = async () => {
       try {
         const response = await fetch(

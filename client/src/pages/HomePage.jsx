@@ -6,8 +6,13 @@ import CountMe from "../components/Content/Home/CountMe";
 import Recently from "../components/Content/Home/Recently";
 import Predict from "../components/Content/Statistics/Predict";
 import Chart from "../components/Content/Home/Chart";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  useEffect(() => {
+    document.title = "Đăng kiểm Việt Nam";
+  }, []);
+
   return (
     <div style={{ padding: "0 2rem" }}>
       <Row gutter={[20, 20]}>

@@ -14,6 +14,8 @@ const SearchPage = () => {
   const authHeader = useAuthHeader();
 
   useEffect(() => {
+    document.title = "Tra cứu phương tiện";
+
     const fetchData = async () => {
       try {
         setIsLoading(true);

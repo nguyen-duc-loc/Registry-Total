@@ -62,6 +62,8 @@ const ViewCarPage = () => {
   });
 
   useEffect(() => {
+    document.title = "Thông tin phương tiện";
+
     const fetchData = async () => {
       try {
         setIsLoading(true);

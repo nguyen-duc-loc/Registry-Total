@@ -8,7 +8,7 @@ import {
   notification,
 } from "antd";
 import classes from "./../../../styles/Content/Settings/ChangePassword.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthHeader, useSignIn } from "react-auth-kit";
 
 const ChangePassword = () => {
@@ -19,6 +19,10 @@ const ChangePassword = () => {
   const [messageApi, messageContextHolder] = message.useMessage();
   const [isChanging, setIsChanging] = useState(false);
   const signIn = useSignIn();
+
+  useEffect(() => {
+    document.title = "Thay đổi mật khẩu";
+  }, []);
 
   const openErrorNotification = () => {
     notificationApi["error"]({

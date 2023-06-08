@@ -61,6 +61,8 @@ const ViewInspectionPage = () => {
   });
 
   useEffect(() => {
+    document.title = "Thông tin đăng kiểm";
+
     const fetchData = async () => {
       try {
         setLoading(true);
