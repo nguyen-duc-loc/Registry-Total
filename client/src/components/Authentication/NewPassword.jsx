@@ -1,10 +1,10 @@
-import { LockOutlined } from "@ant-design/icons";
 import { Form, Input, Button, ConfigProvider } from "antd";
 import { useState } from "react";
 
 import classes from "./../../styles/Authentication/Reset.module.css";
 import { useSignIn } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
+import { IoLockClosedOutline } from "react-icons/io5";
 
 const NewPassword = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,7 +62,7 @@ const NewPassword = (props) => {
         ]}
       >
         <Input.Password
-          prefix={<LockOutlined className={classes.icon} />}
+          prefix={<IoLockClosedOutline className={classes.icon} />}
           placeholder="Mật khẩu mới"
           type="password"
           autoComplete="off"
@@ -91,7 +91,7 @@ const NewPassword = (props) => {
         ]}
       >
         <Input.Password
-          prefix={<LockOutlined className={classes.icon} />}
+          prefix={<IoLockClosedOutline className={classes.icon} />}
           placeholder="Nhập lại mật khẩu mới"
           type="password"
           autoComplete="off"

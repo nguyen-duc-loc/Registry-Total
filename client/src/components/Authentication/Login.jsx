@@ -1,4 +1,3 @@
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import {
   Button,
   ConfigProvider,
@@ -11,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import classes from "./../../styles/Authentication/Login.module.css";
 import { useState } from "react";
 import { useSignIn } from "react-auth-kit";
+import { IoLockClosedOutline, IoMailOutline } from "react-icons/io5";
 
 const LoginForm = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -95,7 +95,7 @@ const LoginForm = (props) => {
             ]}
           >
             <Input
-              prefix={<MailOutlined className={classes.icon} />}
+              prefix={<IoMailOutline className={classes.icon} />}
               placeholder="Email"
               type="email"
               autoComplete="off"
@@ -113,7 +113,7 @@ const LoginForm = (props) => {
             ]}
           >
             <Input.Password
-              prefix={<LockOutlined className={classes.icon} />}
+              prefix={<IoLockClosedOutline className={classes.icon} />}
               type="password"
               size="large"
               placeholder="Mật khẩu"

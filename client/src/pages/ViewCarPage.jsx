@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ViewCar from "../components/Content/Car/ViewCar";
 import { useEffect, useState } from "react";
 import { useAuthHeader } from "react-auth-kit";
@@ -9,6 +9,7 @@ const ViewCarPage = () => {
   const { carId } = useParams();
   const authHeader = useAuthHeader();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const [carData, setCarData] = useState({
     numberPlate: "",
     registrationNumber: "",

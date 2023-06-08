@@ -1,8 +1,7 @@
 import { Form, Input, Button, ConfigProvider } from "antd";
-import { MailOutlined } from "@ant-design/icons";
 import { useState } from "react";
-
 import classes from "./../../styles/Authentication/Reset.module.css";
+import { IoMailOutline } from "react-icons/io5";
 
 const FindEmail = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,7 +48,7 @@ const FindEmail = (props) => {
         ]}
       >
         <Input
-          prefix={<MailOutlined className={classes.icon} />}
+          prefix={<IoMailOutline className={classes.icon} />}
           placeholder="Email"
           type="email"
           autoComplete="off"
