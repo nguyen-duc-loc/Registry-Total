@@ -23,10 +23,10 @@ const HomePage = () => {
         <Col xl={6} sm={12} xs={24}>
           <CountMe />
         </Col>
-        <Col xl={16} sm={24} xs={24}>
+        <Col xl={15} sm={24} xs={24}>
           <Chart />
         </Col>
-        <Col xl={8} sm={24} xs={24}>
+        <Col xl={9} sm={24} xs={24}>
           <Predict height={250} />
         </Col>
         <Col span={24}>

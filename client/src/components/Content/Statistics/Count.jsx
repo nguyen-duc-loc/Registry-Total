@@ -75,7 +75,7 @@ const Count = () => {
       </Col>
       <Col xl={24} sm={12} xs={24}>
         <CardStatistics
-          title="Số lượng đăng kiểm trong năm nay"
+          title="Đăng kiểm trong năm nay"
           loading={loading}
           value={numberOfInspectionsThisYear}
           src={image2}

@@ -11,7 +11,7 @@ const RootPage = () => {
   return (
     <Layout hasSider>
       {!isMobile && <Sider />}
-      <Layout>
+      <Layout style={{ height: "100vh" }}>
         {isMobile && <Header />}
         <Content />
       </Layout>
