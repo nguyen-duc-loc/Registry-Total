@@ -44,8 +44,15 @@ const Predict = (props) => {
         const expireData = await getExpireData.json();
         const numberOfNew = await getNumberOfNew.json();
 
-        setExpired(expireData.reInspections[0].count);
-        setAboutToExpire(expireData.reInspections[1].count);
+        setExpired(
+          expireData.reInspections.filter((d) => d.status === "expired").pop()
+            .count
+        );
+        setAboutToExpire(
+          expireData.reInspections
+            .filter((d) => d.status === "about-to-expire")
+            .pop().count
+        );
         setNewIns(Math.ceil(numberOfNew.data.data));
 
         setLoading(false);
