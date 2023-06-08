@@ -2,6 +2,7 @@ import { Avatar, Image, List } from "antd";
 import { Link } from "react-router-dom";
 import searchImage from "./../../../assets/images/search-1.svg";
 import notFoundImage from "./../../../assets/images/void.svg";
+import carImage from "./../../../assets/images/car.png";
 
 const ResultList = (props) => {
   return props.searchText.trim().length !== 0 ? (
@@ -16,18 +17,14 @@ const ResultList = (props) => {
           margin: "3rem auto",
           backgroundColor: "var(--color-white)",
         }}
-        renderItem={(item, index) => (
+        renderItem={(item) => (
           <List.Item
             actions={[<Link to={`/search/${item.id}`}>Xem chi tiết</Link>]}
           >
             <List.Item.Meta
-              avatar={
-                <Avatar
-                  src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}
-                />
-              }
+              avatar={<Avatar src={carImage} />}
               title={item.numberPlate}
-              description={`#${item.modelCode}`}
+              description={`#${item.registrationNumber}`}
               style={{ textAlign: "left" }}
             />
           </List.Item>

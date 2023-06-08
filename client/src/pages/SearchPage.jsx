@@ -8,7 +8,7 @@ const SearchPage = () => {
   const [listData, setListData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [data, setData] = useState([
-    { id: "", numberPlate: "", modelCode: "" },
+    { id: "", numberPlate: "", registrationNumber: "" },
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const authHeader = useAuthHeader();
@@ -22,7 +22,7 @@ const SearchPage = () => {
         const response = await fetch(
           `${
             import.meta.env.VITE_BASE_URL
-          }/api/v1/cars/?limit=10000&fields=numberPlate, modelCode`,
+          }/api/v1/cars/?fields=numberPlate,registrationNumber&limit=100000`,
           {
             headers: {
               "Content-Type": "application/json",
