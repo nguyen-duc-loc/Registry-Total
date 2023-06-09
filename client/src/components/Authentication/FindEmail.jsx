@@ -10,7 +10,7 @@ const FindEmail = (props) => {
     setIsSubmitting(true);
     try {
       const response = await fetch(
-        `https://sleepy-coast-93816.herokuapp.com/api/v1/users/forgotPassword`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/forgotPassword`,
         {
           method: "POST",
           headers: {

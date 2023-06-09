@@ -250,7 +250,7 @@ const CreateInspection = () => {
       };
 
       const patchResponse = await fetch(
-        `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/${carId}/inspects`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/cars/${carId}/inspects`,
         {
           method: "PATCH",
           headers: {
@@ -266,7 +266,7 @@ const CreateInspection = () => {
       }
 
       const postResponse = await fetch(
-        `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/${carId}/inspections`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/cars/${carId}/inspections`,
         {
           method: "POST",
           headers: {
@@ -322,7 +322,7 @@ const CreateInspection = () => {
                 setLoading(true);
 
                 const response = await fetch(
-                  `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/?numberPlate=${value
+                  `${import.meta.env.VITE_BASE_URL}/api/v1/cars/?numberPlate=${value
                     .trim()
                     .toUpperCase()}`,
                   {

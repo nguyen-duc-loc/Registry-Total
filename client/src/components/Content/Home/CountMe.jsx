@@ -14,7 +14,9 @@ const CountMe = () => {
         setLoading(true);
 
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/users/inspections?limit=5000&sort=inspectionNumber`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/users/inspections?limit=5000&sort=inspectionNumber`,
           {
             headers: {
               "Content-Type": "application/json",

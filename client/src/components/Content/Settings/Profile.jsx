@@ -29,6 +29,7 @@ import classes from "./../../../styles/Content/Settings/Profile.module.css";
 import { useEffect, useState } from "react";
 import validateDate from "validate-date";
 import TextWithIcon from "../../UI/TextWithIcon";
+import { useMediaQuery } from "react-responsive";
 
 const processBirthDate = (birthDate) => {
   if (!birthDate) return;
@@ -99,12 +100,15 @@ const Profile = () => {
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
+  const breakPoint = useMediaQuery({ query: "(max-width: 576px)" });
 
   useEffect(() => {
+    document.title = "Hồ sơ cá nhân";
+
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/users/getMe`,
+          `${import.meta.env.VITE_BASE_URL}/api/v1/users/getMe`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -198,7 +202,12 @@ const Profile = () => {
           }}
         >
           <Card>
-            <Space size="large">
+            <Space
+              direction={breakPoint ? "vertical" : "horizontal"}
+              size="large"
+              align="center"
+              style={{ width: "100%" }}
+            >
               <Avatar src={avatar} size={100} />
               <Space direction="vertical" size="small">
                 <span className={classes.name}>{user.name}</span>
@@ -359,7 +368,7 @@ const Profile = () => {
             };
 
             const response = await fetch(
-              `https://sleepy-coast-93816.herokuapp.com/api/v1/users/updateMe`,
+              `${import.meta.env.VITE_BASE_URL}/api/v1/users/updateMe`,
               {
                 method: "PATCH",
                 headers: {

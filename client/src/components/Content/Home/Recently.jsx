@@ -21,7 +21,9 @@ const Recently = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/users/registrationCentres/inspections?limit=5&sort=-inspectionDate`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/users/registrationCentres/inspections?limit=5&sort=-inspectionDate`,
           {
             headers: {
               "Content-Type": "application/json",

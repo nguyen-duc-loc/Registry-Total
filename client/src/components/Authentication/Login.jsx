@@ -31,7 +31,7 @@ const LoginForm = (props) => {
 
     try {
       const response = await fetch(
-        `https://sleepy-coast-93816.herokuapp.com/api/v1/users/login`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/login`,
         {
           method: "POST",
           headers: {

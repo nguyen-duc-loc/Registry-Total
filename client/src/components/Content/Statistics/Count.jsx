@@ -21,7 +21,9 @@ const Count = () => {
 
       try {
         const allResponse = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/users/registrationCentres/inspections?limit=45000`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/users/registrationCentres/inspections?limit=45000`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -31,7 +33,9 @@ const Count = () => {
         );
 
         const yearResponse = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/year/`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/inspections/centreStatistics/year/`,
           {
             headers: {
               "Content-Type": "application/json",

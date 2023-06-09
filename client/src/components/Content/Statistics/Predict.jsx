@@ -18,7 +18,9 @@ const Predict = (props) => {
         setLoading(true);
 
         const getExpireData = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/centreStatistics/expirationPredictions`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/cars/centreStatistics/expirationPredictions`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -28,7 +30,9 @@ const Predict = (props) => {
         );
 
         const getNumberOfNew = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/cars/centreStatistics/newInspectionPredictions`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/cars/centreStatistics/newInspectionPredictions`,
           {
             headers: {
               "Content-Type": "application/json",

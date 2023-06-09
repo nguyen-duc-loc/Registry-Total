@@ -10,7 +10,7 @@ const Verify = (props) => {
     setIsSubmitting(true);
     try {
       const response = await fetch(
-        `https://sleepy-coast-93816.herokuapp.com/api/v1/users/checkResetToken`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/checkResetToken`,
         {
           method: "POST",
           headers: {

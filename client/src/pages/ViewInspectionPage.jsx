@@ -61,12 +61,14 @@ const ViewInspectionPage = () => {
   });
 
   useEffect(() => {
+    document.title = "Thông tin đăng kiểm";
+
     const fetchData = async () => {
       try {
         setLoading(true);
 
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/${inspectionId}`,
+          `${import.meta.env.VITE_BASE_URL}/api/v1/inspections/${inspectionId}`,
           {
             headers: {
               "Content-Type": "application/json",

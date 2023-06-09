@@ -22,7 +22,9 @@ const ColumnChart = () => {
         const opts = [];
 
         const getAllYearsData = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/year/?sort=year`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/inspections/centreStatistics/year/?sort=year`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -49,7 +51,9 @@ const ColumnChart = () => {
 
         if (year !== "all") {
           const getYearData = await fetch(
-            `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/${filterByOption}/${year}/?sort=${filterByOption}`,
+            `${
+              import.meta.env.VITE_BASE_URL
+            }/api/v1/inspections/centreStatistics/${filterByOption}/${year}/?sort=${filterByOption}`,
             {
               headers: {
                 "Content-Type": "application/json",

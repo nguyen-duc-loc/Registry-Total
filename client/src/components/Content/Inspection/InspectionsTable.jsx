@@ -177,7 +177,11 @@ const InspectionsTable = (props) => {
   });
 
   useEffect(() => {
-    let url = "https://sleepy-coast-93816.herokuapp.com/api/v1/users/";
+    document.title = `${
+      props.mode === "all" ? "Tất cả đăng kiểm" : "Đăng kiểm của tôi"
+    }`;
+
+    let url = `${import.meta.env.VITE_BASE_URL}/api/v1/users/`;
 
     if (props.mode === "all") url += "registrationCentres/";
 

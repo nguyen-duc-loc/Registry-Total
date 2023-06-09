@@ -3,8 +3,13 @@ import ColumnChart from "../components/Content/Statistics/ColumnChart";
 import Count from "../components/Content/Statistics/Count";
 import LineChart from "../components/Content/Statistics/LineChart";
 import Predict from "../components/Content/Statistics/Predict";
+import { useEffect } from "react";
 
 const StatisticsPage = () => {
+  useEffect(() => {
+    document.title = "Thống kê";
+  }, []);
+
   return (
     <div style={{ padding: "0 1.6rem" }}>
       <Row gutter={[20, 20]}>

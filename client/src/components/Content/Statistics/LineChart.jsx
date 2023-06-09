@@ -14,7 +14,9 @@ const LineChart = () => {
         setLoading(true);
 
         const response = await fetch(
-          `https://sleepy-coast-93816.herokuapp.com/api/v1/inspections/centreStatistics/monthYear?sort=year,month`,
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/v1/inspections/centreStatistics/monthYear?sort=year,month`,
           {
             headers: {
               "Content-Type": "application/json",
