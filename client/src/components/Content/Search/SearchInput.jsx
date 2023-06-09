@@ -39,7 +39,6 @@ const SearchInput = (props) => {
               }
             );
             const res = await response.json();
-            console.log(res.data.data);
             setOptions(
               res.data.data
                 .map((d) => {
@@ -77,6 +76,9 @@ const SearchInput = (props) => {
         placeholder="Nhập biển số xe"
         onSearch={async () => {
           props.setSearchText(text);
+
+          if (!text) return;
+
           try {
             props.setLoading(true);
             const response = await fetch(
@@ -91,7 +93,6 @@ const SearchInput = (props) => {
               }
             );
             const res = await response.json();
-            console.log(res.data.data);
             props.setData(res.data.data);
             props.setLoading(false);
           } catch (err) {
