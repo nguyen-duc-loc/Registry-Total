@@ -96,6 +96,7 @@ const ColumnChart = () => {
       extra={
         <Space size="middle">
           <Select
+            disabled={loading}
             defaultValue={year}
             onChange={(value) => {
               setYear(value);
@@ -122,7 +123,7 @@ const ColumnChart = () => {
             style={{
               width: 120,
             }}
-            disabled={year === "all"}
+            disabled={year === "all" || loading}
             listHeight={200}
             options={[
               {

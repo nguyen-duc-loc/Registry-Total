@@ -150,6 +150,7 @@ const ColumnChart = () => {
       extra={
         <Space size="middle">
           <Select
+            disabled={loading}
             defaultValue={year}
             onChange={(value) => {
               setYear(value);
@@ -176,7 +177,7 @@ const ColumnChart = () => {
             style={{
               width: 120,
             }}
-            disabled={year === "all"}
+            disabled={year === "all" || loading}
             listHeight={200}
             options={[
               {
@@ -195,6 +196,7 @@ const ColumnChart = () => {
       <Row gutter={[20, 20]} style={{ marginBottom: "2.4rem" }}>
         <Col>
           <Select
+            disabled={loading}
             value={side}
             onChange={(value) => {
               setSide(value);
@@ -228,7 +230,7 @@ const ColumnChart = () => {
         <Col>
           <Select
             value={area}
-            disabled={side === "all"}
+            disabled={side === "all" || loading}
             onChange={(value) => {
               setArea(value);
               setProvince("all");
@@ -251,7 +253,7 @@ const ColumnChart = () => {
         <Col>
           <Select
             value={province}
-            disabled={side === "all"}
+            disabled={side === "all" || loading}
             onChange={(value) => {
               setProvince(value);
             }}

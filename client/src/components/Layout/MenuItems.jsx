@@ -184,7 +184,7 @@ const MenuItem = () => {
             >
               Tạo trung tâm
             </NavLink>,
-            "my-inspections"
+            "create-centres"
           ),
         ]
       ),
