@@ -44,7 +44,7 @@ const ContentBreadcumb = () => {
     items = [defaultItem, { title: "Tạo đăng kiểm" }];
   } else if (path === "/statistics") {
     items = [defaultItem, { title: "Thống kê" }];
-  } else if (path.includes("/search")) {
+  } else if (path.includes("/cars/search")) {
     items = [defaultItem, { title: "Tra cứu phương tiện" }];
   } else if (path.includes("/settings")) {
     if (path.includes("/profile")) {

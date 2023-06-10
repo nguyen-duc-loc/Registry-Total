@@ -125,7 +125,7 @@ const App = () => {
               }
             />
           </Route>
-          <Route path="search">
+          <Route path="/cars/search">
             <Route
               index
               element={
