@@ -33,7 +33,7 @@ const NewPassword = (props) => {
         throw new Error("Could not authenticate.");
       }
 
-      const res = response.json();
+      const res = await response.json();
 
       if (
         signIn({
@@ -41,13 +41,14 @@ const NewPassword = (props) => {
           expiresIn: 480,
           tokenType: "Bearer",
           authState: {
-            data: res.data,
+            data: res.data.user,
           },
         })
       ) {
         navigate("/");
       }
     } catch (err) {
+      setIsSubmitting(false);
       console.error(err.message);
     }
   };
