@@ -1,6 +1,6 @@
 import { Card } from "antd";
 import { useEffect, useState } from "react";
-import { useAuthHeader } from "react-auth-kit";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 import { Column } from "@ant-design/plots";
 
 const now = new Date();
@@ -10,6 +10,8 @@ const Chart = () => {
   const authHeader = useAuthHeader();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const auth = useAuthUser();
+  const admin = auth().data.role === "admin";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,9 +21,9 @@ const Chart = () => {
         const items = [];
 
         const getDataThisYear = await fetch(
-          `${
-            import.meta.env.VITE_BASE_URL
-          }/api/v1/inspections/centreStatistics/month/${year}?sort=month`,
+          `${import.meta.env.VITE_BASE_URL}/api/v1/inspections/${
+            admin ? "allCentresStatistics" : "centreStatistics"
+          }/month/${year}?sort=month`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -48,9 +50,9 @@ const Chart = () => {
 
         if (length < 12) {
           const getDataLastYear = await fetch(
-            `${
-              import.meta.env.VITE_BASE_URL
-            }/api/v1/inspections/centreStatistics/month/${year - 1}?sort=month`,
+            `${import.meta.env.VITE_BASE_URL}/api/v1/inspections/${
+              admin ? "allCentresStatistics" : "centreStatistics"
+            }/month/${year - 1}?sort=month`,
             {
               headers: {
                 "Content-Type": "application/json",

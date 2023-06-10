@@ -16,18 +16,15 @@ const Search = lazy(() => import("./pages/SearchPage"));
 const ViewCar = lazy(() => import("./pages/ViewCarPage"));
 const CreateInspection = lazy(() => import("./pages/CreateInspectionPage"));
 const Statistics = lazy(() => import("./pages/StatisticsPage"));
+const Centres = lazy(() => import("./pages/CentresPage"));
+const CreateCentre = lazy(() => import("./pages/CreateCentrePage"));
+const ViewCentre = lazy(() => import("./pages/ViewCentrePage"));
 
 const App = () => {
   const PrivateRoute = () => {
     const isAuthenticated = useIsAuthenticated();
     const auth = isAuthenticated();
-    return auth ? (
-      <Suspense fallback={<Loading />}>
-        <Root />
-      </Suspense>
-    ) : (
-      <Navigate to="/auth" />
-    );
+    return auth ? <Root /> : <Navigate to="/auth" />;
   };
 
   return (
@@ -39,156 +36,35 @@ const App = () => {
         },
       }}
     >
-      <Routes>
-        <Route
-          path="/auth"
-          element={
-            <Suspense fallback={<Loading />}>
-              <Authentication />{" "}
-            </Suspense>
-          }
-          loader={() =>
-            import("./pages/AuthenticationPage").then((module) =>
-              module.loader()
-            )
-          }
-        />
-        <Route
-          path="/"
-          element={<PrivateRoute />}
-          loader={() =>
-            import("./pages/RootPage").then((module) => module.loader())
-          }
-        >
-          <Route
-            index
-            element={
-              <Suspense fallback={<Loading />}>
-                <Home />
-              </Suspense>
-            }
-            loader={() =>
-              import("./pages/HomePage").then((module) => module.loader())
-            }
-          />
-          <Route path="inspections">
-            <Route
-              path="all"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Inspections mode="all" />
-                </Suspense>
-              }
-              loader={() =>
-                import("./pages/InspectionsPage").then((module) =>
-                  module.loader()
-                )
-              }
-            />
-            <Route
-              path="me"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Inspections mode="me" />
-                </Suspense>
-              }
-              loader={() =>
-                import("./pages/InspectionsPage").then((module) =>
-                  module.loader()
-                )
-              }
-            />
-            <Route
-              path=":inspectionId"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <ViewInspection />
-                </Suspense>
-              }
-              loader={(meta) =>
-                import("./pages/ViewInspectionPage").then((module) =>
-                  module.loader(meta)
-                )
-              }
-            />
-            <Route
-              path="create"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <CreateInspection />
-                </Suspense>
-              }
-              loader={() =>
-                import("./pages/CreateInspectionPage").then((module) =>
-                  module.loader()
-                )
-              }
-            />
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/auth" element={<Authentication />} />
+          <Route path="/" element={<PrivateRoute />}>
+            <Route index element={<Home />} />
+            <Route path="inspections">
+              <Route path="all" element={<Inspections mode="all" />} />
+              <Route path="me" element={<Inspections mode="me" />} />
+              <Route path=":inspectionId" element={<ViewInspection />} />
+              <Route path="create" element={<CreateInspection />} />
+            </Route>
+            <Route path="centres">
+              <Route path="all" element={<Centres />} />
+              <Route path="create" element={<CreateCentre />} />
+              <Route path=":centreId" element={<ViewCentre />} />
+            </Route>
+            <Route path="/cars/search">
+              <Route index element={<Search />} />
+              <Route path=":carId" element={<ViewCar />} />
+            </Route>
+            <Route path="statistics" element={<Statistics />} />
+            <Route path="settings">
+              <Route index element={<Navigate to="profile" />} />
+              <Route path="profile" element={<Settings mode="profile" />} />
+              <Route path="password" element={<Settings mode="password" />} />
+            </Route>
           </Route>
-          <Route path="search">
-            <Route
-              index
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Search />
-                </Suspense>
-              }
-              loader={() =>
-                import("./pages/SearchPage").then((module) => module.loader())
-              }
-            />
-            <Route
-              path=":carId"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <ViewCar />
-                </Suspense>
-              }
-              loader={(meta) =>
-                import("./pages/ViewCarPage").then((module) =>
-                  module.loader(meta)
-                )
-              }
-            />
-          </Route>
-          <Route
-            path="statistics"
-            element={
-              <Suspense fallback={<Loading />}>
-                <Statistics />
-              </Suspense>
-            }
-            loader={() =>
-              import("./pages/StatisticsPage").then((module) => module.loader())
-            }
-          />
-          <Route path="settings">
-            <Route index element={<Navigate to="profile" />} />
-            <Route
-              path="profile"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Settings mode="profile" />
-                </Suspense>
-              }
-              loader={() =>
-                import("./pages/SettingsPage").then((module) => module.loader())
-              }
-            />
-            <Route
-              path="password"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Settings mode="password" />
-                </Suspense>
-              }
-              loader={() =>
-                import("./pages/SettingsPage").then((module) => module.loader())
-              }
-            />
-          </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
     </ConfigProvider>
   );
 };

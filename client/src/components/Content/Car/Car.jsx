@@ -24,7 +24,7 @@ const Car = (props) => {
     >
       <Item label="Biển đăng kí">
         {props.showLink ? (
-          <Link to={`/search/${props.carId}`} style={{ color: "currentcolor" }}>
+          <Link to={`/cars/search/${props.carId}`} style={{ color: "currentcolor" }}>
             {car.numberPlate}
           </Link>
         ) : (

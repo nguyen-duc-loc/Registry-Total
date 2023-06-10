@@ -19,7 +19,7 @@ const ResultList = (props) => {
         }}
         renderItem={(item) => (
           <List.Item
-            actions={[<Link to={`/search/${item.id}`}>Xem chi tiết</Link>]}
+            actions={[<Link to={`/cars/search/${item.id}`}>Xem chi tiết</Link>]}
           >
             <List.Item.Meta
               avatar={<Avatar src={carImage} />}
