@@ -1,7 +1,7 @@
 import { Pie } from "@ant-design/plots";
 import { Card } from "antd";
 import { useEffect, useState } from "react";
-import { useAuthHeader } from "react-auth-kit";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 import { useMediaQuery } from "react-responsive";
 
 const Predict = (props) => {
@@ -11,6 +11,8 @@ const Predict = (props) => {
   const [aboutToExpire, setAboutToExpire] = useState(0);
   const [newIns, setNewIns] = useState(0);
   const breakPoint = useMediaQuery({ query: "(min-width: 576px)" });
+  const auth = useAuthUser();
+  const admin = auth().data.role === "admin";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,9 +20,9 @@ const Predict = (props) => {
         setLoading(true);
 
         const getExpireData = await fetch(
-          `${
-            import.meta.env.VITE_BASE_URL
-          }/api/v1/cars/centreStatistics/expirationPredictions`,
+          `${import.meta.env.VITE_BASE_URL}/api/v1/cars/${
+            admin ? "allCentresStatistics" : "centreStatistics"
+          }/expirationPredictions`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -30,9 +32,9 @@ const Predict = (props) => {
         );
 
         const getNumberOfNew = await fetch(
-          `${
-            import.meta.env.VITE_BASE_URL
-          }/api/v1/cars/centreStatistics/newInspectionPredictions`,
+          `${import.meta.env.VITE_BASE_URL}/api/v1/cars/${
+            admin ? "allCentresStatistics" : "centreStatistics"
+          }/newInspectionPredictions`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -52,12 +54,16 @@ const Predict = (props) => {
           expireData.reInspections.filter((d) => d.status === "expired").pop()
             .count
         );
+
         setAboutToExpire(
           expireData.reInspections
             .filter((d) => d.status === "about-to-expire")
             .pop().count
         );
-        setNewIns(Math.ceil(numberOfNew.data.data));
+
+        setNewIns(
+          Math.ceil(admin ? numberOfNew.results : numberOfNew.data.data)
+        );
 
         setLoading(false);
       } catch (err) {

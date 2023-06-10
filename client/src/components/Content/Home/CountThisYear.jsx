@@ -1,57 +1,22 @@
-import { useState, useEffect } from "react";
-import { useAuthHeader } from "react-auth-kit";
+import { useAuthUser } from "react-auth-kit";
 import image from "./../../../assets/images/grow-2.svg";
 import CardStatistics from "../../UI/CardStatistics";
 
 const now = new Date();
 const year = now.getFullYear();
 
-const CountThisYear = () => {
-  const authHeader = useAuthHeader();
-  const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-
-        const response = await fetch(
-          `${
-            import.meta.env.VITE_BASE_URL
-          }/api/v1/inspections/centreStatistics/year`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: authHeader(),
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Can not get");
-        }
-
-        const res = await response.json();
-
-        setCount(res.data.data.filter((d) => d.year === year)[0].count);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-        console.error(err);
-      }
-    };
-
-    fetchData();
-  }, []);
+const CountThisYear = (props) => {
+  const auth = useAuthUser();
+  const admin = auth().data.role === "admin";
 
   return (
     <CardStatistics
       title="Đăng kiểm trong năm nay"
-      loading={loading}
-      value={count}
+      url={`/api/v1/inspections/${
+        admin ? "allCentresStatistics" : "centreStatistics"
+      }/year?year=${year}`}
       src={image}
-      height={80}
+      height={props.height ?? 80}
     />
   );
 };
