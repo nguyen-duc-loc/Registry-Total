@@ -177,7 +177,7 @@ const ChangePassword = () => {
                 },
               }}
             >
-              <Button type="default" disabled={isChanging}>
+              <Button type="default" disabled={isChanging} htmlType="reset">
                 Hủy
               </Button>
             </ConfigProvider>

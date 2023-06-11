@@ -1,6 +1,7 @@
 import {
   Button,
   Card,
+  Checkbox,
   Col,
   Form,
   Image,
@@ -53,20 +54,25 @@ const InputBox = ({ type, label, name, addonAfter, placeholder }) => {
   return (
     <Col xl={8} md={12} xs={24}>
       <Form.Item
-        label={label}
+        label={type !== "checkbox" && label}
         name={name}
-        rules={[
-          {
-            required: true,
-            message: "Trường này không được để trống!",
-          },
-        ]}
+        rules={
+          type !== "checkbox" && [
+            {
+              required: true,
+              message: "Trường này không được để trống!",
+            },
+          ]
+        }
+        valuePropName={type === "checkbox" ? "checked" : "value"}
       >
-        {type === "number" ? (
+        {type === "number" && (
           <InputNumber addonAfter={addonAfter} style={{ width: "100%" }} />
-        ) : (
-          <Input addonAfter={addonAfter} placeholder={placeholder} />
         )}
+        {type === "checkbox" && (
+          <Checkbox>{type === "checkbox" && label}</Checkbox>
+        )}
+        {!type && <Input addonAfter={addonAfter} placeholder={placeholder} />}
       </Form.Item>
     </Col>
   );
@@ -153,6 +159,16 @@ const inputItems = [
     addonAfter: "lốp",
   },
   { label: "Cỡ lốp/trục", name: "tireSize", placeholder: "VD: 225/65 R17" },
+  {
+    type: "checkbox",
+    label: "Kinh doanh vận tải",
+    name: "business",
+  },
+  {
+    type: "checkbox",
+    label: "Cải tạo",
+    name: "recovered",
+  },
 ];
 
 const CreateInspection = () => {
@@ -231,6 +247,7 @@ const CreateInspection = () => {
       setSubmitting(true);
 
       const data = {
+        purpose: values.business ? "business" : "personal",
         specification: {
           wheelFormula: values.wheelFormula,
           wheelTread: `${values.wheelTread} (mm)`,
@@ -247,6 +264,7 @@ const CreateInspection = () => {
           maximumOutputToRpmRatio: values.maximumOutputToRpmRatio,
           numberOfTiresAndTireSize: `${values.numberOfTires} tires, ${values.tireSize}`,
         },
+        recovered: values.recovered,
       };
 
       const patchResponse = await fetch(
@@ -322,9 +340,9 @@ const CreateInspection = () => {
                 setLoading(true);
 
                 const response = await fetch(
-                  `${import.meta.env.VITE_BASE_URL}/api/v1/cars/?numberPlate=${value
-                    .trim()
-                    .toUpperCase()}`,
+                  `${
+                    import.meta.env.VITE_BASE_URL
+                  }/api/v1/cars/?numberPlate=${value.trim().toUpperCase()}`,
                   {
                     headers: {
                       "Content-Type": "application/json",
@@ -401,7 +419,10 @@ const CreateInspection = () => {
                 okText="Tiếp tục"
                 cancelButtonProps={{ size: "middle" }}
                 okButtonProps={{ size: "middle" }}
-                onConfirm={() => next()}
+                onConfirm={() => {
+                  next();
+                  setFound(false);
+                }}
               >
                 <Button type="primary">Tiếp tục</Button>
               </Popconfirm>
@@ -415,8 +436,12 @@ const CreateInspection = () => {
           className={classes.form}
           title="Đăng kiểm phương tiện"
           extra={
-            <Button onClick={() => prev()}>
-              <TextWithIcon text="Trở lại" Icon={IoReturnUpBackOutline} />{" "}
+            <Button
+              onClick={() => {
+                prev();
+              }}
+            >
+              <TextWithIcon text="Trở lại" Icon={IoReturnUpBackOutline} />
             </Button>
           }
         >
@@ -426,7 +451,7 @@ const CreateInspection = () => {
             onFinish={onFinish}
             autoComplete="off"
           >
-            <Row gutter={[30, 16]}>
+            <Row gutter={[30, 16]} align="bottom">
               {inputItems.map((item) => {
                 return (
                   <InputBox

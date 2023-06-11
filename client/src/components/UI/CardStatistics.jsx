@@ -33,7 +33,7 @@ const CardStatistics = (props) => {
 
         const res = await response.json();
 
-        setCount(res.data.data[0].count ?? res.results);
+        setCount(res.data.data[0]?.count ?? res.results);
         setLoading(false);
       } catch (err) {
         setLoading(false);

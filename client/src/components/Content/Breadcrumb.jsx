@@ -41,22 +41,16 @@ const ContentBreadcumb = () => {
       ];
     }
   } else if (path.includes("/centres")) {
-    if (path.includes("/all")) {
+    if (path === "/all") {
       items = [
         defaultItem,
         { title: "Quản lí trung tâm" },
         { title: "Tất cả trung tâm" },
       ];
-    } else if (path.includes("/create")) {
-      items = [
-        defaultItem,
-        { title: "Quản lí trung tâm" },
-        { title: "Tạo trung tâm" },
-      ];
     } else {
       items = [
         defaultItem,
-        { title: "Quản lí đăng kiểm" },
+        { title: "Quản lí trung tâm" },
         { title: "Xem trung tâm" },
       ];
     }

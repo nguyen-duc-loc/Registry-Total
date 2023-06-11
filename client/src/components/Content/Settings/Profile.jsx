@@ -125,6 +125,7 @@ const Profile = () => {
         setUser(res.data.user);
         setLoading(false);
       } catch (err) {
+        setLoading(false);
         console.error(err.message);
       }
     };
@@ -334,7 +335,11 @@ const Profile = () => {
                 label={
                   <TextWithIcon
                     Icon={IoConstructOutline}
-                    text="Tên đơn vị đăng kiểm"
+                    text={
+                      user.role === "staff"
+                        ? "Tên đơn vị đăng kiểm"
+                        : "Cục đăng kiểm"
+                    }
                   />
                 }
                 style={marginSmall}
@@ -350,6 +355,7 @@ const Profile = () => {
         title="Chỉnh sửa thông tin cá nhân"
         cancelText="Hủy"
         onCancel={() => {
+          form.resetFields();
           setOpen(false);
         }}
         okButtonProps={{ loading: submitting, disabled: submitting }}
@@ -362,7 +368,6 @@ const Profile = () => {
 
             const datas = {
               name: values.name,
-              email: values.email,
               phone: values.phone,
               dateOfBirth: values.birthDate.split("/").reverse().join("-"),
             };
@@ -389,7 +394,6 @@ const Profile = () => {
             const newUser = user;
             newUser.name = datas.name;
             newUser.dateOfBirth = datas.dateOfBirth;
-            newUser.email = datas.email;
             newUser.phone = datas.phone;
 
             setUser(newUser);
@@ -398,8 +402,9 @@ const Profile = () => {
             setSubmitting(false);
             openMessage();
             form.resetFields();
-          } catch (info) {
-            console.log("Validate Failed:", info);
+          } catch (err) {
+            setSubmitting(false);
+            console.error(err);
           }
         }}
       >
@@ -416,7 +421,6 @@ const Profile = () => {
             name: user.name,
             birthDate: processBirthDate(user.dateOfBirth),
             phone: user.phone,
-            email: user.email,
           }}
         >
           <Form.Item
@@ -432,7 +436,7 @@ const Profile = () => {
             label="Ngày sinh"
             rules={setRule("birthDate")}
           >
-            <Input />
+            <Input placeholder="dd/mm/yyyy" maxLength={10} />
           </Form.Item>
           <Form.Item
             name="phone"
@@ -440,22 +444,6 @@ const Profile = () => {
             rules={setRule("phone")}
           >
             <Input maxLength={10} />
-          </Form.Item>
-          <Form.Item
-            name="email"
-            label="Email"
-            rules={[
-              {
-                required: "true",
-                message: "Trường này không được để trống",
-              },
-              {
-                type: "email",
-                message: "Email không hợp lệ",
-              },
-            ]}
-          >
-            <Input maxLength={100} />
           </Form.Item>
         </Form>
       </Modal>

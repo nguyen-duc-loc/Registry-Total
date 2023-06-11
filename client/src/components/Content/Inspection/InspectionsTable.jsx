@@ -2,7 +2,7 @@ import { ConfigProvider, Table, Input, Space, Button, DatePicker } from "antd";
 import classes from "./../../../styles/Content/Inspection/InspectionsTable.module.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { useAuthHeader } from "react-auth-kit";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 import { DoubleRightOutlined, SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 
@@ -21,6 +21,8 @@ const InspectionsTable = (props) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
+  const auth = useAuthUser();
+  const admin = auth().data.role === "admin";
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -181,11 +183,15 @@ const InspectionsTable = (props) => {
       props.mode === "all" ? "Tất cả đăng kiểm" : "Đăng kiểm của tôi"
     }`;
 
-    let url = `${import.meta.env.VITE_BASE_URL}/api/v1/users/`;
+    let url = `${import.meta.env.VITE_BASE_URL}/api/v1/`;
+
+    url += admin ? "" : "users/";
 
     if (props.mode === "all") url += "registrationCentres/";
 
-    url += "inspections?limit=5000&sort=-inspectionNumber";
+    url += admin ? `${props.centreId}/` : "";
+
+    url += "inspections?limit=100000&sort=-inspectionNumber";
 
     const fetchData = async () => {
       try {
@@ -220,6 +226,9 @@ const InspectionsTable = (props) => {
       dataIndex: "inspectionNumber",
       key: "inspectionNumber",
       align: "center",
+      sorter: (a, b) => a.inspectionNumber.localeCompare(b.inspectionNumber),
+      sortDirections: ["ascend"],
+      showSorterTooltip: false,
       ...getColumnSearchProps("inspectionNumber"),
     },
     {
@@ -292,7 +301,7 @@ const InspectionsTable = (props) => {
         pagination={{
           position: ["bottomCenter"],
         }}
-        scroll={{ x: 640 }}
+        scroll={{ x: 650 }}
       />
     </ConfigProvider>
   );

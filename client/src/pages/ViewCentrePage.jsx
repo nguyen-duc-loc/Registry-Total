@@ -1,5 +1,7 @@
-const ViewCentre = () => {
-  return <div>1</div>;
+import ViewCentre from "../components/Content/Centre/ViewCentre";
+
+const ViewCentrePage = () => {
+  return <ViewCentre />;
 };
 
-export default ViewCentre;
+export default ViewCentrePage;

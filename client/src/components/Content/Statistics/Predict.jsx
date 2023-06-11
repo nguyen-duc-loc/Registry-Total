@@ -20,8 +20,12 @@ const Predict = (props) => {
         setLoading(true);
 
         const getExpireData = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/api/v1/cars/${
-            admin ? "allCentresStatistics" : "centreStatistics"
+          `${import.meta.env.VITE_BASE_URL}/api/v1/${
+            props.centreId ? `registrationCentres/${props.centreId}/` : ""
+          }cars/${
+            admin && props.adminStat
+              ? "allCentresStatistics"
+              : "centreStatistics"
           }/expirationPredictions`,
           {
             headers: {
@@ -32,8 +36,12 @@ const Predict = (props) => {
         );
 
         const getNumberOfNew = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/api/v1/cars/${
-            admin ? "allCentresStatistics" : "centreStatistics"
+          `${import.meta.env.VITE_BASE_URL}/api/v1/${
+            props.centreId ? `registrationCentres/${props.centreId}/` : ""
+          }cars/${
+            admin && props.adminStat
+              ? "allCentresStatistics"
+              : "centreStatistics"
           }/newInspectionPredictions`,
           {
             headers: {
@@ -52,17 +60,21 @@ const Predict = (props) => {
 
         setExpired(
           expireData.reInspections.filter((d) => d.status === "expired").pop()
-            .count
+            ?.count ?? 0
         );
 
         setAboutToExpire(
           expireData.reInspections
             .filter((d) => d.status === "about-to-expire")
-            .pop().count
+            .pop()?.count ?? 0
         );
 
         setNewIns(
-          Math.ceil(admin ? numberOfNew.results : numberOfNew.data.data)
+          Math.ceil(
+            admin && props.adminStat
+              ? numberOfNew.results
+              : numberOfNew.data.data
+          )
         );
 
         setLoading(false);

@@ -37,7 +37,7 @@ const HomePage = () => {
           <Chart />
         </Col>
         <Col xl={9} sm={24} xs={24}>
-          <Predict height={250} />
+          <Predict height={250} adminStat={admin ? true : false} />
         </Col>
         <Col span={24}>{admin ? <div>1</div> : <Recently />}</Col>
       </Row>

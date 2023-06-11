@@ -1,17 +1,24 @@
 import { Column } from "@ant-design/plots";
 import { Card, Select, Space } from "antd";
 import { useEffect, useState } from "react";
-import { useAuthHeader } from "react-auth-kit";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
 const now = new Date();
 
-const ColumnChart = () => {
+const yearOptions = [];
+
+for (let i = now.getFullYear(); i >= 2014; i--) {
+  yearOptions.push(i);
+}
+
+const StaffColumnChart = (props) => {
   const authHeader = useAuthHeader();
   const [items, setItems] = useState([]);
   const [year, setYear] = useState(now.getFullYear());
   const [loading, setLoading] = useState(false);
-  const [yearOptions, setYearOptions] = useState([]);
   const [filterByOption, setFilterByOption] = useState("month");
+  const auth = useAuthUser();
+  const admin = auth().data.role === "admin";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,64 +26,44 @@ const ColumnChart = () => {
         setLoading(true);
 
         const dataItems = [];
-        const opts = [];
 
-        const getAllYearsData = await fetch(
-          `${
-            import.meta.env.VITE_BASE_URL
-          }/api/v1/inspections/centreStatistics/year/?sort=year`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: authHeader(),
-            },
-          }
-        );
+        const url =
+          year === "all"
+            ? `/api/v1/${
+                admin ? `registrationCentres/${props.centreId}/` : ""
+              }inspections/centreStatistics/year?sort=year`
+            : `/api/v1/${
+                admin ? `registrationCentres/${props.centreId}/` : ""
+              }inspections/centreStatistics/${filterByOption}/${year}/?sort=${filterByOption}`;
 
-        if (!getAllYearsData.ok) {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}${url}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authHeader(),
+          },
+        });
+
+        if (!response.ok) {
           throw new Error("Can not get.");
         }
 
-        const allYearsData = await getAllYearsData.json();
+        const res = await response.json();
 
-        allYearsData.data.data.forEach((d) => {
-          opts.push(d.year);
+        res.data.data.forEach((d) => {
           if (year === "all") {
-            dataItems.push({ count: d.count, year: d.year.toString() });
-          }
-        });
-
-        setItems(dataItems);
-        setYearOptions(opts.sort((a, b) => b - a));
-
-        if (year !== "all") {
-          const getYearData = await fetch(
-            `${
-              import.meta.env.VITE_BASE_URL
-            }/api/v1/inspections/centreStatistics/${filterByOption}/${year}/?sort=${filterByOption}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: authHeader(),
-              },
-            }
-          );
-
-          if (!getYearData.ok) {
-            throw new Error("Can not get.");
-          }
-
-          const yearData = await getYearData.json();
-
-          yearData.data.data.forEach((d) => {
+            dataItems.push({
+              count: d.count,
+              year: d.year.toString(),
+            });
+          } else {
             dataItems.push({
               count: d.count,
               option: d[`${filterByOption}`].toString(),
             });
-          });
+          }
+        });
 
-          setItems(dataItems);
-        }
+        setItems(dataItems);
 
         setLoading(false);
       } catch (err) {
@@ -170,4 +157,4 @@ const ColumnChart = () => {
   );
 };
 
-export default ColumnChart;
+export default StaffColumnChart;

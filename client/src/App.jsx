@@ -17,7 +17,6 @@ const ViewCar = lazy(() => import("./pages/ViewCarPage"));
 const CreateInspection = lazy(() => import("./pages/CreateInspectionPage"));
 const Statistics = lazy(() => import("./pages/StatisticsPage"));
 const Centres = lazy(() => import("./pages/CentresPage"));
-const CreateCentre = lazy(() => import("./pages/CreateCentrePage"));
 const ViewCentre = lazy(() => import("./pages/ViewCentrePage"));
 
 const App = () => {
@@ -48,8 +47,7 @@ const App = () => {
               <Route path="create" element={<CreateInspection />} />
             </Route>
             <Route path="centres">
-              <Route path="all" element={<Centres />} />
-              <Route path="create" element={<CreateCentre />} />
+              <Route index element={<Centres />} />
               <Route path=":centreId" element={<ViewCentre />} />
             </Route>
             <Route path="/cars/search">

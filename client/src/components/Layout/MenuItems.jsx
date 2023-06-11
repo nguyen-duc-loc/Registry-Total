@@ -10,13 +10,14 @@ import {
 import { UploadOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import classes from "./../../styles/Layout/MenuItems.module.css";
-import { useAuthUser, useSignOut } from "react-auth-kit";
+import { useAuthHeader, useAuthUser, useSignOut } from "react-auth-kit";
 import {
   IoAddCircle,
   IoAddCircleOutline,
   IoBarChart,
   IoBarChartOutline,
   IoCarOutline,
+  IoFileTrayFull,
   IoFileTrayFullOutline,
   IoGrid,
   IoGridOutline,
@@ -62,17 +63,15 @@ const MenuItem = () => {
   const [open, setOpen] = useState(false);
   const [fileList, setFileList] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const authHeader = useAuthHeader();
 
   const uploadHandler = async () => {
     const formData = new FormData();
     fileList.forEach((file) => {
-      console.log(file);
       formData.append("file", file);
     });
 
     setUploading(true);
-
-    console.log(formData);
 
     try {
       const response = await fetch(
@@ -87,26 +86,23 @@ const MenuItem = () => {
       );
 
       if (!response.ok) {
-        setUploading(false);
-        message.error("Cannot upload file.");
         throw new Error("Cannot upload");
       }
 
       const res = await response.json();
-      console.log(res);
-      message.success("Upload file successfully.");
+      message.success("Tải dữ liệu thành công.");
       setFileList([]);
       setUploading(false);
+      setOpen(false);
     } catch (err) {
+      setUploading(false);
+      message.error("Tải lên không thành công. Hãy thử lại sau.");
       console.error(err.message);
     }
   };
 
   const props = {
     accept: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    onChange(info) {
-      console.log(info.file);
-    },
     onRemove: (file) => {
       const index = fileList.indexOf(file);
       const newFileList = fileList.slice();
@@ -164,29 +160,19 @@ const MenuItem = () => {
       ),
     admin &&
       getItem(
-        <span style={defaultStyleLink}>Quản lí các trung tâm</span>,
-        "centre",
-        <IoFileTrayFullOutline style={styleIcon} />,
-        [
-          getItem(
-            <NavLink
-              to="/centres/all"
-              style={({ isActive }) => styleLink(isActive)}
-            >
-              Tất cả trung tâm
-            </NavLink>,
-            "all-centres"
-          ),
-          getItem(
-            <NavLink
-              to="/centres/create"
-              style={({ isActive }) => styleLink(isActive)}
-            >
-              Tạo trung tâm
-            </NavLink>,
-            "create-centres"
-          ),
-        ]
+        <NavLink to="/centres" style={({ isActive }) => styleLink(isActive)}>
+          Quản lí các trung tâm
+        </NavLink>,
+        "centres",
+        <NavLink to="/centres" style={({ isActive }) => styleLink(isActive)}>
+          {({ isActive }) =>
+            isActive ? (
+              <IoFileTrayFull style={styleIcon} />
+            ) : (
+              <IoFileTrayFullOutline style={styleIcon} />
+            )
+          }
+        </NavLink>
       ),
     !admin &&
       getItem(
@@ -315,8 +301,8 @@ const MenuItem = () => {
             <p className="ant-upload-drag-icon">
               <UploadOutlined style={{ fontSize: "36px" }} />
             </p>
-            <p className="ant-upload-text">Upload user</p>
-            <p className="ant-upload-hint">upload .xlsx file</p>
+            <p className="ant-upload-text">Tải lên</p>
+            <p className="ant-upload-hint">tải lên tập tin .xlsx</p>
           </Upload.Dragger>
           <Button
             type="primary"

@@ -28,7 +28,7 @@ const StatisticsPage = () => {
           <LineChart />
         </Col>
         <Col xl={9} sm={24} xs={24}>
-          <Predict height={300} />
+          <Predict adminStat={admin} height={300} />
         </Col>
       </Row>
     </div>

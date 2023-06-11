@@ -13,7 +13,7 @@ map.set("Miền Bắc", area1);
 map.set("Miền Trung", area2);
 map.set("Miền Nam", area3);
 
-const CentresList = () => {
+const CentresList = (props) => {
   const [loading, setLoading] = useState(false);
   const authHeader = useAuthHeader();
   const [centres, setCentres] = useState([]);
@@ -30,11 +30,14 @@ const CentresList = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
+        props.setLoading(true);
+
+        const provinces = new Set();
 
         const response = await fetch(
           `${
             import.meta.env.VITE_BASE_URL
-          }/api/v1/registrationCentres?fields=id,name, ,address,area,side&limit=200`,
+          }/api/v1/registrationCentres?fields=id,name, ,address,area,side&limit=200&sort=name&role[ne]=registry-total`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -49,11 +52,17 @@ const CentresList = () => {
 
         const res = await response.json();
 
+        res.data.data.forEach((d) => provinces.add(d.address));
+
+        props.setProvinces(Array.from(provinces));
+
         setCentres(res.data.data);
         setDataSource(res.data.data);
 
+        props.setLoading(false);
         setLoading(false);
       } catch (err) {
+        props.setLoading(false);
         setLoading(false);
         console.error(err);
       }
@@ -89,20 +98,12 @@ const CentresList = () => {
 
         let list = centres;
 
-        console.log(list);
-
         if (side !== "all") list = list.filter((item) => item.side === side);
-
-        console.log(list);
 
         if (area !== "all") list = list.filter((item) => item.area === area);
 
-        console.log(list);
-
         if (province !== "all")
           list = list.filter((item) => item.address === province);
-
-        console.log(list);
 
         setDataSource(list);
       } catch (err) {
@@ -114,14 +115,7 @@ const CentresList = () => {
   }, [side, area, province]);
 
   return (
-    <div
-      style={{
-        maxWidth: "65rem",
-        margin: "6.4rem auto",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <>
       <Row gutter={[20, 20]} style={{ marginBottom: "2.4rem" }}>
         <Col>
           <Select
@@ -233,7 +227,7 @@ const CentresList = () => {
           </List.Item>
         )}
       />
-    </div>
+    </>
   );
 };
 export default CentresList;
