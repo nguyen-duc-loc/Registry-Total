@@ -48,7 +48,6 @@ const SearchInput = (props) => {
 
             const res = await response.json();
 
-            console.log(res);
             setOptions(
               res.data.data
                 .map((d) => {

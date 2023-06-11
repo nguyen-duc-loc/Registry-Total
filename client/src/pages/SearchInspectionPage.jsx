@@ -10,7 +10,7 @@ const SearchInspection = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.title = "Tra cứu phương tiện";
+    document.title = "Tra cứu đăng kiểm";
   }, []);
 
   return (

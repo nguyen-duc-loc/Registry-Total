@@ -221,7 +221,7 @@ const CentresList = (props) => {
           >
             <List.Item.Meta
               avatar={<Avatar src={image} />}
-              title={<a href="https://ant.design">{item.name}</a>}
+              title={item.name}
               description={`#${item.address}`}
             />
           </List.Item>

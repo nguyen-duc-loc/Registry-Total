@@ -21,7 +21,11 @@ const CentreModal = (props) => {
     <>
       {contextHolder}
       <Modal
-        title="Thêm một trung tâm mới"
+        title={
+          props.mode === "edit"
+            ? "Chỉnh sửa trung tâm"
+            : "Thêm một trung tâm mới"
+        }
         onCancel={() => {
           form.resetFields();
           props.setOpen(false);
@@ -69,12 +73,14 @@ const CentreModal = (props) => {
               throw new Error("There was an error.");
             }
 
+            const newData = res.data.data;
+
             if (props.mode === "edit") {
-              props.setCentreName(newCentre.name);
-              props.setCentrePhone(newCentre.phone);
-              props.setCentreAddress(newCentre.address);
-              props.setCentreEmail(newCentre.email);
-              props.setCentreDescription(newCentre.description);
+              props.setCentreName(newData.name);
+              props.setCentrePhone(newData.phone);
+              props.setCentreAddress(newData.address);
+              props.setCentreEmail(newData.email);
+              props.setCentreDescription(newData.description);
             }
 
             props.setOpen(false);
