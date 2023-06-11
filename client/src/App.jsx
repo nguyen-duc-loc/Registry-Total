@@ -12,7 +12,8 @@ const Inspections = lazy(() => import("./pages/InspectionsPage"));
 const Authentication = lazy(() => import("./pages/AuthenticationPage"));
 const Settings = lazy(() => import("./pages/SettingsPage"));
 const ViewInspection = lazy(() => import("./pages/ViewInspectionPage"));
-const Search = lazy(() => import("./pages/SearchPage"));
+const SearchCar = lazy(() => import("./pages/SearchCarPage"));
+const SearchInspection = lazy(() => import("./pages/SearchInspectionPage"));
 const ViewCar = lazy(() => import("./pages/ViewCarPage"));
 const CreateInspection = lazy(() => import("./pages/CreateInspectionPage"));
 const Statistics = lazy(() => import("./pages/StatisticsPage"));
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="inspections">
               <Route path="all" element={<Inspections mode="all" />} />
               <Route path="me" element={<Inspections mode="me" />} />
+              <Route path="search" element={<SearchInspection />} />
               <Route path=":inspectionId" element={<ViewInspection />} />
               <Route path="create" element={<CreateInspection />} />
             </Route>
@@ -51,7 +53,7 @@ const App = () => {
               <Route path=":centreId" element={<ViewCentre />} />
             </Route>
             <Route path="/cars/search">
-              <Route index element={<Search />} />
+              <Route index element={<SearchCar />} />
               <Route path=":carId" element={<ViewCar />} />
             </Route>
             <Route path="statistics" element={<Statistics />} />

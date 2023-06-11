@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ResultList from "../components/Content/Search/ResultList";
 import SearchInput from "../components/Content/Search/SearchInput";
 
-const SearchPage = () => {
+const SearchCarPage = () => {
   const [searchText, setSearchText] = useState("");
   const [data, setData] = useState([
     { id: "", numberPlate: "", registrationNumber: "" },
@@ -28,10 +28,16 @@ const SearchPage = () => {
         setData={setData}
         setSearchText={setSearchText}
         setLoading={setLoading}
+        search="car"
       />
-      <ResultList listData={data} searchText={searchText} loading={loading} />
+      <ResultList
+        listData={data}
+        searchText={searchText}
+        loading={loading}
+        search="car"
+      />
     </div>
   );
 };
 
-export default SearchPage;
+export default SearchCarPage;

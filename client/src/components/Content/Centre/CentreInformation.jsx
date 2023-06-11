@@ -44,6 +44,8 @@ const CentreInformation = (props) => {
   };
 
   useEffect(() => {
+    document.title = "Xem trung tâm";
+
     const fetchData = async () => {
       try {
         setLoading(true);
