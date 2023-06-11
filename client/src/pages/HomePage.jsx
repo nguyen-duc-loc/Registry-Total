@@ -9,6 +9,7 @@ import Chart from "../components/Content/Home/Chart";
 import { useEffect } from "react";
 import { useAuthUser } from "react-auth-kit";
 import CountCentres from "../components/Content/Home/CountCentres";
+import TopCentre from "../components/Content/Home/TopCentre";
 
 const HomePage = () => {
   const auth = useAuthUser();
@@ -39,7 +40,7 @@ const HomePage = () => {
         <Col xl={9} sm={24} xs={24}>
           <Predict height={250} adminStat={admin ? true : false} />
         </Col>
-        <Col span={24}>{admin ? <div>1</div> : <Recently />}</Col>
+        <Col span={24}>{admin ? <TopCentre /> : <Recently />}</Col>
       </Row>
     </div>
   );
