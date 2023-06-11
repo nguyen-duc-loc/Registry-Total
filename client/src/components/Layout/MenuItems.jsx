@@ -23,6 +23,7 @@ import {
   IoGridOutline,
   IoSearch,
   IoSearchOutline,
+  IoShieldCheckmarkOutline,
 } from "react-icons/io5";
 import avatar from "./../../assets/images/avatar.svg";
 import { useState } from "react";
@@ -135,8 +136,8 @@ const MenuItem = () => {
     !admin &&
       getItem(
         <span style={defaultStyleLink}>Quản lí đăng kiểm</span>,
-        "registration",
-        <IoFileTrayFullOutline style={styleIcon} />,
+        "inspections",
+        <IoShieldCheckmarkOutline style={styleIcon} />,
         [
           getItem(
             <NavLink
@@ -174,6 +175,7 @@ const MenuItem = () => {
           }
         </NavLink>
       ),
+
     !admin &&
       getItem(
         <NavLink
@@ -235,6 +237,28 @@ const MenuItem = () => {
             "upload"
           ),
         ]
+      ),
+    admin &&
+      getItem(
+        <NavLink
+          to="/inspections/search"
+          style={({ isActive }) => styleLink(isActive)}
+        >
+          Tra cứu đăng kiểm
+        </NavLink>,
+        "search-inspection",
+        <NavLink
+          to="/inspections/search"
+          style={({ isActive }) => styleLink(isActive)}
+        >
+          {({ isActive }) =>
+            isActive ? (
+              <IoSearch style={styleIcon} />
+            ) : (
+              <IoSearchOutline style={styleIcon} />
+            )
+          }
+        </NavLink>
       ),
     getItem(
       <NavLink to="/statistics" style={({ isActive }) => styleLink(isActive)}>

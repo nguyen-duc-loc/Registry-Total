@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ResultList from "../components/Content/Search/ResultList";
 import SearchInput from "../components/Content/Search/SearchInput";
 
-const SearchPage = () => {
+const SearchInspection = () => {
   const [searchText, setSearchText] = useState("");
   const [data, setData] = useState([
     { id: "", numberPlate: "", registrationNumber: "" },
@@ -16,7 +16,7 @@ const SearchPage = () => {
   return (
     <div
       style={{
-        width: "50rem",
+        width: "60rem",
         margin: "auto",
         display: "flex",
         flexDirection: "column",
@@ -34,4 +34,4 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
+export default SearchInspection;

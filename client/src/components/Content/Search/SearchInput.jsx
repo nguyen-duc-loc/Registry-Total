@@ -8,6 +8,7 @@ const SearchInput = (props) => {
   const navigate = useNavigate();
   const [text, setText] = useState("");
   const authHeader = useAuthHeader();
+  const searchCar = props.search === "car";
 
   const timeout = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -28,9 +29,15 @@ const SearchInput = (props) => {
         } else {
           try {
             const response = await fetch(
-              `${
-                import.meta.env.VITE_BASE_URL
-              }/api/v1/cars/?fields=numberPlate,registrationNumber&limit=100000&numberPlate[regex]=^${text}`,
+              `${import.meta.env.VITE_BASE_URL}/api/v1/${
+                searchCar ? "cars" : "inspections"
+              }/?fields=${
+                searchCar
+                  ? "numberPlate,registrationNumber"
+                  : "_id,inspectionNumber"
+              }&limit=100000&${
+                searchCar ? "numberPlate" : "inspectionNumber"
+              }[regex]=^${text}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -38,14 +45,17 @@ const SearchInput = (props) => {
                 },
               }
             );
+
             const res = await response.json();
+
+            console.log(res);
             setOptions(
               res.data.data
                 .map((d) => {
                   return {
-                    label: d.numberPlate,
-                    value: d.numberPlate,
-                    id: d.id,
+                    label: searchCar ? d.numberPlate : d.inspectionNumber,
+                    value: searchCar ? d.numberPlate : d.inspectionNumber,
+                    id: searchCar ? d.id : d._id,
                   };
                 })
                 .slice(0, 5)
@@ -66,14 +76,16 @@ const SearchInput = (props) => {
 
   return (
     <AutoComplete
-      style={{ width: "50rem", marginTop: "3rem" }}
+      style={{ width: "100%", marginTop: "3rem" }}
       options={options}
       onSelect={onSelect}
       onChange={(value) => setText(value.trim())}
     >
       <Input.Search
         size="large"
-        placeholder="Nhập biển số xe"
+        placeholder={`Nhập ${
+          props.search === "car" ? "biển số xe" : "số đăng kiểm"
+        }`}
         onSearch={async () => {
           props.setSearchText(text);
 
@@ -82,9 +94,15 @@ const SearchInput = (props) => {
           try {
             props.setLoading(true);
             const response = await fetch(
-              `${
-                import.meta.env.VITE_BASE_URL
-              }/api/v1/cars/?fields=numberPlate,registrationNumber&limit=100000&numberPlate[regex]=^${text}`,
+              `${import.meta.env.VITE_BASE_URL}/api/v1/${
+                searchCar ? "cars" : "inspections"
+              }/?fields=${
+                searchCar
+                  ? "numberPlate,registrationNumber"
+                  : "_id,inspectionNumber"
+              }&limit=100000&${
+                searchCar ? "numberPlate" : "inspectionNumber"
+              }[regex]=^${text}`,
               {
                 headers: {
                   "Content-Type": "application/json",

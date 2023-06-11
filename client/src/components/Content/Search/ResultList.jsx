@@ -1,10 +1,14 @@
-import { Avatar, Image, List, Skeleton, Spin } from "antd";
+import { Avatar, Image, List, Skeleton } from "antd";
 import { Link } from "react-router-dom";
-import searchImage from "./../../../assets/images/search-1.svg";
+import searchImage1 from "./../../../assets/images/search-1.svg";
+import searchImage2 from "./../../../assets/images/search-3.svg";
 import notFoundImage from "./../../../assets/images/void.svg";
 import carImage from "./../../../assets/images/car.png";
+import inspectionImage from "./../../../assets/images/checked.png";
 
 const ResultList = (props) => {
+  const searchCar = props.search === "car";
+
   return props.searchText.trim().length !== 0 ? (
     props.listData.length > 0 ? (
       <List
@@ -19,12 +23,26 @@ const ResultList = (props) => {
         }}
         renderItem={(item) => (
           <List.Item
-            actions={[<Link to={`/cars/search/${item.id}`}>Xem chi tiết</Link>]}
+            actions={[
+              <Link
+                to={`/${searchCar ? "cars/search" : "inspections"}/${item.id}`}
+              >
+                Xem chi tiết
+              </Link>,
+            ]}
           >
             <List.Item.Meta
-              avatar={<Avatar src={carImage} />}
-              title={item.numberPlate}
-              description={item.id !== "" && `#${item.registrationNumber}`}
+              avatar={
+                <Avatar
+                  src={searchCar ? carImage : inspectionImage}
+                  size={20}
+                />
+              }
+              title={searchCar ? item.numberPlate : item.inspectionNumber}
+              description={
+                item.id !== "" &&
+                `#${searchCar ? item.registrationNumber : item.centre.name}`
+              }
               style={{ textAlign: "left" }}
             />
           </List.Item>
@@ -53,13 +71,15 @@ const ResultList = (props) => {
     <>
       <br />
       <Image
-        src={searchImage}
+        src={searchCar ? searchImage1 : searchImage2}
         width={250}
         style={{ margin: "4rem 0" }}
         preview={false}
       />
       <br />
-      <span>Bắt đầu tìm kiếm phương tiện của bạn nào!</span>
+      <span>
+        Bắt đầu tìm kiếm {searchCar ? "phương tiện" : "đăng kiểm"} nào!
+      </span>
     </>
   );
 };

@@ -11,7 +11,7 @@ const CountTotal = (props) => {
       title="Tổng số lượng đăng kiểm"
       url={`/api/v1/${
         admin
-          ? "inspections/?fields=id&limit=100000"
+          ? "inspections/?fields=_id&limit=100000"
           : "users/registrationCentres/inspections?limit=45000"
       }`}
       src={image}
