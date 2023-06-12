@@ -294,20 +294,21 @@ const CreateInspection = () => {
         }
       );
 
+      const res = await postResponse.json();
+
       if (!postResponse) {
+        openMessage("error", `Có lỗi xảy ra. ${res.message}.`);
         throw new Error("Can not post.");
       }
 
-      const res = await postResponse.json();
       setInspectionId(res.data.data.id);
 
       setSubmitting(false);
 
       next();
     } catch (err) {
-      openMessage("error", "Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin.");
       setSubmitting(false);
-      console.error(err);
+      if (import.meta.env.VITE_ENV === "development") console.error(err);
     }
   };
 

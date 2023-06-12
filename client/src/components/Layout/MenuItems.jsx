@@ -98,7 +98,8 @@ const MenuItem = () => {
     } catch (err) {
       setUploading(false);
       message.error("Tải lên không thành công. Hãy thử lại sau.");
-      console.error(err.message);
+      if (import.meta.env.VITE_ENV === "development")
+        console.error(err.message);
     }
   };
 

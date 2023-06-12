@@ -109,7 +109,8 @@ const StaffInformation = () => {
             } catch (err) {
               openMessage("error", `Không thể xóa nhân viên ${record.name}`);
               setDeleting(false);
-              console.error(err);
+              if (import.meta.env.VITE_ENV === "development")
+                console.error(err);
             }
           }}
         >
@@ -161,7 +162,7 @@ const StaffInformation = () => {
         setLoading(false);
       } catch (err) {
         setLoading(false);
-        console.error(err);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 
@@ -243,7 +244,8 @@ const StaffInformation = () => {
               form.resetFields();
             } catch (err) {
               setAdding(false);
-              console.error(err);
+              if (import.meta.env.VITE_ENV === "development")
+                console.error(err);
             }
           }}
           open={open}

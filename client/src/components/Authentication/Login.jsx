@@ -63,7 +63,7 @@ const LoginForm = (props) => {
       }
     } catch (err) {
       setIsSubmitting(false);
-      console.error(err.message);
+      if (import.meta.env.VITE_ENV === "development") console.error(err);
     }
   };
 

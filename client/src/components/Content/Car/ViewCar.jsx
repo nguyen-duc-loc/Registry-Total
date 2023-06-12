@@ -15,6 +15,7 @@ import Car from "./Car";
 import Specification from "./Specification";
 import { Link } from "react-router-dom";
 import NoData from "../../UI/NoData";
+import PageNotExist from "../../UI/PageNotExist";
 
 const processDate = (date) => {
   if (!date) return;
@@ -127,7 +128,9 @@ const ViewCar = (props) => {
     },
   ];
 
-  return (
+  return props.error ? (
+    <PageNotExist />
+  ) : (
     <Card
       className={classes.container}
       loading={props.isLoading}

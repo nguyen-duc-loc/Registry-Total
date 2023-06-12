@@ -3,11 +3,14 @@ import InspectionCollapse from "./InspectionCollpase";
 import classes from "./../../../styles/Content/Inspection/ViewInspection.module.css";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
+import PageNotExist from "../../UI/PageNotExist";
 
 const ViewInspection = (props) => {
   const navigate = useNavigate();
 
-  return (
+  return props.error ? (
+    <PageNotExist />
+  ) : (
     <Card
       className={classes.card}
       loading={props.loading}

@@ -104,7 +104,7 @@ const ColumnChart = () => {
         setLoading(false);
       } catch (err) {
         setLoading(false);
-        console.error(err);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 
@@ -136,7 +136,7 @@ const ColumnChart = () => {
 
         setProvinceOptions(res.data.data.map((d) => d.province));
       } catch (err) {
-        console.error(err);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 

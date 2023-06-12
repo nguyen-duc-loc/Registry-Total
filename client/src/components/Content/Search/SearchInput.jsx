@@ -60,7 +60,7 @@ const SearchInput = (props) => {
                 .slice(0, 5)
             );
           } catch (err) {
-            console.error(err);
+            if (import.meta.env.VITE_ENV === "development") console.error(err);
           }
         }
       }
@@ -113,7 +113,7 @@ const SearchInput = (props) => {
             props.setData(res.data.data);
             props.setLoading(false);
           } catch (err) {
-            console.error(err);
+            if (import.meta.env.VITE_ENV === "development") console.error(err);
           }
         }}
         enterButton

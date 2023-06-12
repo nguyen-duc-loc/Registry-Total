@@ -7,7 +7,7 @@ import CentreStatistics from "./CentreStatistics";
 import CentrePredict from "./CentrePredict";
 import { IoArrowBackOutline } from "react-icons/io5";
 
-const ViewCentre = () => {
+const ViewCentre = (props) => {
   const { centreId } = useParams();
   const navigate = useNavigate();
 
@@ -15,7 +15,9 @@ const ViewCentre = () => {
     {
       key: "centre-info",
       label: `Thông tin trung tâm`,
-      children: <CentreInformation centreId={centreId} />,
+      children: (
+        <CentreInformation centreId={centreId} setError={props.setError} />
+      ),
     },
     {
       key: "staff-info",

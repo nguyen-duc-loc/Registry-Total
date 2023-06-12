@@ -212,8 +212,9 @@ const InspectionsTable = (props) => {
         setData(res.data.data);
         setLoading(false);
       } catch (err) {
-        console.error(err.message);
         setLoading(false);
+        if (import.meta.env.VITE_ENV === "development")
+          console.error(err.message);
       }
     };
 

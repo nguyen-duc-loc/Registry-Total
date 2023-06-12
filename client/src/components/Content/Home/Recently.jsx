@@ -42,7 +42,7 @@ const Recently = () => {
         setLoading(false);
       } catch (err) {
         setLoading(false);
-        console.error(err);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 

@@ -51,7 +51,8 @@ const LineChart = () => {
         setLoading(false);
       } catch (err) {
         setLoading(false);
-        console.error("Can not get.");
+        if (import.meta.env.VITE_ENV === "development")
+          console.error("Can not get.");
       }
     };
 

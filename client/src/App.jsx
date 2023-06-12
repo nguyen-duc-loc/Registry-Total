@@ -19,6 +19,7 @@ const CreateInspection = lazy(() => import("./pages/CreateInspectionPage"));
 const Statistics = lazy(() => import("./pages/StatisticsPage"));
 const Centres = lazy(() => import("./pages/CentresPage"));
 const ViewCentre = lazy(() => import("./pages/ViewCentrePage"));
+const PageNotExist = lazy(() => import("./../src/components/UI/PageNotExist"));
 
 const App = () => {
   const PrivateRoute = () => {
@@ -47,21 +48,27 @@ const App = () => {
               <Route path="search" element={<SearchInspection />} />
               <Route path=":inspectionId" element={<ViewInspection />} />
               <Route path="create" element={<CreateInspection />} />
+              <Route path="*" element={<PageNotExist />} />
             </Route>
             <Route path="centres">
               <Route index element={<Centres />} />
               <Route path=":centreId" element={<ViewCentre />} />
+              <Route path="*" element={<PageNotExist />} />
             </Route>
             <Route path="cars">
+              <Route index element={<Navigate to="search" />} />
               <Route path="search" element={<SearchCar />} />
               <Route path=":carId" element={<ViewCar />} />
+              <Route path="*" element={<PageNotExist />} />
             </Route>
             <Route path="statistics" element={<Statistics />} />
             <Route path="settings">
               <Route index element={<Navigate to="profile" />} />
               <Route path="profile" element={<Settings mode="profile" />} />
               <Route path="password" element={<Settings mode="password" />} />
+              <Route path="*" element={<PageNotExist />} />
             </Route>
+            <Route path="*" element={<PageNotExist />} />
           </Route>
         </Routes>
       </Suspense>

@@ -64,7 +64,7 @@ const CentresList = (props) => {
       } catch (err) {
         props.setLoading(false);
         setLoading(false);
-        console.error(err);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 
@@ -107,7 +107,7 @@ const CentresList = (props) => {
 
         setDataSource(list);
       } catch (err) {
-        console.error(err);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 

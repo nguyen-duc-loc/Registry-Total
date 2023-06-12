@@ -7,6 +7,7 @@ const ViewInspectionPage = () => {
   const { inspectionId } = useParams();
   const authHeader = useAuthHeader();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [data, setData] = useState({
     inspectionNumber: "",
     inspectionDate: "",
@@ -87,14 +88,15 @@ const ViewInspectionPage = () => {
         setLoading(false);
       } catch (err) {
         setLoading(false);
-        console.error(err);
+        setError(true);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 
     fetchData();
   }, []);
 
-  return <ViewInspection loading={loading} data={data} />;
+  return <ViewInspection loading={loading} data={data} error={error} />;
 };
 
 export default ViewInspectionPage;

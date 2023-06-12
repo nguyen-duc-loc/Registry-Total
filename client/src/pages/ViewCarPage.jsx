@@ -9,6 +9,7 @@ const ViewCarPage = () => {
   const { carId } = useParams();
   const authHeader = useAuthHeader();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [carData, setCarData] = useState({
     numberPlate: "",
@@ -110,7 +111,8 @@ const ViewCarPage = () => {
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);
-        console.error(err);
+        setError(true);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 
@@ -122,6 +124,7 @@ const ViewCarPage = () => {
       isLoading={isLoading}
       carData={carData}
       anotherData={anotherData}
+      error={error}
       title={
         <Button
           type="text"

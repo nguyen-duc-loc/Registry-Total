@@ -81,7 +81,7 @@ const ChangePassword = () => {
 
       openMessage();
     } catch (err) {
-      console.error(err);
+      if (import.meta.env.VITE_ENV === "development") console.error(err);
     }
   };
 

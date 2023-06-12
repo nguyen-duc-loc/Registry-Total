@@ -32,7 +32,7 @@ const FindEmail = (props) => {
       props.setVerifying(true);
       props.next();
     } catch (err) {
-      console.error(err.message);
+      if (import.meta.env.VITE_ENV === "development") console.error(err);
     }
   };
 

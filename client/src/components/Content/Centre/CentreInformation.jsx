@@ -77,8 +77,8 @@ const CentreInformation = (props) => {
         setLoading(false);
       } catch (err) {
         setLoading(false);
-
-        console.error(err);
+        props.setError(true);
+        if (import.meta.env.VITE_ENV === "development") console.error(err);
       }
     };
 
@@ -222,7 +222,8 @@ const CentreInformation = (props) => {
                 } catch (err) {
                   setDeleting(false);
                   openMessage("error", "Không thể xóa trung âm");
-                  console.error(err);
+                  if (import.meta.env.VITE_ENV === "development")
+                    console.error(err);
                 }
               }}
             >

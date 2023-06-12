@@ -33,7 +33,7 @@ const Verify = (props) => {
       props.setResetting(true);
       props.next();
     } catch (err) {
-      console.error(err.message);
+      if (import.meta.env.VITE_ENV === "development") console.error(err);
     }
   };
 
