@@ -20,10 +20,10 @@ const Chart = () => {
 
         const items = [];
 
-        const getDataThisYear = await fetch(
+        const response = await fetch(
           `${import.meta.env.VITE_BASE_URL}/api/v1/inspections/${
             admin ? "allCentresStatistics" : "centreStatistics"
-          }/month/${year}?sort=month`,
+          }/monthYear?sort=-year,-month&limit=12`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -32,58 +32,20 @@ const Chart = () => {
           }
         );
 
-        if (!getDataThisYear.ok) {
+        if (!response.ok) {
           throw new Error("Can not get.");
         }
 
-        const dataThisYear = await getDataThisYear.json();
-        const length = dataThisYear.results;
+        const res = await response.json();
 
-        dataThisYear.data.data.forEach((d) => {
+        res.data.data.forEach((d) => {
           items.push({
-            month: d.month,
-            year: year,
             count: d.count,
-            monthYear: `${d.month}/${year}`,
+            monthYear: `${d.month}/${d.year}`,
           });
         });
 
-        if (length < 12) {
-          const getDataLastYear = await fetch(
-            `${import.meta.env.VITE_BASE_URL}/api/v1/inspections/${
-              admin ? "allCentresStatistics" : "centreStatistics"
-            }/month/${year - 1}?sort=month`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: authHeader(),
-              },
-            }
-          );
-
-          if (!getDataLastYear.ok) {
-            throw new Error("Can not get.");
-          }
-
-          const dataLastYear = await getDataLastYear.json();
-
-          const arr = dataLastYear.data.data;
-
-          for (let i = 0; i < 12 - length; i++) {
-            const last = arr.pop();
-            items.push({
-              month: last.month,
-              year: year - 1,
-              count: last.count,
-              monthYear: `${last.month}/${year - 1}`,
-            });
-          }
-        }
-
-        items.sort((a, b) => {
-          if (a.year === b.year) return a.month - b.month;
-          return a.year - b.year;
-        });
+        items.reverse();
 
         setData(items);
         setLoading(false);

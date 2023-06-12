@@ -157,6 +157,15 @@ const MenuItem = () => {
             </NavLink>,
             "my-inspections"
           ),
+          getItem(
+            <NavLink
+              to="/inspections/search"
+              style={({ isActive }) => styleLink(isActive)}
+            >
+              Tra cứu đăng kiểm
+            </NavLink>,
+            "search-inspection"
+          ),
         ]
       ),
     admin &&

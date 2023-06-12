@@ -360,7 +360,7 @@ const StaffInformation = () => {
         <Table
           columns={columns}
           dataSource={employees}
-          scroll={{ x: 660 }}
+          scroll={{ x: 780 }}
           pagination={false}
           footer={() => (
             <div

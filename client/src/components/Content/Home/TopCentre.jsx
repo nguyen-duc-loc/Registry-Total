@@ -5,12 +5,6 @@ import { Link } from "react-router-dom";
 import { DoubleRightOutlined } from "@ant-design/icons";
 import { IoPlayForwardOutline } from "react-icons/io5";
 
-const processDate = (date) => {
-  if (!date) return;
-  const [month, day, year] = new Date(date).toLocaleDateString().split("/");
-  return [day.padStart(2, "0"), month.padStart(2, "0"), year].join("/");
-};
-
 const TopCentre = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);

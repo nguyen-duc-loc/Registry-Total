@@ -5,7 +5,7 @@ const CountMe = () => {
   return (
     <CardStatistics
       title="Số lượng đăng kiểm của tôi"
-      url="/api/v1/users/inspections?fields=_id&limit=5000&sort=inspectionNumber"
+      url="/api/v1/users/inspections/numberOfDocuments"
       src={image}
       height={80}
     />

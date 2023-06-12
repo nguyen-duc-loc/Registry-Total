@@ -5,7 +5,7 @@ const CountCentres = () => {
   return (
     <CardStatistics
       title="Số lượng trung tâm đăng kiểm"
-      url="/api/v1/registrationCentres?limit=1000"
+      url="/api/v1/registrationCentres/numberOfDocuments"
       src={image}
       height={80}
     />
