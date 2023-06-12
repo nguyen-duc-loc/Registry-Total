@@ -13,9 +13,9 @@ const CountThisMonth = () => {
   return (
     <CardStatistics
       title="Đăng kiểm trong tháng này"
-      url={`/api/v1/inspections/${
-        admin ? "allCentresStatistics" : "centreStatistics"
-      }/month/${year}?month=${month}`}
+      url={`/api/v1/${
+        admin ? "" : "users/registrationCentres/"
+      }inspections/numberOfDocuments?inspectionDate[gte]=${year}-${month}-01&inspectionDate[lte]=${year}-${month}-31`}
       src={image}
       height={80}
     />

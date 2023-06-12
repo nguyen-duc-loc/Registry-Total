@@ -52,8 +52,8 @@ const App = () => {
               <Route index element={<Centres />} />
               <Route path=":centreId" element={<ViewCentre />} />
             </Route>
-            <Route path="/cars/search">
-              <Route index element={<SearchCar />} />
+            <Route path="cars">
+              <Route path="search" element={<SearchCar />} />
               <Route path=":carId" element={<ViewCar />} />
             </Route>
             <Route path="statistics" element={<Statistics />} />

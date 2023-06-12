@@ -23,16 +23,16 @@ const HomePage = () => {
     <div style={{ padding: "0 2rem" }}>
       <Row gutter={[20, 20]}>
         <Col xl={6} sm={12} xs={24}>
-          {admin ? <CountCentres /> : <CountTotal />}
+          <CountTotal />
         </Col>
         <Col xl={6} sm={12} xs={24}>
-          {admin ? <CountTotal /> : <CountThisYear />}
+          <CountThisYear />
         </Col>
         <Col xl={6} sm={12} xs={24}>
-          {admin ? <CountThisYear /> : <CountThisMonth />}
+          <CountThisMonth />
         </Col>
         <Col xl={6} sm={12} xs={24}>
-          {admin ? <CountThisMonth /> : <CountMe />}
+          {admin ? <CountCentres /> : <CountMe />}
         </Col>
         <Col xl={15} sm={24} xs={24}>
           <Chart />

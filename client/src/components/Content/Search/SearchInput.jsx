@@ -15,7 +15,7 @@ const SearchInput = (props) => {
   };
 
   const onSelect = (_, options) => {
-    navigate(options.id);
+    navigate(`/${searchCar ? "cars" : "inspections"}/${options.id}`);
   };
 
   useEffect(() => {

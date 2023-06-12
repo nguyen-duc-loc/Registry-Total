@@ -12,9 +12,9 @@ const CountThisYear = (props) => {
   return (
     <CardStatistics
       title="Đăng kiểm trong năm nay"
-      url={`/api/v1/inspections/${
-        admin ? "allCentresStatistics" : "centreStatistics"
-      }/year?year=${year}`}
+      url={`/api/v1/${
+        admin ? "" : "users/registrationCentres/"
+      }inspections/numberOfDocuments?inspectionDate[gte]=${year}-01-01&inspectionDate[lte]=${year}-12-31`}
       src={image}
       height={props.height ?? 80}
     />

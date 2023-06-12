@@ -24,9 +24,7 @@ const ResultList = (props) => {
         renderItem={(item) => (
           <List.Item
             actions={[
-              <Link
-                to={`/${searchCar ? "cars/search" : "inspections"}/${item.id}`}
-              >
+              <Link to={`/${searchCar ? "cars" : "inspections"}/${item.id}`}>
                 Xem chi tiết
               </Link>,
             ]}

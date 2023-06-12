@@ -19,44 +19,47 @@ const Predict = (props) => {
       try {
         setLoading(true);
 
-        const getExpireData = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/api/v1/${
-            props.centreId ? `registrationCentres/${props.centreId}/` : ""
-          }cars/${
-            admin && props.adminStat
-              ? "allCentresStatistics"
-              : "centreStatistics"
-          }/expirationPredictions`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: authHeader(),
-            },
-          }
-        );
-
-        const getNumberOfNew = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/api/v1/${
-            props.centreId ? `registrationCentres/${props.centreId}/` : ""
-          }cars/${
-            admin && props.adminStat
-              ? "allCentresStatistics"
-              : "centreStatistics"
-          }/newInspectionPredictions`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: authHeader(),
-            },
-          }
-        );
+        const [getExpireData, getNumberOfNew] = await Promise.all([
+          fetch(
+            `${import.meta.env.VITE_BASE_URL}/api/v1/${
+              props.centreId ? `registrationCentres/${props.centreId}/` : ""
+            }cars/${
+              admin && props.adminStat
+                ? "allCentresStatistics"
+                : "centreStatistics"
+            }/expirationPredictions`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: authHeader(),
+              },
+            }
+          ),
+          fetch(
+            `${import.meta.env.VITE_BASE_URL}/api/v1/${
+              props.centreId ? `registrationCentres/${props.centreId}/` : ""
+            }cars/${
+              admin && props.adminStat
+                ? "allCentresStatistics"
+                : "centreStatistics"
+            }/newInspectionPredictions`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: authHeader(),
+              },
+            }
+          ),
+        ]);
 
         if (!getExpireData.ok || !getNumberOfNew.ok) {
           throw new Error("Can not get.");
         }
 
-        const expireData = await getExpireData.json();
-        const numberOfNew = await getNumberOfNew.json();
+        const [expireData, numberOfNew] = await Promise.all([
+          getExpireData.json(),
+          getNumberOfNew.json(),
+        ]);
 
         setExpired(
           expireData.reInspections.filter((d) => d.status === "expired").pop()

@@ -2,9 +2,12 @@ import { RightOutlined } from "@ant-design/icons";
 import { Breadcrumb, ConfigProvider } from "antd";
 import classes from "../../styles/Content/Breadcrumb.module.css";
 import { useLocation } from "react-router-dom";
+import { useAuthUser } from "react-auth-kit";
 
 const ContentBreadcumb = () => {
   const location = useLocation();
+  const auth = useAuthUser();
+  const admin = auth().data.role === "admin";
 
   const defaultItem = { title: "Nhà của tôi" };
 
@@ -33,10 +36,16 @@ const ContentBreadcumb = () => {
         { title: "Quản lí đăng kiểm" },
         { title: "Tạo đăng kiểm" },
       ];
+    } else if (path.includes("/search")) {
+      items = [
+        defaultItem,
+        !admin && { title: "Quản lí đăng kiểm" },
+        { title: "Tra cứu đăng kiểm" },
+      ];
     } else {
       items = [
         defaultItem,
-        { title: "Quản lí đăng kiểm" },
+        !admin && { title: "Quản lí đăng kiểm" },
         { title: "Xem đăng kiểm" },
       ];
     }

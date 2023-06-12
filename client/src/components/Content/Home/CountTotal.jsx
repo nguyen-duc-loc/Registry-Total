@@ -10,10 +10,8 @@ const CountTotal = (props) => {
     <CardStatistics
       title="Tổng số lượng đăng kiểm"
       url={`/api/v1/${
-        admin
-          ? "inspections/?fields=_id&limit=100000"
-          : "users/registrationCentres/inspections?limit=45000"
-      }`}
+        admin ? "" : "users/registrationCentres/"
+      }inspections/numberOfDocuments`}
       src={image}
       height={props.height ?? 80}
     />
