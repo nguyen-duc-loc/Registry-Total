@@ -258,7 +258,7 @@ const ColumnChart = () => {
               setProvince(value);
             }}
             style={{
-              width: 150,
+              width: 200,
             }}
             listHeight={200}
             options={[

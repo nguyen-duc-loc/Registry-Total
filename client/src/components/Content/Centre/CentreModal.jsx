@@ -126,7 +126,11 @@ const CentreModal = (props) => {
               },
             ]}
           >
-            <Input addonBefore="Trung tâm đăng kiểm" maxLength={100} />
+            <Input
+              addonBefore="Trung tâm đăng kiểm"
+              maxLength={100}
+              allowClear
+            />
           </Form.Item>
           <Form.Item
             name="address"
@@ -170,7 +174,7 @@ const CentreModal = (props) => {
               },
             ]}
           >
-            <Input maxLength={10} />
+            <Input maxLength={10} allowClear />
           </Form.Item>
           <Form.Item
             name="email"
@@ -183,7 +187,7 @@ const CentreModal = (props) => {
               },
             ]}
           >
-            <Input maxLength={100} />
+            <Input maxLength={100} allowClear />
           </Form.Item>
           <Form.Item name="description" label="Mô tả">
             <Input.TextArea rows={4} />

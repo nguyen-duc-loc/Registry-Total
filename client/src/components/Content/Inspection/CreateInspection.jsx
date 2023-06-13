@@ -138,6 +138,7 @@ const inputItems = [
     name: "permissibleCarry",
   },
   {
+    type: "number",
     label: "Thể tích làm việc của động cơ",
     name: "engineDisplacement",
     addonAfter: (
