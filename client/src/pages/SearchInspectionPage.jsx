@@ -16,7 +16,7 @@ const SearchInspection = () => {
   return (
     <div
       style={{
-        width: "60rem",
+        maxWidth: "60rem",
         margin: "auto",
         display: "flex",
         flexDirection: "column",
