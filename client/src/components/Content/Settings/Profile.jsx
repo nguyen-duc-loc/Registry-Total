@@ -49,12 +49,7 @@ const setRule = (name) => {
       required: true,
       validator(_, value) {
         if (value) {
-          if (name === "phone") {
-            if (value[0] === "0" && value.match("[0-9]{10}")) {
-              return Promise.resolve();
-            }
-            return Promise.reject(new Error("Số điện thoại không hợp lệ"));
-          } else if (name === "birthDate") {
+          if (name === "birthDate") {
             let isValid = true;
             let [date, month, year] = value.split("/");
             const birth = new Date([year, month, date].join("-"));
@@ -134,10 +129,10 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  const openErrorNotification = () => {
+  const openErrorNotification = (message) => {
     notificationApi["error"]({
       message: "Lỗi",
-      description: "Không thể chỉnh sửa thông tin.",
+      description: message,
       placement: "bottomLeft",
     });
   };
@@ -385,10 +380,11 @@ const Profile = () => {
               }
             );
 
-            if (!response.ok) {
-              openErrorNotification();
-              setSubmitting(false);
+            const res = await response.json();
 
+            if (!response.ok) {
+              openErrorNotification(res.message);
+              setSubmitting(false);
               throw new Error("An error occured");
             }
 
@@ -439,11 +435,7 @@ const Profile = () => {
           >
             <Input placeholder="dd/mm/yyyy" maxLength={10} />
           </Form.Item>
-          <Form.Item
-            name="phone"
-            label="Số điện thoại"
-            rules={setRule("phone")}
-          >
+          <Form.Item name="phone" label="Số điện thoại">
             <Input maxLength={10} />
           </Form.Item>
         </Form>
