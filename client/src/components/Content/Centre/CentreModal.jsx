@@ -166,20 +166,7 @@ const CentreModal = (props) => {
             rules={[
               {
                 required: true,
-                validator(_, value) {
-                  if (value) {
-                    if (value[0] === "0" && value.match("[0-9]{10}")) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      new Error("Số điện thoại không hợp lệ")
-                    );
-                  } else {
-                    return Promise.reject(
-                      new Error("Trường này không được để trống!")
-                    );
-                  }
-                },
+                message: "Trường này không được để trống!",
               },
             ]}
           >
