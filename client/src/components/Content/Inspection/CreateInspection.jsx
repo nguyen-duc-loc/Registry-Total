@@ -279,7 +279,10 @@ const CreateInspection = () => {
         }
       );
 
+      const patchRes = await patchResponse.json();
+
       if (!patchResponse.ok) {
+        openMessage("error", `Có lỗi xảy ra. ${patchRes.message}.`);
         throw new Error("Can not patch");
       }
 
@@ -294,14 +297,12 @@ const CreateInspection = () => {
         }
       );
 
-      const res = await postResponse.json();
-
-      if (!postResponse) {
-        openMessage("error", `Có lỗi xảy ra. ${res.message}.`);
+      const postRes = await postResponse.json();
+      if (!postResponse.ok) {
         throw new Error("Can not post.");
       }
 
-      setInspectionId(res.data.data.id);
+      setInspectionId(postRes.data.data.id);
 
       setSubmitting(false);
 
