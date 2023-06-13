@@ -426,17 +426,26 @@ const Profile = () => {
             style={{ marginTop: "2rem" }}
             rules={setRule("name")}
           >
-            <Input maxLength={100} />
+            <Input maxLength={100} allowClear />
           </Form.Item>
           <Form.Item
             name="birthDate"
             label="Ngày sinh"
             rules={setRule("birthDate")}
           >
-            <Input placeholder="dd/mm/yyyy" maxLength={10} />
+            <Input placeholder="dd/mm/yyyy" maxLength={10} allowClear />
           </Form.Item>
-          <Form.Item name="phone" label="Số điện thoại">
-            <Input maxLength={10} />
+          <Form.Item
+            name="phone"
+            label="Số điện thoại"
+            rules={[
+              {
+                required: true,
+                message: "Trường này không được để trống!",
+              },
+            ]}
+          >
+            <Input maxLength={10} allowClear />
           </Form.Item>
         </Form>
       </Modal>
