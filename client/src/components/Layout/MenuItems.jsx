@@ -1,16 +1,7 @@
-import {
-  Avatar,
-  ConfigProvider,
-  Menu,
-  Modal,
-  Upload,
-  message,
-  Button,
-} from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Avatar, ConfigProvider, Menu, Modal, Result } from "antd";
 import { NavLink } from "react-router-dom";
 import classes from "./../../styles/Layout/MenuItems.module.css";
-import { useAuthHeader, useAuthUser, useSignOut } from "react-auth-kit";
+import { useAuthUser, useSignOut } from "react-auth-kit";
 import {
   IoAddCircle,
   IoAddCircleOutline,
@@ -62,61 +53,6 @@ const MenuItem = () => {
   const auth = useAuthUser();
   const admin = auth().data.role === "admin";
   const [open, setOpen] = useState(false);
-  const [fileList, setFileList] = useState([]);
-  const [uploading, setUploading] = useState(false);
-  const authHeader = useAuthHeader();
-
-  const uploadHandler = async () => {
-    const formData = new FormData();
-    fileList.forEach((file) => {
-      formData.append("file", file);
-    });
-
-    setUploading(true);
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/cars/uploads`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: authHeader(),
-          },
-          body: formData,
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Cannot upload");
-      }
-
-      const res = await response.json();
-      message.success("Tải dữ liệu thành công.");
-      setFileList([]);
-      setUploading(false);
-      setOpen(false);
-    } catch (err) {
-      setUploading(false);
-      message.error("Tải lên không thành công. Hãy thử lại sau.");
-      if (import.meta.env.VITE_ENV === "development")
-        console.error(err.message);
-    }
-  };
-
-  const props = {
-    accept: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    onRemove: (file) => {
-      const index = fileList.indexOf(file);
-      const newFileList = fileList.slice();
-      newFileList.splice(index, 1);
-      setFileList(newFileList);
-    },
-    beforeUpload: (file) => {
-      setFileList([...fileList, file]);
-      return false;
-    },
-    fileList,
-  };
 
   const items = [
     getItem(
@@ -318,35 +254,14 @@ const MenuItem = () => {
         onCancel={() => {
           setOpen(false);
         }}
-        okText="Bắt đầu tải lên"
-        cancelText="Hủy"
         footer={[]}
       >
-        <div
-          style={{
-            marginTop: "3.2rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "24px",
-          }}
-        >
-          <Upload.Dragger {...props} style={{ width: "250px" }}>
-            <p className="ant-upload-drag-icon">
-              <UploadOutlined style={{ fontSize: "36px" }} />
-            </p>
-            <p className="ant-upload-text">Tải lên</p>
-            <p className="ant-upload-hint">tải lên tập tin .xlsx</p>
-          </Upload.Dragger>
-          <Button
-            type="primary"
-            onClick={uploadHandler}
-            disabled={fileList.length === 0}
-            loading={uploading}
-          >
-            {uploading ? "Đang tải lên" : "Bắt đầu tải lên"}
-          </Button>
-        </div>
+        <Result
+          status="500"
+          title="500"
+          subTitle="Chức năng này tạm thời bị khóa. Vui lòng thử lại sau."
+          style={{ paddingBottom: 0 }}
+        />
       </Modal>
       <ConfigProvider
         theme={{
