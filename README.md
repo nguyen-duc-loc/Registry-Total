@@ -1,23 +1,38 @@
 # Registry Total
 
-## 👀 Members
+Application for a big project in the subject: Web application development (INT3306 20)
 
-- **[Nguyen Duc Loc](https://www.facebook.com/benonxkrissy)**
-- **[Tran Quang Minh](https://www.facebook.com/tminht2k99lhp)**
-- **[Pham Viet Hoang](https://www.facebook.com/phamviet.hoang.1002)**
+## Demo
 
-## 📦 Install
+https://registry-total.netlify.app/
 
-On client side:
+## Authors
+
+- [Nguyen Duc Loc](https://www.facebook.com/benonxkrissy)
+- [Tran Quang Minh](https://www.facebook.com/tminht2k99lhp)
+
+## Run Locally
+
+Clone the project
 
 ```bash
-$ npm install
-$ npm run dev
+  git clone https://github.com/nguyen-duc-loc/Registry-Total.git
 ```
 
-On server side:
+Go to the project directory
 
 ```bash
-$ npm install
-$ npm run start:dev
+  cd Registry-Total/client
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
 ```
